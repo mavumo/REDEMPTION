@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expungement Eligibility Form</title>
+  <style>
+    /* Basic reset */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body, html { width: 100%; height: 100%; font-family: 'Helvetica Neue', Arial, sans-serif; background: #fff; color: #000; font-size: 18px; }
+    .form-container { width: 100%; max-width: 600px; margin: auto; padding: 2rem; position: relative; }
+    .step { display: none; animation: fadeIn 0.3s ease-in-out; }
+    .step.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
+    .question { font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem; }
+    .options { margin-bottom: 1.5rem; }
+    .options input[type="text"], .options input[type="email"], .options input[type="date"], .options input[type="tel"] { width: 100%; padding: 0.75rem; font-size: 1rem; border: 1px solid #ccc; border-radius: 4px; }
+    .btn-group { display: flex; justify-content: space-between; margin-top: 1rem; }
+    button, .btn { background: #000; color: #fff; border: none; padding: 0.75rem 1.5rem; font-size: 1rem; cursor: pointer; border-radius: 4px; text-decoration: none; display: inline-block; }
+    button[disabled] { opacity: 0.5; cursor: not-allowed; }
+    .progress { height: 4px; background: #eee; margin-bottom: 2rem; overflow: hidden; border-radius: 2px; }
+    .progress-bar { height: 100%; width: 0%; background: #000; transition: width 0.3s ease; }
+    .logo { text-align: center; margin-bottom: 1rem; }
+    .logo img { max-width: 150px; }
+    .title { text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .subtitle { text-align: center; font-size: 1rem; margin-bottom: 1rem; }
+    .fee-note { text-align: center; font-size: 1rem; font-weight: 600; margin-bottom: 2rem; }
+    .personal-prompt { text-align: center; font-size: 1rem; margin-bottom: 1rem; }
+    .almost-done { text-align: center; font-size: 1.2rem; font-weight: 700; color: #333; margin-bottom: 1rem; display: none; }
+    .thank-you, .ineligible, .alternative { text-align: center; }
+    .footer { text-align: center; margin: 2rem 0; font-weight: 700; font-size: 0.9rem; }
+    .footer a { color: inherit; text-decoration: none; margin: 0 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="logo"><img src="/assets/redemptionblk.svg" alt="Redemption Law Group"></div>
+    <div class="title">Expungement Eligibility Form</div>
+    <div class="subtitle">Check Your Eligibility For Expungement Under California Penal Code § 1203.4, § 1203.41 &amp; Related Laws.</div>
+    <div class="fee-note">Service cost: <strong>$990</strong> once-off.</div>
+    <div class="almost-done" id="almostDone">Almost done!</div>
+    <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+
+    <form id="expungeForm">
+      <!-- Step 1: Name -->
+      <div class="step active" data-step="1">
+        <div class="question">First Name</div>
+        <div class="options"><input type="text" name="firstName" id="firstName" required></div>
+        <div class="question">Last Name</div>
+        <div class="options"><input type="text" name="lastName" id="lastName" required></div>
+      </div>
+      <!-- Step 2 -->
+      <div class="step" data-step="2">
+        <div class="personal-prompt" id="promptConvicted"></div>
+        <div class="question" id="q2">Have you ever been convicted of a crime in California?</div>
+        <div class="options">
+          <label><input type="radio" name="convicted" value="yes"> Yes</label><br>
+          <label><input type="radio" name="convicted" value="no"> No</label>
+        </div>
+      </div>
+      <!-- Step 3 -->
+      <div class="step" data-step="3">
+        <div class="question" id="q3">What type of offense were you convicted of?</div>
+        <div class="options">
+          <label><input type="radio" name="offenseType" value="misdemeanor"> Misdemeanor</label><br>
+          <label><input type="radio" name="offenseType" value="felony"> Felony</label><br>
+          <label><input type="radio" name="offenseType" value="both"> Both</label><br>
+          <label><input type="radio" name="offenseType" value="not_sure"> Not Sure</label>
+        </div>
+      </div>
+      <!-- Step 4 -->
+      <div class="step" data-step="4">
+        <div class="question" id="q4">Have you completed all terms of your sentence, including probation, parole, and fines?</div>
+        <div class="options">
+          <label><input type="radio" name="completedTerms" value="yes"> Yes</label><br>
+          <label><input type="radio" name="completedTerms" value="no"> No</label>
+        </div>
+      </div>
+      <!-- Step 5 -->
+      <div class="step" data-step="5">
+        <div class="question" id="q5">Are you currently facing any new criminal charges or investigations?</div>
+        <div class="options">
+          <label><input type="radio" name="newCharges" value="yes"> Yes</label><br>
+          <label><input type="radio" name="newCharges" value="no"> No</label>
+        </div>
+      </div>
+      <!-- Step 6 -->
+      <div class="step" data-step="6">
+        <div class="question" id="q6">Are you currently on probation or parole?</div>
+        <div class="options">
+          <label><input type="radio" name="onProbation" value="yes"> Yes</label><br>
+          <label><input type="radio" name="onProbation" value="no"> No</label>
+        </div>
+      </div>
+      <!-- Step 7 -->
+      <div class="step" data-step="7">
+        <div class="question" id="q7">Were you sentenced to state prison (not county jail)?</div>
+        <div class="options">
+          <label><input type="radio" name="statePrison" value="yes"> Yes</label><br>
+          <label><input type="radio" name="statePrison" value="no"> No</label><br>
+          <label><input type="radio" name="statePrison" value="not_sure"> Not Sure</label>
+        </div>
+      </div>
+      <!-- Ineligible: served state prison -->
+      <div class="step" data-step="8">
+        <div class="alternative">
+          <h2>Unfortunately, you do not qualify for expungement.</h2>
+          <p>Not to worry! We can still assist with:</p>
+          <ul style="text-align:left;">
+            <li><strong>Certificate of Rehabilitation</strong> – $1,295 once-off</li>
+            <li><strong>Arrest Record Sealing</strong> – $1,695 once-off</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Early probation termination -->
+      <div class="step" data-step="9">
+        <div class="alternative">
+          <h2>Early Probation Termination Service</h2>
+          <p>We recommend our <strong>"Early Probation Termination"</strong> – $1,695 once-off, plus an immediate expungement petition for $990.</p>
+        </div>
+      </div>
+      <!-- Contact Info -->
+      <div class="step" data-step="10">
+        <div class="question">Email Address</div>
+        <div class="options"><input type="email" name="email" required></div>
+      </div>
+      <div class="step" data-step="11">
+        <div class="question">Phone Number</div>
+        <div class="options"><input type="tel" name="phone" required></div>
+      </div>
+      <div class="step" data-step="12">
+        <div class="question">Do you want to schedule a free consultation with an attorney?</div>
+        <div class="options">
+          <label><input type="radio" name="scheduleConsult" value="yes"> Yes</label><br>
+          <label><input type="radio" name="scheduleConsult" value="no"> No</label>
+        </div>
+      </div>
+      <!-- Thank You -->
+      <div class="step" data-step="13">
+        <div class="thank-you">
+          <h2>Thank you, <span id="finalName"></span>!</h2>
+          <p>Your responses have been recorded. We will contact you within 24–48 hours.</p>
+          <p id="consultBtnContainer"></p>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" id="prevBtn" onclick="changeStep(-1)">Back</button>
+        <button type="button" id="nextBtn" onclick="changeStep(1)">Next</button>
+      </div>
+    </form>
+  </div>
+
+  <footer class="footer">
+    © 2025 - <a href="https://preview.redemptionlawgroup.com">Redemption Law Group</a> | All rights reserved. | <a href="https://preview.redemptionlawgroup.com/legal">Terms and Conditions Apply</a>
+  </footer>
+
+  <script>
+    const form = document.getElementById('expungeForm');
+    const steps = document.querySelectorAll('.step');
+    const progressBar = document.getElementById('progressBar');
+    const almostDoneEl = document.getElementById('almostDone');
+    let currentStep = 1;
+    const totalSteps = steps.length;
+    let userName = '';
+
+    function showStep(step) {
+      steps.forEach(s => s.classList.remove('active'));
+      document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
+      document.getElementById('prevBtn').style.display = step === 1 ? 'none' : 'inline-block';
+      updateCTA(step);
+      const pct = ((step-1)/(totalSteps-1))*100;
+      progressBar.style.width = pct + '%';
+      almostDoneEl.style.display = pct >= 75 ? 'block' : 'none';
+      if(step > 1) personalizeQuestion(step);
+    }
+
+    function changeStep(n) {
+      // Name step validation
+      if(currentStep === 1 && n === 1) {
+        const fn = document.getElementById('firstName').value.trim();
+        const ln = document.getElementById('lastName').value.trim();
+        if(!fn || !ln) return;
+        userName = fn + ' ' + ln;
+      }
+      // Q2 logic
+      if(currentStep === 2 && n === 1) {
+        const val = form.elements['convicted'].value;
+        if(val === 'no') return endIneligible();
+      }
+      // Q6 probation logic sends to step 9
+      if(currentStep === 6 && n === 1) {
+        if(form.elements['onProbation'].value === 'yes') return goToStep(9);
+      }
+      // Q7 prison logic sends to step 8
+      if(currentStep === 7 && n === 1) {
+        if(form.elements['statePrison'].value === 'yes') return goToStep(8);
+      }
+      if(currentStep + n > totalSteps) return submitForm();
+      currentStep += n; showStep(currentStep);
+      if(currentStep === totalSteps) handleConsult();
+    }
+
+    function goToStep(step) { currentStep = step; showStep(currentStep); }
+
+    function updateCTA(step) {
+      const nextBtn = document.getElementById('nextBtn');
+      // conditional pages: expert
+      if(step === 8 || step === 9) {
+        nextBtn.textContent = 'Talk To An Expert';
+        nextBtn.onclick = () => window.open('https://calendly.com/your-link', '_blank');
+      } else {
+        nextBtn.textContent = 'Go To Next Step';
+        nextBtn.onclick = () => changeStep(1);
+      }
+    }
+
+    function personalizeQuestion(step) {
+      const promptEl = document.getElementById(`promptConvicted`);
+      const finalName = document.getElementById('finalName');
+      finalName.textContent = userName;
+      // for Q2 only
+      if(step === 2) promptEl.textContent = `Hi ${userName}, let's begin:`;
+    }
+
+    function endIneligible() {
+      document.querySelector('.form-container').innerHTML = '<div class="ineligible"><h2>It seems you may not qualify, '+userName+'.</h2><p>Expungement is available only for past convictions in California.</p></div>';
+    }
+
+    function submitForm() {
+      const data = {};
+      new FormData(form).forEach((v,k) => data[k]=v);
+      fetch('https://formspree.io/f/meogdlvp', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(data)
+      }).then(res => goToStep(currentStep+1))
+        .catch(err => console.error(err));
+    }
+
+    function handleConsult() {
+      if(form.elements['scheduleConsult'].value === 'yes') {
+        document.getElementById('consultBtnContainer').innerHTML = '<a href="https://calendly.com/your-link" target="_blank" class="btn">Book Free Consultation</a>';
+      }
+    }
+
+    // init
+    showStep(currentStep);
+  </script>
+</body>
+</html>
