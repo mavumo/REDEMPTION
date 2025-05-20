@@ -152,7 +152,7 @@
   </footer>
 
   <script>
-    const form = document.getElementById('expungeForm');
+    const form = document.getElementById('meogdlvp');
     const steps = document.querySelectorAll('.step');
     const progressBar = document.getElementById('progressBar');
     let currentStep = 1;
@@ -206,7 +206,8 @@
     function submitForm() {
       const data = {};
       new FormData(form).forEach((v,k) => data[k]=v);
-      fetch('YOUR_ENDPOINT_URL', {
+      fetch('https://formspree.io/f/meogdlvp', 
+            {
         method: 'POST', headers: {'Content-Type':'application/json'},
         body: JSON.stringify(data)
       }).then(res => goToStep(currentStep+1))
