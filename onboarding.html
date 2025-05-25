@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>California Expungement Eligibility Test – REDEMPTION</title>
+  <title>Getting Started – REDEMPTION</title>
   <style>
     * { box-sizing: border-box; }
     body, html {
@@ -104,9 +104,9 @@
 <body>
   <div class="form-container">
     <div class="logo-container">
-      <img src="/path/to/logo.png" alt="Redemption Law Group Logo" />
+      <img src="/redemptionblk.svg" alt="Redemption Law Group Logo" />
     </div>
-    <h1>Expungement Eligibility Test</h1>
+    <h1>GETTING STARTED</h1>
 
     <!-- Progress Bar -->
     <div class="progress"><div class="progress-bar"></div></div>
@@ -204,7 +204,7 @@
         </div>
       </div>
 
-      <!-- Step 9: Ineligible → Certificate Offer -->
+      <!-- Step 9: Ineligible – Certificate Offer -->
       <div class="form-step" data-step="9">
         <h2>You are not eligible for expungement; however, we can offer our Certificate of Rehabilitation service.</h2>
         <p>Under PC 4852.01, we’ll petition the court on your behalf. This certificate is a court-issued endorsement that your criminal history is behind you and you’re a contributing member of society. Price: <strong>$1,295.00</strong></p>
@@ -213,10 +213,10 @@
         </div>
       </div>
 
-      <!-- Step 10: Eligible → Expungement Summary -->
+      <!-- Step 10: Eligible – Expungement Summary -->
       <div class="form-step" data-step="10">
         <h2>Great news—you qualify for expungement!</h2>
-        <p>We’ll clear your record under PC § 1203.4 & § 1203.41 for <strong>$990.00</strong>.</p>
+        <p>We’ll clear your record under PC § 1203.4 &amp; § 1203.41 for <strong>$990.00</strong>.</p>
         <div class="btn-group">
           <button class="back-btn">Back</button>
           <button class="next-btn">Next</button>
@@ -266,7 +266,7 @@
     const totalSteps = steps.length;
     let current = 1;
 
-    // Step-1 branching: expungement → 5, others → their detail pages
+    // branching logic
     const logic = {
       1: {
         'California Record Expungement': 5,
@@ -285,7 +285,6 @@
       if (!el) return;
       el.classList.add('active');
       current = step;
-      // disable Next until user picks
       const nxt = el.querySelector('.next-btn');
       if (nxt) nxt.disabled = true;
       updateProgress();
@@ -293,10 +292,11 @@
 
     function updateProgress() {
       const idx = steps.findIndex(s => s.classList.contains('active'));
-      document.querySelector('.progress-bar').style.width = `${((idx+1)/totalSteps)*100}%`;
+      document.querySelector('.progress-bar')
+              .style.width = `${((idx+1)/totalSteps)*100}%`;
     }
 
-    // enable “Next” when a radio is selected
+    // enable Next when a radio is selected
     form.addEventListener('change', e => {
       if (e.target.matches('input[type="radio"]')) {
         const btn = e.target.closest('.form-step').querySelector('.next-btn');
@@ -304,7 +304,7 @@
       }
     });
 
-    // Next-button handler
+    // next-button handler
     form.querySelectorAll('.next-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const stepEl = btn.closest('.form-step');
@@ -315,20 +315,23 @@
       });
     });
 
-    // Back-button handler
+    // back-button handler: steps 2–6 revert to step 1
     form.querySelectorAll('.back-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        // always return to Step 1 from the 3 detail pages
-        if ([2,3,4].includes(current)) return show(1);
-        show(current - 1);
+        if ([2,3,4,5,6].includes(current)) {
+          show(1);
+        } else {
+          show(current - 1);
+        }
       });
     });
 
-    // “Proceed” → Stripe Checkout
+    // proceed-to-Stripe handler
     document.addEventListener('click', e => {
       if (e.target.classList.contains('proceed-btn')) {
+        const svc = e.target.dataset.service;
         window.location.href =
-          `https://your-stripe-checkout-url.com?service=${encodeURIComponent(e.target.dataset.service)}&success_url=https://redemption.legal/next-steps`;
+          `https://your-stripe-checkout-url.com?service=${encodeURIComponent(svc)}&success_url=https://redemption.legal/next-steps`;
       }
     });
 
