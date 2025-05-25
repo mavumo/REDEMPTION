@@ -2,55 +2,164 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>California Expungement Eligibility Test - REDEMPTION</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Getting Started – REDEMPTION</title>
   <style>
-    * { box-sizing: border-box; }
-    body, html { margin:0; padding:0; height:100%; font-family: Arial, sans-serif; background:#f0f2f5; display:flex; align-items:center; justify-content:center; }
-    .form-container { background:#fff; width:100%; max-width:480px; padding:40px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
-    .form-step { display:none; }
-    .form-step.active { display:block; }
-    h1 { font-size:24px; margin-bottom:16px; text-align:center; color:#333; }
-    h2 { font-size:20px; margin-bottom:24px; color:#333; }
-    .logo-container img { max-width:150px; display:block; margin:0 auto 20px; }
-    .options label { display:block; margin-bottom:16px; font-size:18px; cursor:pointer; }
-    .options input { margin-right:12px; transform:scale(1.2); vertical-align:middle; }
-    input[type="text"], input[type="email"], input[type="tel"] { width:100%; padding:12px; margin-bottom:24px; border:1px solid #ddd; border-radius:4px; font-size:16px; }
-    .btn-group { text-align:right; }
-    button {
-      padding:12px 24px; font-size:16px; border:none; border-radius:4px; cursor:pointer;
-      background:#4caf50; color:#fff;
+    * { box-sizing: border-box }
+    body, html {
+      margin: 0; padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex; align-items: center; justify-content: center;
     }
-    button:disabled { background:#aaa; cursor:not-allowed; }
-    .back-btn { background:#ddd; color:#333; margin-right:12px; }
-    .service-list h3 { margin-top:0; }
-    .service-list .service { margin-bottom:24px; }
-    .service-list .service p { margin:8px 0; }
-    .proceed-btn { margin-top:12px; }
-    .footer { text-align:center; margin-top:24px; font-size:14px; color:#777; }
+    .form-container {
+      background: #fff;
+      width: 100%; max-width: 480px;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .logo-container img {
+      max-width: 150px;
+      display: block;
+      margin: 0 auto 20px;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      text-align: center;
+      color: #333;
+    }
+    .progress {
+      width: 100%;
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 4px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #4caf50;
+      transition: width 0.3s ease;
+    }
+    .form-step { display: none }
+    .form-step.active { display: block }
+    .form-step h2 {
+      font-size: 20px;
+      margin-bottom: 24px;
+      color: #333;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 16px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .options input {
+      margin-right: 12px;
+      transform: scale(1.2);
+      vertical-align: middle;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 24px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .btn-group { text-align: right }
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background: #4caf50;
+      color: #fff;
+    }
+    button:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+    .back-btn {
+      background: #ddd;
+      color: #333;
+      margin-right: 12px;
+    }
+    .service-list h3 {
+      margin-top: 0;
+    }
+    .service-list p {
+      margin: 8px 0 16px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 14px;
+      color: #777;
+    }
   </style>
 </head>
 <body>
   <div class="form-container">
     <div class="logo-container">
-      <img src="/redemptionblk.svg" alt="Redemption Law Group Logo" />
+      <img src="/path/to/logo.png" alt="Redemption Law Group Logo" />
     </div>
-    <h1>Expungement Eligibility Test</h1>
+    <h1>Getting Started</h1>
+
+    <!-- Progress Bar -->
+    <div class="progress">
+      <div class="progress-bar"></div>
+    </div>
+
     <form id="expunge-form">
-      <!-- Step 1 -->
+      <!-- Step 1: Segment User by Service -->
       <div class="form-step active" data-step="1">
-        <h2>Have you ever been convicted of a crime in California?</h2>
+        <h2>Which service are you interested in?</h2>
         <div class="options">
-          <label><input type="radio" name="ever_convicted" value="Yes">Yes</label>
-          <label><input type="radio" name="ever_convicted" value="No">No</label>
+          <label>
+            <input type="radio" name="service" value="California Record Expungement">
+            California Record Expungement – $990.00
+          </label>
+          <label>
+            <input type="radio" name="service" value="Certificate of Rehabilitation">
+            Certificate of Rehabilitation – $1,295.00
+          </label>
+          <label>
+            <input type="radio" name="service" value="Arrest Record Sealing">
+            Arrest Record Sealing – $1,695.00
+          </label>
+          <label>
+            <input type="radio" name="service" value="Early Probation Termination">
+            Early Probation Termination – $1,695.00
+          </label>
         </div>
         <div class="btn-group">
           <button class="next-btn" disabled>Next</button>
         </div>
       </div>
 
-      <!-- Step 2: CA-Only Notice -->
+      <!-- Step 2: Have you ever been convicted in CA? -->
       <div class="form-step" data-step="2">
+        <h2>Have you ever been convicted of a crime in California?</h2>
+        <div class="options">
+          <label><input type="radio" name="ever_convicted" value="Yes"> Yes</label>
+          <label><input type="radio" name="ever_convicted" value="No"> No</label>
+        </div>
+        <div class="btn-group">
+          <button class="back-btn">Back</button>
+          <button class="next-btn" disabled>Next</button>
+        </div>
+      </div>
+
+      <!-- Step 3: CA-Only Notice -->
+      <div class="form-step" data-step="3">
         <h2>Our service is only available to clients in the State of California.</h2>
         <p>We will be expanding into other states soon.</p>
         <div class="btn-group">
@@ -58,12 +167,12 @@
         </div>
       </div>
 
-      <!-- Step 3 -->
-      <div class="form-step" data-step="3">
+      <!-- Step 4: Sentence Completed? -->
+      <div class="form-step" data-step="4">
         <h2>Have you completed all terms of your sentence, including probation, parole, and fines?</h2>
         <div class="options">
-          <label><input type="radio" name="sentence_complete" value="Yes">Yes</label>
-          <label><input type="radio" name="sentence_complete" value="No">No</label>
+          <label><input type="radio" name="sentence_complete" value="Yes"> Yes</label>
+          <label><input type="radio" name="sentence_complete" value="No"> No</label>
         </div>
         <div class="btn-group">
           <button class="back-btn">Back</button>
@@ -71,12 +180,12 @@
         </div>
       </div>
 
-      <!-- Step 4 -->
-      <div class="form-step" data-step="4">
+      <!-- Step 5: State Prison? -->
+      <div class="form-step" data-step="5">
         <h2>Were you sentenced to state prison (not county jail)?</h2>
         <div class="options">
-          <label><input type="radio" name="state_prison" value="Yes">Yes</label>
-          <label><input type="radio" name="state_prison" value="No">No</label>
+          <label><input type="radio" name="state_prison" value="Yes"> Yes</label>
+          <label><input type="radio" name="state_prison" value="No"> No</label>
         </div>
         <div class="btn-group">
           <button class="back-btn">Back</button>
@@ -84,31 +193,25 @@
         </div>
       </div>
 
-      <!-- Step 5: Certificate of Rehabilitation -->
-      <div class="form-step service-list" data-step="5">
-        <h2>Unfortunately, you do not qualify for expungement.</h2>
-        <div class="service">
-          <h3>Certificate of Rehabilitation</h3>
-          <p>Under Cal. Pen. Code § 4852.01, we can assist you in obtaining a Certificate of Rehabilitation for <strong>$1,295</strong>.</p>
-          <button type="button" class="proceed-btn">Proceed</button>
-        </div>
+      <!-- Step 6: Certificate of Rehabilitation -->
+      <div class="form-step service-list" data-step="6">
+        <h2>Certificate of Rehabilitation</h2>
+        <p>Under Cal. Pen. Code § 4852.01, we can assist you in obtaining a Certificate of Rehabilitation for <strong>$1,295.00</strong>.</p>
+        <button type="button" class="proceed-btn" data-service="certificate">Proceed</button>
       </div>
 
-      <!-- Step 6: Expungement Service -->
-      <div class="form-step service-list" data-step="6">
-        <h2>Great news—you qualify for expungement!</h2>
-        <div class="service">
-          <h3>California Expungement Service</h3>
-          <p>We recommend our Expungement service under PC § 1203.4 &amp; § 1203.41 for <strong>$990</strong> once-off.</p>
-        </div>
+      <!-- Step 7: California Record Expungement -->
+      <div class="form-step service-list" data-step="7">
+        <h2>California Record Expungement</h2>
+        <p>We recommend our Expungement service under PC § 1203.4 & § 1203.41 for <strong>$990.00</strong> once-off.</p>
         <div class="btn-group">
           <button class="back-btn">Back</button>
           <button class="next-btn">Next</button>
         </div>
       </div>
 
-      <!-- Step 7: Contact Details -->
-      <div class="form-step" data-step="7">
+      <!-- Step 8: Contact Details -->
+      <div class="form-step" data-step="8">
         <h2>Provide your contact details to get started.</h2>
         <input type="text" name="fullName" placeholder="Full Name" required />
         <input type="email" name="email" placeholder="Email Address" required />
@@ -119,12 +222,12 @@
         </div>
       </div>
 
-      <!-- Step 8: Consultation Opt-In -->
-      <div class="form-step" data-step="8">
+      <!-- Step 9: Consultation Opt-In -->
+      <div class="form-step" data-step="9">
         <h2>Do you want to schedule a free consultation with an attorney?</h2>
         <div class="options">
-          <label><input type="radio" name="consult" value="Yes">Yes</label>
-          <label><input type="radio" name="consult" value="No">No</label>
+          <label><input type="radio" name="consult" value="Yes"> Yes</label>
+          <label><input type="radio" name="consult" value="No"> No</label>
         </div>
         <div class="btn-group">
           <button class="back-btn">Back</button>
@@ -132,40 +235,74 @@
         </div>
       </div>
 
-      <!-- Step 9: Thank You -->
-      <div class="form-step" data-step="9">
+      <!-- Step 10: Thank You -->
+      <div class="form-step" data-step="10">
         <h2>Thank you for completing your eligibility check!</h2>
         <p>Our team will review your answers and get in touch within 24–48 hours.</p>
+      </div>
+
+      <!-- Step 11: Arrest Record Sealing Service -->
+      <div class="form-step service-list" data-step="11">
+        <h2>Arrest Record Sealing</h2>
+        <p>We can assist you in sealing your arrest record for <strong>$1,695.00</strong>.</p>
+        <button type="button" class="proceed-btn" data-service="arrest-sealing">Proceed</button>
+      </div>
+
+      <!-- Step 12: Early Probation Termination Service -->
+      <div class="form-step service-list" data-step="12">
+        <h2>Early Probation Termination</h2>
+        <p>We can assist you in early termination of your probation for <strong>$1,695.00</strong>.</p>
+        <button type="button" class="proceed-btn" data-service="early-probation">Proceed</button>
       </div>
     </form>
 
     <div class="footer">
-      © 2025 – Redemption Law Group | All rights reserved. | Terms &amp; Conditions Apply
+      © 2025 – Redemption Law Group | All rights reserved. | Terms & Conditions Apply
     </div>
   </div>
 
   <script>
     const form = document.getElementById('expunge-form');
     const steps = Array.from(form.querySelectorAll('.form-step'));
+    const totalSteps = steps.length;
+    let current = 1;
 
-    // Updated routing logic w/ new CA-only notice as step 2
+    // Branching logic on step number & answer
     const logic = {
-      1: { 'No': 2, 'Yes': 3 },
-      3: { 'Yes': 4, 'No': 5 },
-      4: { 'Yes': 5, 'No': 6 }
+      1: {
+        'California Record Expungement': 2,
+        'Certificate of Rehabilitation': 6,
+        'Arrest Record Sealing': 11,
+        'Early Probation Termination': 12
+      },
+      2: { 'No': 3, 'Yes': 4 },
+      4: { 'Yes': 5, 'No': 6 },
+      5: { 'Yes': 6, 'No': 7 }
     };
 
-    let current = 1;
     function show(step) {
       steps.forEach(s => s.classList.remove('active'));
-      form.querySelector(`.form-step[data-step="${step}"]`).classList.add('active');
+      const stepEl = form.querySelector(`.form-step[data-step="${step}"]`);
+      if (!stepEl) return;
+      stepEl.classList.add('active');
       current = step;
-      const next = form.querySelector(`.form-step[data-step="${step}"] .next-btn`);
-      if (next) next.disabled = true;
+
+      // Disable any “Next” until a choice is made
+      const nextBtn = stepEl.querySelector('.next-btn');
+      if (nextBtn) nextBtn.disabled = true;
+
+      updateProgress();
     }
 
+    function updateProgress() {
+      const idx = steps.findIndex(s => s.classList.contains('active'));
+      const pct = ((idx + 1) / totalSteps) * 100;
+      document.querySelector('.progress-bar').style.width = pct + '%';
+    }
+
+    // Enable Next when an option is picked
     form.addEventListener('change', e => {
-      if (e.target.type === 'radio') {
+      if (e.target.matches('input[type="radio"]')) {
         const btn = e.target.closest('.form-step').querySelector('.next-btn');
         if (btn) btn.disabled = false;
       }
@@ -175,9 +312,12 @@
     form.querySelectorAll('.next-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const stepEl = btn.closest('.form-step');
+        const stepNum = parseInt(stepEl.dataset.step, 10);
         const val = stepEl.querySelector('input[type="radio"]:checked')?.value;
-        let next = current + 1;
-        if (logic[current] && val in logic[current]) next = logic[current][val];
+        let next = stepNum + 1;
+        if (logic[stepNum] && val in logic[stepNum]) {
+          next = logic[stepNum][val];
+        }
         show(next);
       });
     });
@@ -187,15 +327,17 @@
       btn.addEventListener('click', () => show(current - 1));
     });
 
-    // Proceed to Stripe Checkout on certificate path
+    // Proceed to Stripe Checkout
     document.addEventListener('click', e => {
       if (e.target.classList.contains('proceed-btn')) {
-        // Replace with your actual Stripe Checkout URL, including a success_url param:
-        window.location.href =
-          'https://your-stripe-checkout-url.com?success_url=https://redemption.legal/next-steps';
+        const service = e.target.dataset.service;
+        // replace with your real Stripe Checkout URLs
+        window.location.href = 
+          `https://your-stripe-checkout-url.com?service=${encodeURIComponent(service)}&success_url=https://redemption.legal/next-steps`;
       }
     });
 
+    // initialize
     show(current);
   </script>
 </body>
