@@ -1,0 +1,149 @@
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+
+const steps = [
+  {
+    title: 'Basic Information',
+    fields: [
+      { name: 'fullName', label: 'Full Name', type: 'text', required: true },
+      { name: 'email', label: 'Email Address', type: 'email', required: true },
+      { name: 'dateOfBirth', label: 'Date of Birth', type: 'date', required: true },
+    ],
+  },
+  {
+    title: 'Conviction Details',
+    fields: [
+      { name: 'offenseType', label: 'Type of Offense', type: 'select', options: [
+        'Misdemeanor',
+        'Felony - Eligible for Reduction to Misdemeanor',
+        'Felony - Not Eligible',
+      ], required: true },
+      { name: 'convictionDate', label: 'Date of Conviction', type: 'date', required: true },
+    ],
+  },
+  {
+    title: 'Probation & Sentencing',
+    fields: [
+      { name: 'probationCompleted', label: 'Probation Completed?', type: 'radio', options: ['Yes', 'No'], required: true },
+      { name: 'sentenceServed', label: 'Sentence Served in Full?', type: 'radio', options: ['Yes', 'No'], required: true },
+      { name: 'pendingCharges', label: 'Any Pending Charges?', type: 'radio', options: ['Yes', 'No'], required: true },
+    ],
+  },
+  {
+    title: 'Additional Restrictions',
+    fields: [
+      { name: 'sexOffenderRegistered', label: 'Registered Sex Offender?', type: 'radio', options: ['Yes', 'No'], required: true },
+      { name: 'section1203_4', label: 'Applying Under §1203.4?', type: 'radio', options: ['Yes', 'No'], required: true },
+      { name: 'section1203_41', label: 'Applying Under §1203.41?', type: 'radio', options: ['Yes', 'No'], required: true },
+    ],
+  },
+  {
+    title: 'Review & Submit',
+    fields: [],
+  },
+];
+
+const ExpungementEligibilityForm = () => {
+  const [currentStep, setCurrentStep] = useState(0);
+  const [formData, setFormData] = useState({});
+  const step = steps[currentStep];
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const next = () => {
+    if (currentStep < steps.length - 1) setCurrentStep(s => s + 1);
+  };
+  const back = () => {
+    if (currentStep > 0) setCurrentStep(s => s - 1);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // TODO: logic to evaluate eligibility based on California Penal Code §§ 1203.4, 1203.41
+    console.log('Submitted:', formData);
+    alert('Thank you! We are evaluating your eligibility and will notify you shortly.');
+  };
+
+  return (
+    <div className="max-w-xl mx-auto p-6 bg-white rounded-2xl shadow-lg">
+      <div className="mb-4">
+        <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <motion.div
+            className="h-full bg-blue-500"
+            initial={{ width: 0 }}
+            animate={{ width: `${((currentStep) / (steps.length - 1)) * 100}%` }}
+            transition={{ duration: 0.5 }}
+          />
+        </div>
+        <p className="text-sm text-gray-600 mt-1">Step {currentStep + 1} of {steps.length}: {step.title}</p>
+      </div>
+      <form onSubmit={currentStep === steps.length - 1 ? handleSubmit : (e) => { e.preventDefault(); next(); }}>
+        {step.fields.map((field) => (
+          <div className="mb-4" key={field.name}>
+            <label className="block text-gray-700 mb-1" htmlFor={field.name}>{field.label}</label>
+            {field.type === 'text' || field.type === 'email' || field.type === 'date' ? (
+              <input
+                id={field.name}
+                name={field.name}
+                type={field.type}
+                required={field.required}
+                value={formData[field.name] || ''}
+                onChange={handleChange}
+                className="w-full border border-gray-300 p-2 rounded-md"
+              />
+            ) : null}
+
+            {field.type === 'select' ? (
+              <select
+                id={field.name}
+                name={field.name}
+                required={field.required}
+                value={formData[field.name] || ''}
+                onChange={handleChange}
+                className="w-full border border-gray-300 p-2 rounded-md"
+              >
+                <option value="">-- Select --</option>
+                {field.options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+              </select>
+            ) : null}
+
+            {field.type === 'radio' ? (
+              <div className="flex space-x-4">
+                {field.options.map(opt => (
+                  <label key={opt} className="flex items-center">
+                    <input
+                      type="radio"
+                      name={field.name}
+                      value={opt}
+                      required={field.required}
+                      checked={formData[field.name] === opt}
+                      onChange={handleChange}
+                      className="mr-2"
+                    />
+                    {opt}
+                  </label>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        ))}
+        <div className="flex justify-between">
+          {currentStep > 0 ? (
+            <button type="button" onClick={back} className="px-4 py-2 bg-gray-300 rounded-lg">Back</button>
+          ) : <div />}
+          <button
+            type="submit"
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+          >
+            {currentStep === steps.length - 1 ? 'Submit' : 'Next'}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default ExpungementEligibilityForm;
