@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Getting Started – REDEMPTION</title>
+  <title>California Expungement Eligibility Test – REDEMPTION</title>
   <style>
-    * { box-sizing: border-box }
+    * { box-sizing: border-box; }
     body, html {
       margin: 0; padding: 0;
       height: 100%;
@@ -32,21 +32,19 @@
       color: #333;
     }
     .progress {
-      width: 100%;
-      height: 8px;
+      width: 100%; height: 8px;
       background: #e0e0e0;
       border-radius: 4px;
       margin-bottom: 24px;
       overflow: hidden;
     }
     .progress-bar {
-      height: 100%;
-      width: 0%;
+      height: 100%; width: 0%;
       background: #4caf50;
       transition: width 0.3s ease;
     }
-    .form-step { display: none }
-    .form-step.active { display: block }
+    .form-step { display: none; }
+    .form-step.active { display: block; }
     .form-step h2 {
       font-size: 20px;
       margin-bottom: 16px;
@@ -68,9 +66,7 @@
       transform: scale(1.2);
       vertical-align: middle;
     }
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"] {
+    input[type="text"], input[type="email"], input[type="tel"] {
       width: 100%;
       padding: 12px;
       margin-bottom: 24px;
@@ -78,7 +74,7 @@
       border-radius: 4px;
       font-size: 16px;
     }
-    .btn-group { text-align: right }
+    .btn-group { text-align: right; }
     button {
       padding: 12px 24px;
       font-size: 16px;
@@ -97,9 +93,6 @@
       color: #333;
       margin-right: 12px;
     }
-    .service-list h3 {
-      margin-top: 0;
-    }
     .footer {
       text-align: center;
       margin-top: 24px;
@@ -113,7 +106,7 @@
     <div class="logo-container">
       <img src="/path/to/logo.png" alt="Redemption Law Group Logo" />
     </div>
-    <h1>GETTING STARTED</h1>
+    <h1>Expungement Eligibility Test</h1>
 
     <!-- Progress Bar -->
     <div class="progress">
@@ -121,13 +114,13 @@
     </div>
 
     <form id="expunge-form">
-      <!-- Step 1: Choose Service -->
+      <!-- Step 1: Service Selection -->
       <div class="form-step active" data-step="1">
         <h2>Which service are you interested in?</h2>
         <div class="options">
           <label>
             <input type="radio" name="service" value="California Record Expungement">
-            Criminal Record Expungement – $990.00
+            California Record Expungement – $990.00
           </label>
           <label>
             <input type="radio" name="service" value="Certificate of Rehabilitation">
@@ -153,7 +146,7 @@
         <p>
           We specialize in navigating the complexities of felony expungements to clear your record
           under Penal Code 1203.4 (within the state of California) for just $990.00. Let us handle
-          the paperwork, court filings, and advocate on your behalf so you can put your past behind you.
+          the paperwork, court filings, and advocate on your behalf so you can move forward with a clean slate.
         </p>
         <div class="btn-group">
           <button class="back-btn">Back</button>
@@ -161,7 +154,7 @@
         </div>
       </div>
 
-      <!-- Step 3: Certificate Detail -->
+      <!-- Step 3: Certificate of Rehabilitation Detail -->
       <div class="form-step" data-step="3">
         <h2>Certificate of Rehabilitation</h2>
         <p>
@@ -182,10 +175,8 @@
         <h2>Arrest Record Sealing</h2>
         <p>
           Similar to expungement, arrest record sealing conceals your arrest records from the public,
-          making your past arrests inaccessible through routine background checks. Sometimes, even
-          individuals who were never convicted but were arrested may face discrimination. Our
-          process includes a detailed case assessment, completion of paperwork, and representation
-          in any necessary hearings.
+          making your past arrests inaccessible through routine background checks. Our process includes
+          a detailed assessment, completion of paperwork, and representation in any necessary hearings.
         </p>
         <div class="btn-group">
           <button class="back-btn">Back</button>
@@ -197,10 +188,9 @@
       <div class="form-step" data-step="5">
         <h2>Early Probation Termination</h2>
         <p>
-          Under California Penal Code 1203.3, individuals on probation can petition the court
-          to terminate probation early. Our most satisfied clients are those who obtain early
-          termination and then immediately file for expungement—streamlining the process and
-          maximizing your chances of a clean record.
+          Under California Penal Code 1203.3, individuals on probation can request the court to
+          terminate probation early. Many clients then immediately file for expungement—streamlining
+          the path to a clean record.
         </p>
         <div class="btn-group">
           <button class="back-btn">Back</button>
@@ -208,7 +198,7 @@
         </div>
       </div>
 
-      <!-- Step 6: Ever Convicted? -->
+      <!-- Step 6: Eligibility Q1 -->
       <div class="form-step" data-step="6">
         <h2>Have you ever been convicted of a crime in California?</h2>
         <div class="options">
@@ -230,7 +220,7 @@
         </div>
       </div>
 
-      <!-- Step 8: Sentence Complete? -->
+      <!-- Step 8: Eligibility Q2 -->
       <div class="form-step" data-step="8">
         <h2>Have you completed all terms of your sentence, including probation, parole, and fines?</h2>
         <div class="options">
@@ -243,7 +233,7 @@
         </div>
       </div>
 
-      <!-- Step 9: State Prison? -->
+      <!-- Step 9: Eligibility Q3 -->
       <div class="form-step" data-step="9">
         <h2>Were you sentenced to state prison (not county jail)?</h2>
         <div class="options">
@@ -256,26 +246,24 @@
         </div>
       </div>
 
-      <!-- Step 10: Ineligible – Certificate of Rehabilitation Offer -->
+      <!-- Step 10: Ineligible – Certificate Offer -->
       <div class="form-step" data-step="10">
-        <h2>Unfortunately, you do not qualify for expungement.</h2>
-        <h3>Certificate of Rehabilitation</h3>
+        <h2>You are not eligible for expungement; however, we can offer our Certificate of Rehabilitation service.</h2>
         <p>
-          If you have a criminal conviction and served time in state prison in California,
-          you cannot expunge the underlying conviction. We can assist you in petitioning the court
-          under California Penal Code 4852.01 for a Certificate of Rehabilitation—an official
-          endorsement that your past is behind you and you’re a contributing member of society.
+          Under PC 4852.01, we’ll petition the court on your behalf. This certificate is a court-issued
+          endorsement that your history is behind you and you’re a contributing member of society.
           Price: <strong>$1,295.00</strong>
         </p>
-        <button type="button" class="proceed-btn" data-service="certificate">Proceed</button>
+        <div class="btn-group">
+          <button type="button" class="proceed-btn" data-service="certificate">Proceed</button>
+        </div>
       </div>
 
-      <!-- Step 11: Eligible – Expungement Service -->
+      <!-- Step 11: Eligible – Expungement Summary -->
       <div class="form-step" data-step="11">
         <h2>Great news—you qualify for expungement!</h2>
-        <h3>California Record Expungement</h3>
         <p>
-          We’ll clear your record under PC § 1203.4 & § 1203.41 for <strong>$990.00</strong>.
+          We’ll clear your record under PC § 1203.4 &amp; § 1203.41 for <strong>$990.00</strong>.
         </p>
         <div class="btn-group">
           <button class="back-btn">Back</button>
@@ -316,7 +304,7 @@
     </form>
 
     <div class="footer">
-      © 2025 – Redemption Law Group
+      © 2025 – Redemption Law Group | All rights reserved. | Terms &amp; Conditions Apply
     </div>
   </div>
 
@@ -326,7 +314,6 @@
     const totalSteps = steps.length;
     let current = 1;
 
-    // Routing logic
     const logic = {
       1: {
         'California Record Expungement': 2,
@@ -335,7 +322,7 @@
         'Early Probation Termination': 5
       },
       6: { 'No': 7, 'Yes': 8 },
-      8: { 'Yes': 9, 'No': 10 },
+      8: { 'No': 10, 'Yes': 9 },
       9: { 'Yes': 10, 'No': 11 }
     };
 
@@ -345,15 +332,15 @@
       if (!el) return;
       el.classList.add('active');
       current = step;
-      const nextBtn = el.querySelector('.next-btn');
-      if (nextBtn) nextBtn.disabled = true;
+      const nxt = el.querySelector('.next-btn');
+      if (nxt) nxt.disabled = true;
       updateProgress();
     }
 
     function updateProgress() {
       const idx = steps.findIndex(s => s.classList.contains('active'));
-      const pct = ((idx + 1) / totalSteps) * 100;
-      document.querySelector('.progress-bar').style.width = pct + '%';
+      document.querySelector('.progress-bar')
+              .style.width = `${((idx + 1) / totalSteps) * 100}%`;
     }
 
     // Enable Next when a radio is selected
@@ -364,33 +351,35 @@
       }
     });
 
-    // Next button handler
+    // Next buttons
     form.querySelectorAll('.next-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const stepEl = btn.closest('.form-step');
-        const stepNum = parseInt(stepEl.dataset.step, 10);
+        const num = +stepEl.dataset.step;
         let next;
-        if (stepNum === 2) {
-          // After expungement detail → eligibility Q1
-          next = 6;
+        if (num === 2) {
+          next = 6;  // after expungement detail → first eligibility Q
         } else {
           const val = stepEl.querySelector('input[type="radio"]:checked')?.value;
-          if (logic[stepNum] && val in logic[stepNum]) {
-            next = logic[stepNum][val];
-          } else {
-            next = stepNum + 1;
-          }
+          next = (logic[num] && logic[num][val]) || (num + 1);
         }
         show(next);
       });
     });
 
-    // Back button handler
+    // Back buttons
     form.querySelectorAll('.back-btn').forEach(btn => {
-      btn.addEventListener('click', () => show(current - 1));
+      btn.addEventListener('click', () => {
+        // return to step 1 from the 4 service-detail pages
+        if ([2,3,4,5].includes(current)) {
+          show(1);
+        } else {
+          show(current - 1);
+        }
+      });
     });
 
-    // Proceed to Stripe for any service
+    // Proceed to Stripe Checkout
     document.addEventListener('click', e => {
       if (e.target.classList.contains('proceed-btn')) {
         const svc = e.target.dataset.service;
@@ -399,7 +388,7 @@
       }
     });
 
-    // Initial render
+    // initialize
     show(current);
   </script>
 </body>
