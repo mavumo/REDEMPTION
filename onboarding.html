@@ -33,7 +33,7 @@
 <body>
   <div class="form-container">
     <div class="logo-container">
-      <img src="https://redemption.legal/redemptionblk.svg" alt="Redemption Law Group Logo" />
+      <img src="/redemptionblk.svg" alt="Redemption Law Group Logo" />
     </div>
     <h1>Expungement Eligibility Test</h1>
     <form id="expunge-form">
@@ -49,8 +49,17 @@
         </div>
       </div>
 
-      <!-- Step 2 -->
+      <!-- Step 2: CA-Only Notice -->
       <div class="form-step" data-step="2">
+        <h2>Our service is only available to clients in the State of California.</h2>
+        <p>We will be expanding into other states soon.</p>
+        <div class="btn-group">
+          <button class="back-btn">Back</button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="form-step" data-step="3">
         <h2>Have you completed all terms of your sentence, including probation, parole, and fines?</h2>
         <div class="options">
           <label><input type="radio" name="sentence_complete" value="Yes">Yes</label>
@@ -62,8 +71,8 @@
         </div>
       </div>
 
-      <!-- Step 3 -->
-      <div class="form-step" data-step="3">
+      <!-- Step 4 -->
+      <div class="form-step" data-step="4">
         <h2>Were you sentenced to state prison (not county jail)?</h2>
         <div class="options">
           <label><input type="radio" name="state_prison" value="Yes">Yes</label>
@@ -75,8 +84,8 @@
         </div>
       </div>
 
-      <!-- Step 4: Ineligible – Certificate of Rehabilitation -->
-      <div class="form-step service-list" data-step="4">
+      <!-- Step 5: Certificate of Rehabilitation -->
+      <div class="form-step service-list" data-step="5">
         <h2>Unfortunately, you do not qualify for expungement.</h2>
         <div class="service">
           <h3>Certificate of Rehabilitation</h3>
@@ -85,12 +94,12 @@
         </div>
       </div>
 
-      <!-- Step 5: Eligible – Expungement -->
-      <div class="form-step service-list" data-step="5">
+      <!-- Step 6: Expungement Service -->
+      <div class="form-step service-list" data-step="6">
         <h2>Great news—you qualify for expungement!</h2>
         <div class="service">
           <h3>California Expungement Service</h3>
-          <p>We recommend our Expungement service under PC § 1203.4 & § 1203.41 for <strong>$990</strong> once-off.</p>
+          <p>We recommend our Expungement service under PC § 1203.4 &amp; § 1203.41 for <strong>$990</strong> once-off.</p>
         </div>
         <div class="btn-group">
           <button class="back-btn">Back</button>
@@ -98,8 +107,8 @@
         </div>
       </div>
 
-      <!-- Step 6: Contact Details -->
-      <div class="form-step" data-step="6">
+      <!-- Step 7: Contact Details -->
+      <div class="form-step" data-step="7">
         <h2>Provide your contact details to get started.</h2>
         <input type="text" name="fullName" placeholder="Full Name" required />
         <input type="email" name="email" placeholder="Email Address" required />
@@ -110,8 +119,8 @@
         </div>
       </div>
 
-      <!-- Step 7: Consultation Opt-In -->
-      <div class="form-step" data-step="7">
+      <!-- Step 8: Consultation Opt-In -->
+      <div class="form-step" data-step="8">
         <h2>Do you want to schedule a free consultation with an attorney?</h2>
         <div class="options">
           <label><input type="radio" name="consult" value="Yes">Yes</label>
@@ -123,8 +132,8 @@
         </div>
       </div>
 
-      <!-- Step 8: Thank You -->
-      <div class="form-step" data-step="8">
+      <!-- Step 9: Thank You -->
+      <div class="form-step" data-step="9">
         <h2>Thank you for completing your eligibility check!</h2>
         <p>Our team will review your answers and get in touch within 24–48 hours.</p>
       </div>
@@ -138,13 +147,15 @@
   <script>
     const form = document.getElementById('expunge-form');
     const steps = Array.from(form.querySelectorAll('.form-step'));
-    const logic = {
-      1: { 'No': 5, 'Yes': 2 },
-      2: { 'Yes': 3, 'No': 4 },
-      3: { 'No': 5, 'Yes': 4 }
-    };
-    let current = 1;
 
+    // Updated routing logic w/ new CA-only notice as step 2
+    const logic = {
+      1: { 'No': 2, 'Yes': 3 },
+      3: { 'Yes': 4, 'No': 5 },
+      4: { 'Yes': 5, 'No': 6 }
+    };
+
+    let current = 1;
     function show(step) {
       steps.forEach(s => s.classList.remove('active'));
       form.querySelector(`.form-step[data-step="${step}"]`).classList.add('active');
@@ -160,6 +171,7 @@
       }
     });
 
+    // Next buttons
     form.querySelectorAll('.next-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const stepEl = btn.closest('.form-step');
@@ -170,14 +182,17 @@
       });
     });
 
+    // Back buttons
     form.querySelectorAll('.back-btn').forEach(btn => {
       btn.addEventListener('click', () => show(current - 1));
     });
 
+    // Proceed to Stripe Checkout on certificate path
     document.addEventListener('click', e => {
       if (e.target.classList.contains('proceed-btn')) {
-        // TODO: replace with your real Stripe Checkout URL
-        window.location.href = 'https://your-stripe-checkout-url.com';
+        // Replace with your actual Stripe Checkout URL, including a success_url param:
+        window.location.href =
+          'https://your-stripe-checkout-url.com?success_url=https://redemption.legal/next-steps';
       }
     });
 
