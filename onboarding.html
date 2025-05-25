@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>California Expungement Eligibility Test - REDEMPTION</title>
   <style>
-    /* Typeform-style centered card */
     * { box-sizing: border-box; }
     body, html { margin:0; padding:0; height:100%; font-family: Arial, sans-serif; background:#f0f2f5; display:flex; align-items:center; justify-content:center; }
-    .form-container { background:#fff; width:100%; max-width:480px; padding:40px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); position:relative; }
+    .form-container { background:#fff; width:100%; max-width:480px; padding:40px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
     .form-step { display:none; }
     .form-step.active { display:block; }
     h1 { font-size:24px; margin-bottom:16px; text-align:center; color:#333; }
@@ -16,9 +15,7 @@
     .logo-container img { max-width:150px; display:block; margin:0 auto 20px; }
     .options label { display:block; margin-bottom:16px; font-size:18px; cursor:pointer; }
     .options input { margin-right:12px; transform:scale(1.2); vertical-align:middle; }
-    input[type="text"], input[type="email"], input[type="tel"] {
-      width:100%; padding:12px; margin-bottom:24px; border:1px solid #ddd; border-radius:4px; font-size:16px;
-    }
+    input[type="text"], input[type="email"], input[type="tel"] { width:100%; padding:12px; margin-bottom:24px; border:1px solid #ddd; border-radius:4px; font-size:16px; }
     .btn-group { text-align:right; }
     button {
       padding:12px 24px; font-size:16px; border:none; border-radius:4px; cursor:pointer;
@@ -29,6 +26,7 @@
     .service-list h3 { margin-top:0; }
     .service-list .service { margin-bottom:24px; }
     .service-list .service p { margin:8px 0; }
+    .proceed-btn { margin-top:12px; }
     .footer { text-align:center; margin-top:24px; font-size:14px; color:#777; }
   </style>
 </head>
@@ -53,21 +51,6 @@
 
       <!-- Step 2 -->
       <div class="form-step" data-step="2">
-        <h2>What type of offense were you convicted of?</h2>
-        <div class="options">
-          <label><input type="radio" name="offense_type" value="Misdemeanor">Misdemeanor</label>
-          <label><input type="radio" name="offense_type" value="Felony">Felony</label>
-          <label><input type="radio" name="offense_type" value="Both">Both</label>
-          <label><input type="radio" name="offense_type" value="Not Sure">Not Sure</label>
-        </div>
-        <div class="btn-group">
-          <button class="back-btn">Back</button>
-          <button class="next-btn" disabled>Next</button>
-        </div>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="form-step" data-step="3">
         <h2>Have you completed all terms of your sentence, including probation, parole, and fines?</h2>
         <div class="options">
           <label><input type="radio" name="sentence_complete" value="Yes">Yes</label>
@@ -79,39 +62,12 @@
         </div>
       </div>
 
-      <!-- Step 4 -->
-      <div class="form-step" data-step="4">
-        <h2>Are you currently facing any new criminal charges or investigations?</h2>
-        <div class="options">
-          <label><input type="radio" name="facing_charges" value="Yes">Yes</label>
-          <label><input type="radio" name="facing_charges" value="No">No</label>
-        </div>
-        <div class="btn-group">
-          <button class="back-btn">Back</button>
-          <button class="next-btn" disabled>Next</button>
-        </div>
-      </div>
-
-      <!-- Step 5 -->
-      <div class="form-step" data-step="5">
-        <h2>Are you currently on probation or parole?</h2>
-        <div class="options">
-          <label><input type="radio" name="on_probation" value="Yes">Yes</label>
-          <label><input type="radio" name="on_probation" value="No">No</label>
-        </div>
-        <div class="btn-group">
-          <button class="back-btn">Back</button>
-          <button class="next-btn" disabled>Next</button>
-        </div>
-      </div>
-
-      <!-- Step 6 -->
-      <div class="form-step" data-step="6">
+      <!-- Step 3 -->
+      <div class="form-step" data-step="3">
         <h2>Were you sentenced to state prison (not county jail)?</h2>
         <div class="options">
           <label><input type="radio" name="state_prison" value="Yes">Yes</label>
           <label><input type="radio" name="state_prison" value="No">No</label>
-          <label><input type="radio" name="state_prison" value="Not Sure">Not Sure</label>
         </div>
         <div class="btn-group">
           <button class="back-btn">Back</button>
@@ -119,12 +75,22 @@
         </div>
       </div>
 
-      <!-- Step 7: Eligible -->
-      <div class="form-step service-list" data-step="7">
-        <h2>Good news—you qualify for expungement!</h2>
+      <!-- Step 4: Ineligible – Certificate of Rehabilitation -->
+      <div class="form-step service-list" data-step="4">
+        <h2>Unfortunately, you do not qualify for expungement.</h2>
+        <div class="service">
+          <h3>Certificate of Rehabilitation</h3>
+          <p>Under Cal. Pen. Code § 4852.01, we can assist you in obtaining a Certificate of Rehabilitation for <strong>$1,295</strong>.</p>
+          <button type="button" class="proceed-btn">Proceed</button>
+        </div>
+      </div>
+
+      <!-- Step 5: Eligible – Expungement -->
+      <div class="form-step service-list" data-step="5">
+        <h2>Great news—you qualify for expungement!</h2>
         <div class="service">
           <h3>California Expungement Service</h3>
-          <p>We recommend our Expungement service under PC §1203.4 & §1203.41 for $990 once-off.</p>
+          <p>We recommend our Expungement service under PC § 1203.4 & § 1203.41 for <strong>$990</strong> once-off.</p>
         </div>
         <div class="btn-group">
           <button class="back-btn">Back</button>
@@ -132,8 +98,8 @@
         </div>
       </div>
 
-      <!-- Step 8: Contact -->
-      <div class="form-step" data-step="8">
+      <!-- Step 6: Contact Details -->
+      <div class="form-step" data-step="6">
         <h2>Provide your contact details to get started.</h2>
         <input type="text" name="fullName" placeholder="Full Name" required />
         <input type="email" name="email" placeholder="Email Address" required />
@@ -144,8 +110,8 @@
         </div>
       </div>
 
-      <!-- Step 9: Consultation -->
-      <div class="form-step" data-step="9">
+      <!-- Step 7: Consultation Opt-In -->
+      <div class="form-step" data-step="7">
         <h2>Do you want to schedule a free consultation with an attorney?</h2>
         <div class="options">
           <label><input type="radio" name="consult" value="Yes">Yes</label>
@@ -157,66 +123,65 @@
         </div>
       </div>
 
-      <!-- Step 10: Thank You -->
-      <div class="form-step" data-step="10">
+      <!-- Step 8: Thank You -->
+      <div class="form-step" data-step="8">
         <h2>Thank you for completing your eligibility check!</h2>
         <p>Our team will review your answers and get in touch within 24–48 hours.</p>
       </div>
     </form>
-    <div class="footer">© 2025 – Redemption Law Group | All rights reserved. | Terms &amp; Conditions Apply</div>
+
+    <div class="footer">
+      © 2025 – Redemption Law Group | All rights reserved. | Terms &amp; Conditions Apply
+    </div>
   </div>
 
   <script>
     const form = document.getElementById('expunge-form');
     const steps = Array.from(form.querySelectorAll('.form-step'));
-    const nextBtns = form.querySelectorAll('.next-btn');
-    const backBtns = form.querySelectorAll('.back-btn');
-    let currentStep = 1;
-    const answers = {};
-
     const logic = {
-      1: { 'No': 8, 'Yes': 2 },
-      3: { 'No': 6, 'Yes': 4 },
-      4: { 'No': 5, 'Yes': 6 },
-      5: { 'No': 7, 'Yes': 6 },
-      6: { 'No': 8, 'Yes': 6, 'Not Sure': 6 }
+      1: { 'No': 5, 'Yes': 2 },
+      2: { 'Yes': 3, 'No': 4 },
+      3: { 'No': 5, 'Yes': 4 }
     };
+    let current = 1;
 
-    function showStep(step) {
+    function show(step) {
       steps.forEach(s => s.classList.remove('active'));
-      const el = form.querySelector(`.form-step[data-step="${step}"]`);
-      if (!el) return;
-      el.classList.add('active');
-      currentStep = step;
-      // Reset next button state
-      const next = el.querySelector('.next-btn');
+      form.querySelector(`.form-step[data-step="${step}"]`).classList.add('active');
+      current = step;
+      const next = form.querySelector(`.form-step[data-step="${step}"] .next-btn`);
       if (next) next.disabled = true;
     }
 
     form.addEventListener('change', e => {
-      if (e.target.matches('input[type="radio"]')) {
-        const stepEl = e.target.closest('.form-step');
-        const next = stepEl.querySelector('.next-btn');
-        if (next) next.disabled = false;
+      if (e.target.type === 'radio') {
+        const btn = e.target.closest('.form-step').querySelector('.next-btn');
+        if (btn) btn.disabled = false;
       }
     });
 
-    nextBtns.forEach(btn => btn.addEventListener('click', () => {
-      const stepEl = btn.closest('.form-step');
-      const name = stepEl.querySelector('input[type="radio"][checked]')?.name || stepEl.querySelector('input')?.name;
-      const val = stepEl.querySelector('input[type="radio"]:checked')?.value;
-      if (val) answers[stepEl.dataset.step] = val;
-      let next = parseInt(stepEl.dataset.step) + 1;
-      if (logic[stepEl.dataset.step] && val in logic[stepEl.dataset.step]) {
-        next = logic[stepEl.dataset.step][val];
+    form.querySelectorAll('.next-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const stepEl = btn.closest('.form-step');
+        const val = stepEl.querySelector('input[type="radio"]:checked')?.value;
+        let next = current + 1;
+        if (logic[current] && val in logic[current]) next = logic[current][val];
+        show(next);
+      });
+    });
+
+    form.querySelectorAll('.back-btn').forEach(btn => {
+      btn.addEventListener('click', () => show(current - 1));
+    });
+
+    document.addEventListener('click', e => {
+      if (e.target.classList.contains('proceed-btn')) {
+        // TODO: replace with your real Stripe Checkout URL
+        window.location.href = 'https://your-stripe-checkout-url.com';
       }
-      showStep(next);
-    }));
+    });
 
-    backBtns.forEach(btn => btn.addEventListener('click', () => showStep(currentStep - 1)));
-
-    // Initialize
-    showStep(currentStep);
+    show(current);
   </script>
 </body>
 </html>
