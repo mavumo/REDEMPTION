@@ -3,546 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Eligibility Form</title>
+    <title>Service Eligibility Form | Redemption Law Group</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
-        /* Basic page style */
-body {
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  background-color: #F9F9F9;
-  color: #333;
-  margin: 0;
-  padding: 20px;
-}
-h2 {
-  text-align: center;
-}
-p {
-  font-size: 1.1em;
-  line-height: 1.4;
-}
-small {
-  color: #666;
-}
-
-/* Form container */
-#eligibilityForm {
-  max-width: 600px;
-  background: #FFFFFF;
-  margin: 30px auto;
-  padding: 30px 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* Form steps */
-.form-step {
-  display: none;  /* hide all steps by default */
-}
-.form-step.active {
-  display: block; /* only the active step is shown */
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Fade-in animation for steps */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Input and select styling */
-input, select {
-  width: 100%;
-  font-size: 1em;
-  padding: 10px;
-  margin: 10px 0 20px;
-  box-sizing: border-box;
-  border: 1px solid #CCC;
-  border-radius: 4px;
-}
-input:focus, select:focus {
-  border-color: #66afe9;
-  outline: none;
-}
-
-/* Error message styling */
-.error-msg {
-  color: #D8000C;
-  font-size: 0.9em;
-  margin-top: -10px;
-  display: block;
-}
-input.error, select.error {
-  border-color: #D8000C;
-}
-
-/* Navigation buttons */
-.next-btn, .back-btn, .submit-btn {
-  font-size: 1em;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.next-btn {
-  background-color: #4CAF50; /* a green primary action color */
-  color: #fff;
-}
-.back-btn {
-  background-color: #AAA;    /* gray for back */
-  color: #fff;
-}
-.submit-btn {
-  background-color: #0066CC; /* blue for submit/pay */
-  color: #fff;
-}
-.next-btn:hover, .back-btn:hover, .submit-btn:hover {
-  opacity: 0.9;
-}
-.back-btn:disabled, .next-btn:disabled, .submit-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Footer text */
-footer p {
-  font-size: 0.85em;
-  color: #555;
-  text-align: center;
-  max-width: 600px;
-  margin: 40px auto 20px auto;
-  line-height: 1.3;
-}
-footer a {
-  color: #555;
-  text-decoration: underline;
-}
+        body { background: #f7f9fc; }
+        .form-container { max-width: 700px; margin: auto; padding: 30px; background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,.1); }
+        .form-step { display: none; }
+        .form-step.active { display: block; animation: fadeIn .5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .error-msg { color: red; }
+        footer { text-align: center; margin-top: 20px; font-size: 0.85em; color: #555; }
+        .logo { text-align: center; margin-bottom: 30px; }
+        .logo img { max-width: 200px; }
     </style>
 </head>
 <body>
-
-
-
-<<!-- Multi-step Eligibility Form -->
-<form id="eligibilityForm">
-  <!-- Step 1: Full Name -->
-  <div class="form-step active" id="step-name">
-    <p>Hi! Let's check what you might be eligible for. First, what's your <strong>full name</strong>?</p>
-    <input type="text" id="fullName" name="fullName" placeholder="Your full name" required />
-    <span id="fullNameError" class="error-msg"></span>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-
-  <!-- Step 2: Email Address -->
-  <div class="form-step" id="step-email">
-    <p>Nice to meet you, <span id="firstNameDisplay"></span>! What's your <strong>email address</strong>?</p>
-    <input type="email" id="email" name="email" placeholder="you@example.com" required />
-    <span id="emailError" class="error-msg"></span>
-    <button type="button" class="back-btn">Back</button>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-
-  <!-- Step 3: Phone Number -->
-  <div class="form-step" id="step-phone">
-    <p>And could you provide your <strong>phone number</strong>, <span id="firstNameDisplay2"></span>? <small>(We'll only use it to discuss your eligibility.)</small></p>
-    <input type="tel" id="phone" name="phone" placeholder="555-123-4567" required />
-    <span id="phoneError" class="error-msg"></span>
-    <button type="button" class="back-btn">Back</button>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-
-  <!-- Step 4: Case County -->
-  <div class="form-step" id="step-county">
-    <p>In which California <strong>county</strong> did your case occur?</p>
-    <select id="county" name="county" required>
-      <option value="" disabled selected>Select County</option>
-      <!-- (List of California counties) -->
-      <option value="Alameda">Alameda County</option>
-      <option value="Alpine">Alpine County</option>
-      <option value="Amador">Amador County</option>
-      <!-- ... all other counties ... -->
-      <option value="Yuba">Yuba County</option>
-    </select>
-    <span id="countyError" class="error-msg"></span>
-    <button type="button" class="back-btn">Back</button>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-
-  <!-- Step 5: California Residency -->
-  <div class="form-step" id="step-residency">
-    <p>Do you <strong>currently live in California</strong>?</p>
-    <select id="residency" name="residency" required>
-      <option value="" disabled selected>Select an option</option>
-      <option value="yes">Yes, I'm a California resident</option>
-      <option value="no">No, I live outside California</option>
-    </select>
-    <span id="residencyError" class="error-msg"></span>
-    <button type="button" class="back-btn">Back</button>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-
-  <!-- Step 6: Service Selection -->
-  <div class="form-step" id="step-service">
-    <p>What can we help you with, <span id="firstNameDisplay3"></span>? Select a service to check eligibility:</p>
-    <select id="service" name="service" required>
-      <option value="" disabled selected>Select a service</option>
-      <option value="expungement">Record Expungement – Clear a conviction (PC 1203.4)</option>
-      <option value="cor">Certificate of Rehabilitation – Court acknowledgment of rehabilitation (PC 4852)</option>
-      <option value="sealing">Arrest Record Sealing – Seal an arrest that didn’t lead to conviction (PC 851.87)</option>
-      <option value="probation">Early Probation Termination – End my probation early (PC 1203.3)</option>
-    </select>
-    <span id="serviceError" class="error-msg"></span>
-    <button type="button" class="back-btn">Back</button>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-
-  <!-- Expungement Eligibility Questions (shown if "expungement" selected) -->
-  <div class="form-step service-questions expungement-questions">
-    <p>Have you <strong>completed all terms of your sentence or probation</strong> for that conviction? <small>(Under PC §1203.4, you must finish probation or sentence to qualify)</small></p>
-    <select id="exp_probation_done" name="exp_probation_done" required>
-      <option value="" disabled selected>Select an option</option>
-      <option value="yes">Yes – I completed probation/sentence</option>
-      <option value="no">No – I'm still on probation or have outstanding requirements</option>
-    </select>
-    <span id="expProbationError" class="error-msg"></span>
-    <button type="button" class="back-btn">Back</button>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-  <div class="form-step service-questions expungement-questions">
-    <p>Did you <strong>serve time in state prison</strong> for this conviction? <small>(Expungement is generally not available for state prison cases [oai_citation:29‡redemption.legal](https://redemption.legal/services/record-expungement#:~:text=Certain%20serious%20crimes%20are%20not,is%20necessary%20to%20determine%20eligibility))</small></p>
-    <select id="exp_prison" name="exp_prison" required>
-      <option value="" disabled selected>Select an option</option>
-      <option value="no">No – I was not sentenced to state prison</option>
-      <option value="yes">Yes – I served a state prison term</option>
-    </select>
-    <span id="expPrisonError" class="error-msg"></span>
-    <button type="button" class="back-btn">Back</button>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-  <div class="form-step service-questions expungement-questions">
-    <p>Do you have any <strong>current criminal charges</strong> pending, or are you on probation for another case? <small>(You must not have any new cases pending to get an expungement [oai_citation:30‡redemption.legal](https://redemption.legal/services/record-expungement#:~:text=Eligibility%20depends%20on%20several%20factors,serving%20time%20for%20another%20offense))</small></p>
-    <select id="exp_current_cases" name="exp_current_cases" required>
-      <option value="" disabled selected>Select an option</option>
-      <option value="no">No – I have no pending charges and I'm not on any other probation</option>
-      <option value="yes">Yes – I have another open case or active probation</option>
-    </select>
-    <span id="expCurrentError" class="error-msg"></span>
-    <button type="button" class="back-btn">Back</button>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-  <!-- (Potential additional expungement question about type of offense, if needed) -->
-
-  <!-- Certificate of Rehabilitation Eligibility Questions (shown if "cor" selected) -->
-  <div class="form-step service-questions cor-questions">
-    <p>Have you lived in California <strong>continuously for at least the last 5 years</strong>? <small>(California residency for 5 years is required for a Certificate of Rehabilitation [oai_citation:31‡selfhelp.courts.ca.gov](https://selfhelp.courts.ca.gov/clean-your-record/certificate-rehabilitation#:~:text=1))</small></p>
-    <select id="cor_residency" name="cor_residency" required>
-      <option value="" disabled selected>Select an option</option>
-      <option value="yes">Yes – I've been living in CA for 5+ years</option>
-      <option value="no">No – I have NOT lived in CA for 5 years</option>
-    </select>
-    <span id="corResidencyError" class="error-msg"></span>
-    <button type="button" class="back-btn">Back</button>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-  <div class="form-step service-questions cor-questions">
-    <p>Was your conviction a <strong>felony that involved a prison sentence</strong>? <small>(Certificates are generally for more serious offenses not eligible for expungement)</small></p>
-    <select id="cor_prison" name="cor_prison" required>
-      <option value="" disabled selected>Select an option</option>
-      <option value="yes">Yes – It was a felony and I did serve prison time</option>
-      <option value="no">No – I did not go to prison for that conviction</option>
-    </select>
-    <span id="corPrisonError" class="error-msg"></span>
-    <button type="button" class="back-btn">Back</button>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-  <div class="form-step service-questions cor-questions">
-    <p>How long ago did you <strong>finish your sentence</strong> (including any parole/probation)?</p>
-    <select id="cor_wait_period" name="cor_wait_period" required>
-      <option value="" disabled selected>Select an option</option>
-      <option value=">=7">7 or more years ago</option>
-      <option value="<7">Less than 7 years ago</option>
-    </select>
-    <span id="corWaitError" class="error-msg"></span>
-    <button type="button" class="back-btn">Back</button>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-  <!-- (We could ask about new convictions since then, if needed) -->
-
-  <!-- Arrest Sealing Eligibility Questions (shown if "sealing" selected) -->
-  <div class="form-step service-questions sealing-questions">
-    <p>Were you ever <strong>convicted of the charge</strong> related to this arrest? <small>(If you were convicted, we cannot seal the arrest under PC 851.87 [oai_citation:32‡redemption.legal](https://redemption.legal/services/arrest-record-sealing#:~:text=Image%3A%20Plus%20icon))</small></p>
-    <select id="seal_conviction" name="seal_conviction" required>
-      <option value="" disabled selected>Select an option</option>
-      <option value="no">No – I was NOT convicted (charges dropped, never filed, or acquitted)</option>
-      <option value="yes">Yes – I was convicted of a charge from this arrest</option>
-    </select>
-    <span id="sealConvictionError" class="error-msg"></span>
-    <button type="button" class="back-btn">Back</button>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-  <div class="form-step service-questions sealing-questions">
-    <p>What was the <strong>outcome of your case/arrest</strong>? (Select the one that best applies)</p>
-    <select id="seal_outcome" name="seal_outcome" required>
-      <option value="" disabled selected>Select an outcome</option>
-      <option value="no_charges">No charges were ever filed after the arrest</option>
-      <option value="dismissed">Charges were filed but later dismissed (dropped)</option>
-      <option value="acquitted">Went to trial and found not guilty (acquitted)</option>
-      <option value="diversion">Completed a diversion program and case was dismissed</option>
-    </select>
-    <span id="sealOutcomeError" class="error-msg"></span>
-    <button type="button" class="back-btn">Back</button>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-
-  <!-- Early Probation Termination Eligibility Questions (shown if "probation" selected) -->
-  <div class="form-step service-questions probation-questions">
-    <p>Are you <strong>currently on probation</strong> for the conviction you want to end early?</p>
-    <select id="probation_current" name="probation_current" required>
-      <option value="" disabled selected>Select an option</option>
-      <option value="yes">Yes – I am still on probation now</option>
-      <option value="no">No – I have already finished probation</option>
-    </select>
-    <span id="probationCurrentError" class="error-msg"></span>
-    <button type="button" class="back-btn">Back</button>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-  <div class="form-step service-questions probation-questions">
-    <p>Have you completed at least <strong>half of your probation term</strong>? <small>(Courts typically expect ~50% of the term to be completed before considering early termination [oai_citation:33‡redemption.legal](https://redemption.legal/services/early-probation-termination#:~:text=Eligibility%20depends%20on%20several%20factors%2C,probation%20and%20demonstrated%20good%20conduct))</small></p>
-    <select id="probation_half" name="probation_half" required>
-      <option value="" disabled selected>Select an option</option>
-      <option value="yes">Yes – I've served at least half of my probation period</option>
-      <option value="no">No – I’m less than halfway through</option>
-    </select>
-    <span id="probationHalfError" class="error-msg"></span>
-    <button type="button" class="back-btn">Back</button>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-  <div class="form-step service-questions probation-questions">
-    <p>Have you <strong>fulfilled all conditions</strong> of your probation (paid fines, completed programs, etc.)?</p>
-    <select id="probation_conditions" name="probation_conditions" required>
-      <option value="" disabled selected>Select an option</option>
-      <option value="yes">Yes – I have completed all probation requirements</option>
-      <option value="no">No – I still have some conditions to fulfill</option>
-    </select>
-    <span id="probationConditionsError" class="error-msg"></span>
-    <button type="button" class="back-btn">Back</button>
-    <button type="button" class="next-btn">Next</button>
-  </div>
-  <!-- (Optionally, ask about any probation violations) -->
-
-  <!-- Final Step: Recommendation & Payment -->
-  <div class="form-step" id="step-result">
-    <h2>Your Results</h2>
-    <div id="serviceRecommendation">
-      <!-- This section will be filled with the recommended service or guidance based on the user's answers -->
+<div class="form-container">
+    <div class="logo">
+        <img src="/rdmptn.svg" alt="Redemption Law Group">
     </div>
-    <button type="button" id="payButton" class="submit-btn">Submit & Pay Now</button>
-    <button type="button" class="back-btn">Back</button>
-  </div>
-</form>
 
-<!-- Footer with Disclaimer -->
-<footer>
-  <p><strong>DISCLAIMER:</strong> Completing this form does not establish an attorney-client relationship. It is an initial evaluation for eligibility and <em>not legal advice</em>. **No attorney-client relationship is formed until a separate written agreement is signed**. Submission of this form is subject to our <a href="/legal">General Terms</a> and <a href="/legal">Privacy Policy</a>.</p>
-</footer>
+    <form id="eligibilityForm" method="POST" action="https://formspree.io/f/YOUR_FORMSPREE_ID">
+        <!-- Step 1: Name -->
+        <div class="form-step active">
+            <label>Full Name</label>
+            <input type="text" name="fullName" class="form-control" required>
+            <button type="button" class="btn btn-primary mt-3 next-btn">Next</button>
+        </div>
 
+        <!-- Step 2: Contact Info -->
+        <div class="form-step">
+            <label>Email Address</label>
+            <input type="email" name="email" class="form-control" required>
+            <label class="mt-2">Phone Number</label>
+            <input type="tel" name="phone" class="form-control" required>
+            <button type="button" class="btn btn-secondary mt-3 back-btn">Back</button>
+            <button type="button" class="btn btn-primary mt-3 next-btn">Next</button>
+        </div>
+
+        <!-- Step 3: Service Selection -->
+        <div class="form-step">
+            <label>Select Service</label>
+            <select name="service" class="form-select" required>
+                <option value="expungement">Record Expungement ($990)</option>
+                <option value="cor">Certificate of Rehabilitation ($1,295)</option>
+                <option value="sealing">Arrest Record Sealing ($1,695)</option>
+                <option value="probation">Early Probation Termination ($1,695)</option>
+            </select>
+            <button type="button" class="btn btn-secondary mt-3 back-btn">Back</button>
+            <button type="button" class="btn btn-primary mt-3 next-btn">Next</button>
+        </div>
+
+        <!-- Step 4: Conditional Questions (example simplified) -->
+        <div class="form-step">
+            <div id="conditional-questions"></div>
+            <button type="button" class="btn btn-secondary mt-3 back-btn">Back</button>
+            <button type="button" class="btn btn-primary mt-3 next-btn">Next</button>
+        </div>
+
+        <!-- Step 5: Result and Payment -->
+        <div class="form-step">
+            <div id="recommendation" class="alert alert-info"></div>
+            <button type="button" class="btn btn-secondary mt-3 back-btn">Back</button>
+            <button type="submit" class="btn btn-success mt-3 pay-btn">Submit & Pay Now</button>
+        </div>
+    </form>
+
+    <footer>
+        Completion of the form does not constitute an attorney-client relationship.
+    </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script>
+    const steps = document.querySelectorAll('.form-step');
+    let currentStep = 0;
 
-// Get all step elements and define current step index
-const steps = document.querySelectorAll('.form-step');
-let currentStepIndex = 0;
+    function showStep(step) {
+        steps.forEach((element, index) => {
+            element.classList.toggle('active', index === step);
+        });
+    }
 
-// Function to show a step by index and hide others
-function showStep(index) {
-  steps.forEach((step, i) => {
-    step.classList.toggle('active', i === index);
-  });
-  currentStepIndex = index;
-}
+    document.querySelectorAll('.next-btn').forEach(btn => btn.onclick = () => {
+        if (currentStep === 2) renderConditionalQuestions();
+        currentStep++;
+        showStep(currentStep);
+    });
 
-// Initial display
-showStep(currentStepIndex);
+    document.querySelectorAll('.back-btn').forEach(btn => btn.onclick = () => {
+        currentStep--;
+        showStep(currentStep);
+    });
 
-// Next and Back button event handlers
-document.querySelectorAll('.next-btn').forEach(button => {
-  button.addEventListener('click', () => {
-    // Validate current step inputs before advancing
-    if (!validateCurrentStep()) {
-      return; // if validation fails, do not proceed
-    }
-    // If the current step is the service selection, branch to first question of chosen service
-    if (steps[currentStepIndex].id === 'step-service') {
-      const serviceChoice = document.getElementById('service').value;
-      // Find the index of the first step that has the class for the chosen service
-      const targetStep = Array.from(steps).findIndex(s => 
-        s.classList.contains(serviceChoice + '-questions')
-      );
-      if (targetStep !== -1) {
-        showStep(targetStep);
-        return;
-      }
-    }
-    // Otherwise, just go to the next sequential step
-    showStep(currentStepIndex + 1);
-  });
-});
+    function renderConditionalQuestions() {
+        const service = document.querySelector('[name="service"]').value;
+        const container = document.getElementById('conditional-questions');
+        let html = '';
 
-document.querySelectorAll('.back-btn').forEach(button => {
-  button.addEventListener('click', () => {
-    // If we're at a service-specific question and the previous step is service selection, go back to service selection
-    if (steps[currentStepIndex].classList.contains('service-questions')) {
-      // find the service selection step index
-      const serviceStepIndex = Array.from(steps).findIndex(s => s.id === 'step-service');
-      // If the user hits back on the first question of a service, return to the service selector
-      if (currentStepIndex !== 0 && steps[currentStepIndex - 1].id === 'step-service') {
-        showStep(serviceStepIndex);
-      } else {
-        showStep(currentStepIndex - 1);
-      }
-    } else {
-      // For non-service steps, simply go back one step
-      showStep(currentStepIndex - 1);
-    }
-  });
-});
+        if (service === 'expungement') {
+            html = '<label>Completed probation?</label><select name="probationDone" class="form-select" required><option value="yes">Yes</option><option value="no">No</option></select>';
+        }
 
-// Input validation for each step
-function validateCurrentStep() {
-  let valid = true;
-  const currentStepElem = steps[currentStepIndex];
-  const inputs = currentStepElem.querySelectorAll('input, select');
-  inputs.forEach(input => {
-    const errorSpan = document.getElementById(input.id + 'Error');
-    if (input.hasAttribute('required')) {
-      if (!input.value || input.value.trim() === '' || input.value === input.getAttribute('placeholder')) {
-        valid = false;
-        // Mark error
-        if (errorSpan) errorSpan.textContent = 'This field is required';
-        input.classList.add('error');
-      } else {
-        // Clear any previous error
-        if (errorSpan) errorSpan.textContent = '';
-        input.classList.remove('error');
-      }
+        container.innerHTML = html;
     }
-    // (Additional validation rules can be added here, e.g., regex for email/phone format)
-  });
-  // Special case: after entering full name, use it to personalize later questions
-  if (valid && currentStepElem.id === 'step-name') {
-    const fullName = document.getElementById('fullName').value.trim();
-    const firstName = fullName.split(' ')[0] || fullName;
-    // Insert the first name into spans in subsequent questions
-    document.getElementById('firstNameDisplay').textContent = firstName;
-    document.getElementById('firstNameDisplay2').textContent = firstName;
-    document.getElementById('firstNameDisplay3').textContent = firstName;
-  }
-  // If we're on the last step before results and it's valid, we can compute the recommendation
-  if (valid && currentStepElem.id === 'step-result') {
-    generateRecommendation();
-  }
-  return valid;
-}
 
-// Generate the recommendation message and set up the payment link
-function generateRecommendation() {
-  const serviceChoice = document.getElementById('service').value;
-  let message = '';
-  let recommendedService = serviceChoice;  // by default, assume the service user selected
-  // Determine outcome based on inputs:
-  if (serviceChoice === 'expungement') {
-    const finishedProbation = document.getElementById('exp_probation_done').value;
-    const statePrison = document.getElementById('exp_prison').value;
-    const currentCases = document.getElementById('exp_current_cases').value;
-    if (finishedProbation !== 'yes') {
-      // Not eligible because probation/sentence not completed
-      message = `<p>**Result:** Unfortunately, you’re <strong>not yet eligible for expungement</strong> because your sentence or probation isn’t completed. Under California law, you must finish your probation or sentence before the court can dismiss the case [oai_citation:35‡redemption.legal](https://redemption.legal/services/record-expungement#:~:text=Eligibility%20depends%20on%20several%20factors,serving%20time%20for%20another%20offense). Once you complete it, you may apply for expungement.</p>`;
-      recommendedService = null;
-    } else if (statePrison === 'yes') {
-      // Not eligible for expungement due to prison; suggest CoR
-      message = `<p>**Result:** You indicated that you served a state prison term for your conviction, which means a standard expungement (PC 1203.4) isn’t available [oai_citation:36‡redemption.legal](https://redemption.legal/services/record-expungement#:~:text=Certain%20serious%20crimes%20are%20not,is%20necessary%20to%20determine%20eligibility). However, you may qualify for a <strong>Certificate of Rehabilitation</strong> instead. A Certificate of Rehabilitation (PC 4852.01 et seq.) is a court finding that you’re rehabilitated and it acts as an application for a pardon [oai_citation:37‡selfhelp.courts.ca.gov](https://selfhelp.courts.ca.gov/clean-your-record/certificate-rehabilitation#:~:text=It%27s%20also%20a%20first%20step,the%20Governor%20for%20a%20pardon). We recommend this route given your circumstances.</p>`;
-      recommendedService = 'cor';
-    } else if (currentCases === 'yes') {
-      // Not eligible until no current cases
-      message = `<p>**Result:** It looks like you have a pending case or are on another probation. You must have <strong>no pending charges or other probation</strong> to get an expungement [oai_citation:38‡redemption.legal](https://redemption.legal/services/record-expungement#:~:text=Eligibility%20depends%20on%20several%20factors,serving%20time%20for%20another%20offense). We advise waiting until those are resolved. Once you have no current cases, you can reapply for expungement.</p>`;
-      recommendedService = null;
-    } else {
-      // Eligible for expungement
-      message = `<p>**Result:** Good news, you appear <strong>eligible for a Record Expungement</strong> under PC §1203.4! 🎉 We can petition the court to dismiss your conviction, which will help clean up your record. The service costs $990. When you click "Submit & Pay Now," you’ll be taken to the secure payment to get started.</p>`;
-      recommendedService = 'expungement';
-    }
-  } else if (serviceChoice === 'cor') {
-    // Certificate of Rehabilitation logic
-    const caResident5 = document.getElementById('cor_residency').value;
-    const corPrison = document.getElementById('cor_prison').value;
-    const waitPeriod = document.getElementById('cor_wait_period').value;
-    if (caResident5 !== 'yes') {
-      message = `<p>**Result:** To apply for a Certificate of Rehabilitation, you must have <strong>lived in CA for at least 5 years</strong> continuously [oai_citation:39‡selfhelp.courts.ca.gov](https://selfhelp.courts.ca.gov/clean-your-record/certificate-rehabilitation#:~:text=1). Since you indicated otherwise, you aren't eligible for a CoR at this time. You might consider applying directly for a Governor’s Pardon in the state where you reside.</p>`;
-      recommendedService = null;
-    } else if (corPrison !== 'yes') {
-      message = `<p>**Result:** It appears your conviction might be eligible for an expungement instead of a Certificate of Rehabilitation, because it wasn’t a state-prison felony. We recommend you pursue a <strong>Record Expungement</strong> (PC 1203.4) for this case, as it's generally the first step and often required before a CoR [oai_citation:40‡cdcr.ca.gov](https://www.cdcr.ca.gov/bph/wp-content/uploads/sites/161/2019/07/pv-Petition_For_Certification_of_Rehabilitation_and_Pardon-10-29-19-Remediated.pdf#:~:text=,before%20applying%20for%20a). (Our system can assist with an expungement for $990.)</p>`;
-      recommendedService = 'expungement';
-    } else if (waitPeriod === '<7') {
-      message = `<p>**Result:** A Certificate of Rehabilitation requires a significant rehabilitation period after release. It looks like it’s been less than the typically required 7 years since you finished your sentence [oai_citation:41‡selfhelp.courts.ca.gov](https://selfhelp.courts.ca.gov/clean-your-record/certificate-rehabilitation#:~:text=2,least%207%20years), so you may need to wait before applying. We recommend waiting until you meet the time requirement. In the meantime, maintaining a clean record will be essential.</p>`;
-      recommendedService = null;
-    } else {
-      message = `<p>**Result:** You seem to be a <strong>good candidate for a Certificate of Rehabilitation</strong>! This service (priced at $1,295) would involve our firm preparing a petition to recognize your rehabilitation. A CoR can improve employment opportunities and is forwarded as an application for a pardon [oai_citation:42‡selfhelp.courts.ca.gov](https://selfhelp.courts.ca.gov/clean-your-record/certificate-rehabilitation#:~:text=It%27s%20also%20a%20first%20step,the%20Governor%20for%20a%20pardon). Click "Submit & Pay Now" to proceed.</p>`;
-      recommendedService = 'cor';
-    }
-  } else if (serviceChoice === 'sealing') {
-    // Arrest record sealing logic
-    const wasConvicted = document.getElementById('seal_conviction').value;
-    const outcome = document.getElementById('seal_outcome').value;
-    if (wasConvicted === 'yes') {
-      message = `<p>**Result:** Unfortunately, if a conviction resulted from the arrest, you <strong>cannot seal</strong> that arrest record under PC 851.87. Instead, you should consider a Record Expungement for the conviction. We’d recommend switching to an expungement service to clear the conviction, if eligible.</p>`;
-      recommendedService = 'expungement';
-    } else {
-      // No conviction, eligible to seal
-      message = `<p>**Result:** Great news – since you were <strong>not convicted</strong> (outcome: ${outcome.replace('_',' ')}), you are eligible to have your arrest record sealed [oai_citation:43‡redemption.legal](https://redemption.legal/services/arrest-record-sealing#:~:text=Image%3A%20Plus%20icon). Our Arrest Record Sealing service can handle this for you for $1,695. This will remove the arrest from public background checks. Click "Submit & Pay Now" to proceed to payment and start the process.</p>`;
-      recommendedService = 'sealing';
-    }
-  } else if (serviceChoice === 'probation') {
-    // Early probation termination logic
-    const onProbation = document.getElementById('probation_current').value;
-    const halfDone = document.getElementById('probation_half').value;
-    const conditionsDone = document.getElementById('probation_conditions').value;
-    if (onProbation !== 'yes') {
-      message = `<p>**Result:** It appears you are <strong>not currently on probation</strong>. If your probation is already over, you don’t need early termination. Instead, you might want to <strong>expunge your conviction</strong> if you haven't already, to clear it from your record.</p>`;
-      recommendedService = 'expungement';
-    } else if (halfDone !== 'yes') {
-      message = `<p>**Result:** Early termination is typically considered after you’ve completed at least half of your probation term [oai_citation:44‡redemption.legal](https://redemption.legal/services/early-probation-termination#:~:text=Eligibility%20depends%20on%20several%20factors%2C,probation%20and%20demonstrated%20good%20conduct). Since you haven’t reached that point, courts are unlikely to grant it yet. We suggest revisiting this once more time has passed or you’ve hit the halfway mark.</p>`;
-      recommendedService = null;
-    } else if (conditionsDone !== 'yes') {
-      message = `<p>**Result:** Courts usually require that <strong>all probation conditions</strong> (fines, programs, etc.) are completed before ending probation early [oai_citation:45‡redemption.legal](https://redemption.legal/services/early-probation-termination#:~:text=Eligibility%20depends%20on%20several%20factors%2C,probation%20and%20demonstrated%20good%20conduct). You’ll need to finish any remaining requirements, then you can reapply for early termination.</p>`;
-      recommendedService = null;
-    } else {
-      message = `<p>**Result:** You meet the basic criteria for <strong>Early Probation Termination</strong>! 🎉 We can file a petition under PC §1203.3 to request the court to end your probation now. This service is $1,695. If granted, you’ll be off probation and we can also move to expunge the case. Click below to proceed.</p>`;
-      recommendedService = 'probation';
-    }
-  }
+    document.querySelector('.pay-btn').onclick = (e) => {
+        e.preventDefault();
+        const service = document.querySelector('[name="service"]').value;
+        const urls = {
+            expungement: "https://stripe.com/pay/expungement",
+            cor: "https://stripe.com/pay/cor",
+            sealing: "https://stripe.com/pay/sealing",
+            probation: "https://stripe.com/pay/probation"
+        };
 
-  // Display the message
-  document.getElementById('serviceRecommendation').innerHTML = message;
-  // Configure the payment button link based on recommended service
-  const payButton = document.getElementById('payButton');
-  if (recommendedService) {
-    // Map each service to its Stripe checkout URL (these would be real links in a live form)
-    const stripeLinks = {
-      expungement: "https://checkout.stripe.com/pay/expungement_link", 
-      cor:         "https://checkout.stripe.com/pay/cor_link",
-      sealing:     "https://checkout.stripe.com/pay/sealing_link",
-      probation:   "https://checkout.stripe.com/pay/probation_link"
+        document.getElementById('recommendation').innerHTML = `You're eligible for ${service.replace('_', ' ')}. Proceeding to payment.`;
+        setTimeout(() => location.href = urls[service], 2000);
     };
-    payButton.style.display = 'inline-block';
-    payButton.onclick = () => {
-      window.location.href = stripeLinks[recommendedService];
-    };
-  } else {
-    // If no service is recommended (ineligible), we might hide the pay button or change its function
-    payButton.style.display = 'none';
-  }
-}
 
-// Optionally, we could disable the "Next" button initially and enable it when an input is made, to further enforce answering each question.
-    
+    showStep(currentStep);
 </script>
 </body>
 </html>
