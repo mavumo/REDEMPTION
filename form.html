@@ -1,128 +1,676 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Eligibility Form | Redemption Law Group</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-    <style>
-        body { background: #f7f9fc; }
-        .form-container { max-width: 700px; margin: auto; padding: 30px; background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,.1); }
-        .form-step { display: none; }
-        .form-step.active { display: block; animation: fadeIn .5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .error-msg { color: red; }
-        footer { text-align: center; margin-top: 20px; font-size: 0.85em; color: #555; }
-        .logo { text-align: center; margin-bottom: 30px; }
-        .logo img { max-width: 200px; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service Eligibility Form - Redemption Law Group</title>
+  <style>
+    /* Basic styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 20px;
+      color: #212529;
+    }
+    #form-container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #ffffff;
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    #logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #logo img {
+      max-width: 150px;
+      height: auto;
+    }
+    /* Step containers */
+    .step { display: none; }
+    .step.active { display: block; }
+    /* Form elements styling */
+    label {
+      font-weight: 500;
+      margin-bottom: 5px;
+      display: block;
+    }
+    input[type=text], input[type=email], input[type=tel] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    input[type=text]:focus, input[type=email]:focus, input[type=tel]:focus {
+      border-color: #0d6efd;
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
+    }
+    /* Checkbox and radio styles */
+    input[type=checkbox], input[type=radio] {
+      accent-color: #0d6efd;
+    }
+    .service-option { display: none; }
+    .service-label {
+      display: block;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 2px solid #ced4da;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      position: relative;
+    }
+    .service-label:hover { border-color: #0d6efd; }
+    .service-label::before {
+      content: "";
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      border: 2px solid #0d6efd;
+      border-radius: 4px;
+      vertical-align: middle;
+      background-color: #fff;
+      background-image: none;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: background-color 0.2s, background-image 0.2s;
+    }
+    .service-option:checked + .service-label::before {
+      background-color: #0d6efd;
+      background-image: url("data:image/svg+xml,%3Csvg width='14' height='12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fff' d='M4.8 9.6L1.2 6l-1 1 4.6 4.6L14 2.4l-1-1z'/%3E%3C/svg%3E");
+    }
+    .service-option:checked + .service-label {
+      border-color: #0d6efd;
+      background: #e7f1ff;
+    }
+    .radio-group label {
+      margin-right: 20px;
+      cursor: pointer;
+    }
+    .radio-group label:last-child { margin-right: 0; }
+    /* Notes and error messages */
+    .note {
+      font-size: 0.9em;
+      color: #6c757d;
+      margin: 5px 0 0 0;
+    }
+    .eligibility-note {
+      font-weight: 500;
+      margin: 10px 0;
+    }
+    .eligibility-note.success { color: #28a745; }
+    .eligibility-note.warning { color: #d9534f; }
+    .error-msg {
+      color: #d9534f;
+      font-weight: 500;
+      margin-top: 5px;
+      display: none;
+    }
+    /* Navigation buttons */
+    #navigation {
+      text-align: right;
+      margin-top: 15px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .btn-primary {
+      background-color: #0d6efd;
+      color: #fff;
+    }
+    .btn-primary:hover { background-color: #0b5ed7; }
+    .btn-secondary {
+      background-color: #6c757d;
+      color: #fff;
+    }
+    .btn-secondary:hover { background-color: #5c636a; }
+    /* Final recommendations styling */
+    .recommendation {
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 15px;
+      background: #f8f9fa;
+    }
+    .recommendation h3 { margin-top: 0; }
+  </style>
 </head>
 <body>
-<div class="form-container">
-    <div class="logo">
-        <img src="/rdmptn.svg" alt="Redemption Law Group">
+<div id="form-container">
+  <div id="logo">
+    <img src="https://redemption.legal/rdmptn.svg" alt="Redemption Law Group Logo" />
+  </div>
+  <form id="eligibility-form" novalidate>
+    <!-- Step 1: Name -->
+    <div id="step-name" class="step active">
+      <p><strong>What's your name?</strong></p>
+      <input type="text" name="name" id="name" placeholder="Your Name" required />
+      <p class="error-msg">Please enter your name.</p>
     </div>
-
-    <form id="eligibilityForm" method="POST" action="https://formspree.io/f/YOUR_FORMSPREE_ID">
-        <!-- Step 1: Name -->
-        <div class="form-step active">
-            <label>Full Name</label>
-            <input type="text" name="fullName" class="form-control" required>
-            <button type="button" class="btn btn-primary mt-3 next-btn">Next</button>
-        </div>
-
-        <!-- Step 2: Contact Info -->
-        <div class="form-step">
-            <label>Email Address</label>
-            <input type="email" name="email" class="form-control" required>
-            <label class="mt-2">Phone Number</label>
-            <input type="tel" name="phone" class="form-control" required>
-            <button type="button" class="btn btn-secondary mt-3 back-btn">Back</button>
-            <button type="button" class="btn btn-primary mt-3 next-btn">Next</button>
-        </div>
-
-        <!-- Step 3: Service Selection -->
-        <div class="form-step">
-            <label>Select Service</label>
-            <select name="service" class="form-select" required>
-                <option value="expungement">Record Expungement ($990)</option>
-                <option value="cor">Certificate of Rehabilitation ($1,295)</option>
-                <option value="sealing">Arrest Record Sealing ($1,695)</option>
-                <option value="probation">Early Probation Termination ($1,695)</option>
-            </select>
-            <button type="button" class="btn btn-secondary mt-3 back-btn">Back</button>
-            <button type="button" class="btn btn-primary mt-3 next-btn">Next</button>
-        </div>
-
-        <!-- Step 4: Conditional Questions (example simplified) -->
-        <div class="form-step">
-            <div id="conditional-questions"></div>
-            <button type="button" class="btn btn-secondary mt-3 back-btn">Back</button>
-            <button type="button" class="btn btn-primary mt-3 next-btn">Next</button>
-        </div>
-
-        <!-- Step 5: Result and Payment -->
-        <div class="form-step">
-            <div id="recommendation" class="alert alert-info"></div>
-            <button type="button" class="btn btn-secondary mt-3 back-btn">Back</button>
-            <button type="submit" class="btn btn-success mt-3 pay-btn">Submit & Pay Now</button>
-        </div>
-    </form>
-
-    <footer>
-        Completion of the form does not constitute an attorney-client relationship.
-    </footer>
+    <!-- Step 2: Email -->
+    <div id="step-email" class="step" style="display:none;">
+      <p id="email-question"><strong>Nice to meet you, <span id="userNameSpan"></span>! What's your email address?</strong></p>
+      <input type="email" name="email" id="email" placeholder="you@example.com" required />
+      <p class="error-msg">Please enter a valid email address.</p>
+    </div>
+    <!-- Step 3: Phone -->
+    <div id="step-phone" class="step" style="display:none;">
+      <p><strong>Finally, what is your phone number?</strong></p>
+      <input type="tel" name="phone" id="phone" placeholder="e.g. 555-123-4567" required />
+      <p class="error-msg">Please enter your phone number.</p>
+    </div>
+    <!-- Step 4: Service Selection -->
+    <div id="step-service" class="step" style="display:none;">
+      <p><strong>Which service are you interested in? <br><small>(Select all that apply)</small></strong></p>
+      <div>
+        <input type="checkbox" id="service-expungement" class="service-option" name="services" value="expungement" />
+        <label for="service-expungement" class="service-label">Record Expungement ($990)</label>
+      </div>
+      <div>
+        <input type="checkbox" id="service-cor" class="service-option" name="services" value="cor" />
+        <label for="service-cor" class="service-label">Certificate of Rehabilitation ($1,295)</label>
+      </div>
+      <div>
+        <input type="checkbox" id="service-sealing" class="service-option" name="services" value="sealing" />
+        <label for="service-sealing" class="service-label">Arrest Record Sealing ($1,695)</label>
+      </div>
+      <div>
+        <input type="checkbox" id="service-termination" class="service-option" name="services" value="termination" />
+        <label for="service-termination" class="service-label">Early Probation Termination ($1,695)</label>
+      </div>
+      <p id="serviceError" class="error-msg">Please select at least one service.</p>
+    </div>
+    <!-- Record Expungement Questions -->
+    <div id="step-exp-q1" class="step" style="display:none;">
+      <p><strong>Let's see if you qualify for a Record Expungement.</strong><br>Have you completed all parts of your sentence (such as probation)?</p>
+      <div class="radio-group">
+        <label><input type="radio" name="exp_probation" value="yes" required /> Yes</label>
+        <label><input type="radio" name="exp_probation" value="no" required /> No</label>
+      </div>
+      <p class="note exp_probation_yes" style="display:none;">Great! You've completed probation, which is required for expungement eligibility.</p>
+      <p class="note exp_probation_no" style="display:none;">You'll typically need to finish or terminate probation early before you can get an expungement.</p>
+      <p class="error-msg">Please answer this question.</p>
+    </div>
+    <div id="step-exp-q2" class="step" style="display:none;">
+      <p><strong>Do you have any new charges or convictions since that conviction?</strong></p>
+      <div class="radio-group">
+        <label><input type="radio" name="exp_new_offense" value="no" required /> No, no new charges</label>
+        <label><input type="radio" name="exp_new_offense" value="yes" required /> Yes, I have new charges/convictions</label>
+      </div>
+      <p class="note exp_new_offense_yes" style="display:none;">Having pending charges or recent convictions will prevent an expungement until those are resolved.</p>
+      <p class="note exp_new_offense_no" style="display:none;">Excellent. Staying crime-free since your conviction helps your expungement case.</p>
+      <p class="error-msg">Please answer this question.</p>
+    </div>
+    <div id="step-exp-q3" class="step" style="display:none;">
+      <p><strong>Did you serve any time in state prison for that conviction?</strong></p>
+      <div class="radio-group">
+        <label><input type="radio" name="exp_prison" value="no" required /> No</label>
+        <label><input type="radio" name="exp_prison" value="yes" required /> Yes</label>
+      </div>
+      <p class="note exp_prison_yes" style="display:none;">Cases with state prison sentences aren't eligible for a standard expungement. A Certificate of Rehabilitation might be a better option.</p>
+      <p class="note exp_prison_no" style="display:none;">Great. Convictions not involving state prison are usually eligible for expungement.</p>
+      <p class="error-msg">Please answer this question.</p>
+    </div>
+    <!-- Certificate of Rehabilitation Questions -->
+    <div id="step-cor-q1" class="step" style="display:none;">
+      <p><strong>Now let's check your eligibility for a Certificate of Rehabilitation.</strong><br>Have you completed all your sentences, including any probation or parole?</p>
+      <div class="radio-group">
+        <label><input type="radio" name="cor_completed" value="yes" required /> Yes</label>
+        <label><input type="radio" name="cor_completed" value="no" required /> No</label>
+      </div>
+      <p class="note cor_completed_yes" style="display:none;">Good. You must finish all sentencing (probation, parole) to be eligible for a Certificate of Rehabilitation.</p>
+      <p class="note cor_completed_no" style="display:none;">You'll need to complete your sentence (or wait until you're off probation/parole) before applying for a Certificate of Rehabilitation.</p>
+      <p class="error-msg">Please answer this question.</p>
+    </div>
+    <div id="step-cor-q2" class="step" style="display:none;">
+      <p><strong>Has it been several years since your last conviction or release?</strong><br><small>(Typically, a sustained period of rehabilitation is required)</small></p>
+      <div class="radio-group">
+        <label><input type="radio" name="cor_years" value="yes" required /> Yes, it's been a few years</label>
+        <label><input type="radio" name="cor_years" value="no" required /> No, it hasn't been that long</label>
+      </div>
+      <p class="note cor_years_yes" style="display:none;">Great. A sustained period with no new offenses is required for a Certificate of Rehabilitation.</p>
+      <p class="note cor_years_no" style="display:none;">A longer period of staying crime-free is typically required to qualify for a Certificate of Rehabilitation.</p>
+      <p class="error-msg">Please answer this question.</p>
+    </div>
+    <div id="step-cor-q3" class="step" style="display:none;">
+      <p><strong>Are you currently a California resident?</strong></p>
+      <div class="radio-group">
+        <label><input type="radio" name="cor_resident" value="yes" required /> Yes</label>
+        <label><input type="radio" name="cor_resident" value="no" required /> No</label>
+      </div>
+      <p class="note cor_resident_yes" style="display:none;">Good. You generally need to reside in California to petition for a Certificate of Rehabilitation here.</p>
+      <p class="note cor_resident_no" style="display:none;">You'll usually need to be a California resident to apply for a Certificate of Rehabilitation in California.</p>
+      <p class="error-msg">Please answer this question.</p>
+    </div>
+    <!-- Arrest Record Sealing Questions -->
+    <div id="step-sealing-q1" class="step" style="display:none;">
+      <p><strong>Let's see about sealing your arrest record.</strong><br>Were you ever convicted of a crime from this arrest?</p>
+      <div class="radio-group">
+        <label><input type="radio" name="seal_conviction" value="no" required /> No, I was not convicted</label>
+        <label><input type="radio" name="seal_conviction" value="yes" required /> Yes, I was convicted</label>
+      </div>
+      <p class="note seal_conviction_yes" style="display:none;">If you were convicted, arrest record sealing isn't applicable. An expungement would be the right path for a conviction.</p>
+      <p class="note seal_conviction_no" style="display:none;">Okay. If there was no conviction, you can likely get the arrest sealed given the case is resolved.</p>
+      <p class="error-msg">Please answer this question.</p>
+    </div>
+    <div id="step-sealing-q2" class="step" style="display:none;">
+      <p><strong>Is the arrest case completely resolved with no conviction (charges never filed, dismissed, or you were acquitted)?</strong></p>
+      <div class="radio-group">
+        <label><input type="radio" name="seal_resolved" value="yes" required /> Yes, the case is over with no conviction</label>
+        <label><input type="radio" name="seal_resolved" value="no" required /> No, it's not fully resolved</label>
+      </div>
+      <p class="note seal_resolved_yes" style="display:none;">Great. Since the case ended without a conviction, you're eligible to petition for sealing that arrest.</p>
+      <p class="note seal_resolved_no" style="display:none;">If charges are still pending or not fully resolved, you won't be able to seal the arrest yet.</p>
+      <p class="error-msg">Please answer this question.</p>
+    </div>
+    <!-- Early Probation Termination Questions -->
+    <div id="step-termination-q1" class="step" style="display:none;">
+      <p><strong>Now let's consider ending your probation early.</strong><br>Have you already served at least half of your probation term?</p>
+      <div class="radio-group">
+        <label><input type="radio" name="term_half" value="yes" required /> Yes</label>
+        <label><input type="radio" name="term_half" value="no" required /> No</label>
+      </div>
+      <p class="note term_half_yes" style="display:none;">Good. Courts usually expect at least half the probation term to be completed before considering early termination.</p>
+      <p class="note term_half_no" style="display:none;">Courts often require you to complete a substantial portion (around half) of probation before they'll consider ending it early.</p>
+      <p class="error-msg">Please answer this question.</p>
+    </div>
+    <div id="step-termination-q2" class="step" style="display:none;">
+      <p><strong>Have you fulfilled all court requirements (fines, restitution, programs) for your case?</strong></p>
+      <div class="radio-group">
+        <label><input type="radio" name="term_requirements" value="yes" required /> Yes</label>
+        <label><input type="radio" name="term_requirements" value="no" required /> No</label>
+      </div>
+      <p class="note term_requirements_yes" style="display:none;">Great. Completing all court-ordered requirements strengthens your request to end probation early.</p>
+      <p class="note term_requirements_no" style="display:none;">Courts are less likely to grant early termination if you haven't completed all requirements like fines or programs.</p>
+      <p class="error-msg">Please answer this question.</p>
+    </div>
+    <div id="step-termination-q3" class="step" style="display:none;">
+      <p><strong>Have you had any probation violations?</strong></p>
+      <div class="radio-group">
+        <label><input type="radio" name="term_violations" value="no" required /> No, I have a clean record on probation</label>
+        <label><input type="radio" name="term_violations" value="yes" required /> Yes, there have been violations</label>
+      </div>
+      <p class="note term_violations_yes" style="display:none;">Past violations can make it harder (but not impossible) to get probation ended early.</p>
+      <p class="note term_violations_no" style="display:none;">Excellent. A clean probation record will help your petition for early termination.</p>
+      <p class="error-msg">Please answer this question.</p>
+    </div>
+    <!-- Final Summary / Recommendations -->
+    <div id="step-summary" class="step" style="display:none;">
+      <div id="summary-content"></div>
+    </div>
+    <!-- Navigation Buttons -->
+    <div id="navigation">
+      <button type="button" id="prevBtn" class="btn btn-secondary" style="display:none;">Back</button>
+      <button type="button" id="nextBtn" class="btn btn-primary">Next</button>
+    </div>
+  </form>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script>
-    const steps = document.querySelectorAll('.form-step');
-    let currentStep = 0;
-
-    function showStep(step) {
-        steps.forEach((element, index) => {
-            element.classList.toggle('active', index === step);
-        });
-    }
-
-    document.querySelectorAll('.next-btn').forEach(btn => btn.onclick = () => {
-        if (currentStep === 2) renderConditionalQuestions();
-        currentStep++;
-        showStep(currentStep);
-    });
-
-    document.querySelectorAll('.back-btn').forEach(btn => btn.onclick = () => {
-        currentStep--;
-        showStep(currentStep);
-    });
-
-    function renderConditionalQuestions() {
-        const service = document.querySelector('[name="service"]').value;
-        const container = document.getElementById('conditional-questions');
-        let html = '';
-
-        if (service === 'expungement') {
-            html = '<label>Completed probation?</label><select name="probationDone" class="form-select" required><option value="yes">Yes</option><option value="no">No</option></select>';
-        }
-
-        container.innerHTML = html;
-    }
-
-    document.querySelector('.pay-btn').onclick = (e) => {
-        e.preventDefault();
-        const service = document.querySelector('[name="service"]').value;
-        const urls = {
-            expungement: "https://stripe.com/pay/expungement",
-            cor: "https://stripe.com/pay/cor",
-            sealing: "https://stripe.com/pay/sealing",
-            probation: "https://stripe.com/pay/probation"
-        };
-
-        document.getElementById('recommendation').innerHTML = `You're eligible for ${service.replace('_', ' ')}. Proceeding to payment.`;
-        setTimeout(() => location.href = urls[service], 2000);
+  (function(){
+    const form = document.getElementById('eligibility-form');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nameInput = document.getElementById('name');
+    const emailQuestionSpan = document.getElementById('userNameSpan');
+    const serviceError = document.getElementById('serviceError');
+    const summaryContent = document.getElementById('summary-content');
+    // Map of all step elements
+    const stepElements = {
+      'step-name': document.getElementById('step-name'),
+      'step-email': document.getElementById('step-email'),
+      'step-phone': document.getElementById('step-phone'),
+      'step-service': document.getElementById('step-service'),
+      'step-exp-q1': document.getElementById('step-exp-q1'),
+      'step-exp-q2': document.getElementById('step-exp-q2'),
+      'step-exp-q3': document.getElementById('step-exp-q3'),
+      'step-cor-q1': document.getElementById('step-cor-q1'),
+      'step-cor-q2': document.getElementById('step-cor-q2'),
+      'step-cor-q3': document.getElementById('step-cor-q3'),
+      'step-sealing-q1': document.getElementById('step-sealing-q1'),
+      'step-sealing-q2': document.getElementById('step-sealing-q2'),
+      'step-termination-q1': document.getElementById('step-termination-q1'),
+      'step-termination-q2': document.getElementById('step-termination-q2'),
+      'step-termination-q3': document.getElementById('step-termination-q3'),
+      'step-summary': document.getElementById('step-summary')
     };
-
-    showStep(currentStep);
+    // Initial step sequence (contact info + service)
+    let stepSequence = ['step-name','step-email','step-phone','step-service'];
+    let currentStepIndex = 0;
+    // Function to show a step by index with fade transition
+    function showStep(index) {
+      const currentId = stepSequence[currentStepIndex];
+      const newId = stepSequence[index];
+      const currentStep = stepElements[currentId];
+      const newStep = stepElements[newId];
+      // If moving to summary, build the summary content first
+      if(newId === 'step-summary') {
+        buildSummary();
+      }
+      // Hide current step
+      currentStep.style.display = 'none';
+      // Show new step and fade it in
+      newStep.style.display = 'block';
+      newStep.style.opacity = 0;
+      newStep.style.transition = 'opacity 0.4s ease';
+      newStep.getBoundingClientRect(); // force reflow
+      newStep.style.opacity = 1;
+      // Update navigation buttons
+      prevBtn.style.display = (index > 0) ? 'inline-block' : 'none';
+      if(newId === 'step-summary') {
+        nextBtn.style.display = 'none';
+      } else {
+        nextBtn.style.display = 'inline-block';
+        nextBtn.textContent = 'Next';
+      }
+      currentStepIndex = index;
+    }
+    // Rebuild step sequence after service selection
+    function updateStepSequence() {
+      stepSequence = ['step-name','step-email','step-phone','step-service'];
+      const selected = Array.from(form.querySelectorAll('input[name="services"]:checked')).map(cb => cb.value);
+      const order = ['expungement','cor','sealing','termination'];
+      for(let svc of order) {
+        if(selected.includes(svc)) {
+          switch(svc) {
+            case 'expungement':
+              stepSequence.push('step-exp-q1','step-exp-q2','step-exp-q3');
+              break;
+            case 'cor':
+              stepSequence.push('step-cor-q1','step-cor-q2','step-cor-q3');
+              break;
+            case 'sealing':
+              stepSequence.push('step-sealing-q1','step-sealing-q2');
+              break;
+            case 'termination':
+              stepSequence.push('step-termination-q1','step-termination-q2','step-termination-q3');
+              break;
+          }
+        }
+      }
+      stepSequence.push('step-summary');
+    }
+    // Get selected service values
+    function selectedServiceValues() {
+      return Array.from(form.querySelectorAll('input[name="services"]:checked')).map(cb => cb.value);
+    }
+    // Build final summary content
+    function buildSummary() {
+      summaryContent.innerHTML = '';
+      const nameVal = nameInput.value.trim();
+      const firstName = nameVal.split(' ')[0] || nameVal;
+      const servicesList = selectedServiceValues();
+      const heading = document.createElement('h2');
+      heading.textContent = 'Recommended Services';
+      const intro = document.createElement('p');
+      intro.textContent = (firstName ? 'Thank you, ' + firstName + '. ' : '') + 
+                          'Based on your answers, we recommend the following ' + 
+                          (servicesList.length > 1 ? 'services' : 'service') + ':';
+      summaryContent.appendChild(heading);
+      summaryContent.appendChild(intro);
+      servicesList.forEach(svc => {
+        const block = document.createElement('div');
+        block.className = 'recommendation';
+        let titleText = '', descriptionText = '', priceText = '', issues = [], suggestion = '';
+        // Gather info based on service
+        if(svc === 'expungement') {
+          titleText = 'Record Expungement';
+          priceText = '$990';
+          if(form.elements['exp_probation'] && form.elements['exp_probation'].value === 'no') {
+            issues.push('you have not completed probation');
+            suggestion = 'You may need to finish or terminate probation early before an expungement.';
+          }
+          if(form.elements['exp_new_offense'] && form.elements['exp_new_offense'].value === 'yes') {
+            issues.push('you have pending/new charges');
+          }
+          if(form.elements['exp_prison'] && form.elements['exp_prison'].value === 'yes') {
+            issues.push('the case involved a state prison sentence');
+            suggestion = 'A Certificate of Rehabilitation may be a better option for you.';
+          }
+          descriptionText = 'We prepare and file a petition to dismiss your conviction. A successful expungement clears the conviction from public records, helping you pass background checks.';
+        }
+        if(svc === 'cor') {
+          titleText = 'Certificate of Rehabilitation';
+          priceText = '$1,295';
+          if(form.elements['cor_completed'] && form.elements['cor_completed'].value === 'no') {
+            issues.push('you have not completed all sentences/probation');
+          }
+          if(form.elements['cor_years'] && form.elements['cor_years'].value === 'no') {
+            issues.push('it has not been long since your last offense');
+          }
+          if(form.elements['cor_resident'] && form.elements['cor_resident'].value === 'no') {
+            issues.push('you are not a California resident');
+          }
+          descriptionText = 'We guide you through obtaining an official court order that recognizes your rehabilitation and automatically submits a pardon application. A Certificate of Rehabilitation can restore rights and improve your opportunities.';
+        }
+        if(svc === 'sealing') {
+          titleText = 'Arrest Record Sealing';
+          priceText = '$1,695';
+          if(form.elements['seal_conviction'] && form.elements['seal_conviction'].value === 'yes') {
+            issues.push('there was a conviction from that arrest');
+            suggestion = 'Expungement (not sealing) is the appropriate remedy for a conviction.';
+          }
+          if(form.elements['seal_resolved'] && form.elements['seal_resolved'].value === 'no') {
+            issues.push('the case is not fully resolved yet');
+          }
+          descriptionText = 'We petition the court to seal and destroy your arrest records. Once sealed, the arrest will not appear on background checks, giving you peace of mind when applying for jobs or housing.';
+        }
+        if(svc === 'termination') {
+          titleText = 'Early Probation Termination';
+          priceText = '$1,695';
+          if(form.elements['term_half'] && form.elements['term_half'].value === 'no') {
+            issues.push('you have not served at least half of your probation');
+          }
+          if(form.elements['term_requirements'] && form.elements['term_requirements'].value === 'no') {
+            issues.push('you have outstanding requirements (fines/programs)');
+          }
+          if(form.elements['term_violations'] && form.elements['term_violations'].value === 'yes') {
+            issues.push('you have past probation violations');
+          }
+          descriptionText = 'We petition the court to end your probation ahead of schedule. Early termination lifts probation restrictions and allows you to move forward (for example, becoming eligible for expungement sooner).';
+        }
+        // Create title element
+        const titleEl = document.createElement('h3');
+        titleEl.textContent = titleText + ' (' + priceText + ')';
+        block.appendChild(titleEl);
+        // Eligibility note
+        if(issues.length > 0) {
+          const noteEl = document.createElement('p');
+          noteEl.className = 'eligibility-note warning';
+          let issueMsg = 'Note: Based on your answers, ' + issues.join(' and ');
+          issueMsg += (issues.length === 1 ? ' which means ' : ' which mean ');
+          issueMsg += 'you might not fully qualify for this service.';
+          if(suggestion) issueMsg += ' ' + suggestion;
+          noteEl.textContent = issueMsg;
+          block.appendChild(noteEl);
+        } else {
+          const noteEl = document.createElement('p');
+          noteEl.className = 'eligibility-note success';
+          noteEl.textContent = 'Great news: You likely qualify for this service!';
+          block.appendChild(noteEl);
+        }
+        // Description
+        const descEl = document.createElement('p');
+        descEl.textContent = descriptionText;
+        block.appendChild(descEl);
+        // Stripe payment button (placeholder link)
+        const payLink = document.createElement('a');
+        payLink.href = '#';
+        payLink.className = 'btn btn-primary stripe-button';
+        payLink.textContent = 'Pay ' + priceText;
+        payLink.onclick = function(e) {
+          e.preventDefault();
+          alert('Redirecting to secure Stripe payment... (placeholder)');
+        };
+        block.appendChild(payLink);
+        summaryContent.appendChild(block);
+      });
+      // Closing note
+      const closingNote = document.createElement('p');
+      closingNote.textContent = 'We will reach out to you soon to discuss the next steps.';
+      summaryContent.appendChild(closingNote);
+    }
+    // Show/hide dynamic notes on selection
+    form.querySelectorAll('input[name="exp_probation"]').forEach(input => {
+      input.addEventListener('change', function() {
+        form.querySelector('.exp_probation_yes').style.display = (this.value === 'yes') ? 'block' : 'none';
+        form.querySelector('.exp_probation_no').style.display = (this.value === 'no') ? 'block' : 'none';
+      });
+    });
+    form.querySelectorAll('input[name="exp_new_offense"]').forEach(input => {
+      input.addEventListener('change', function() {
+        form.querySelector('.exp_new_offense_yes').style.display = (this.value === 'yes') ? 'block' : 'none';
+        form.querySelector('.exp_new_offense_no').style.display = (this.value === 'no') ? 'block' : 'none';
+      });
+    });
+    form.querySelectorAll('input[name="exp_prison"]').forEach(input => {
+      input.addEventListener('change', function() {
+        form.querySelector('.exp_prison_yes').style.display = (this.value === 'yes') ? 'block' : 'none';
+        form.querySelector('.exp_prison_no').style.display = (this.value === 'no') ? 'block' : 'none';
+      });
+    });
+    form.querySelectorAll('input[name="cor_completed"]').forEach(input => {
+      input.addEventListener('change', function() {
+        form.querySelector('.cor_completed_yes').style.display = (this.value === 'yes') ? 'block' : 'none';
+        form.querySelector('.cor_completed_no').style.display = (this.value === 'no') ? 'block' : 'none';
+      });
+    });
+    form.querySelectorAll('input[name="cor_years"]').forEach(input => {
+      input.addEventListener('change', function() {
+        form.querySelector('.cor_years_yes').style.display = (this.value === 'yes') ? 'block' : 'none';
+        form.querySelector('.cor_years_no').style.display = (this.value === 'no') ? 'block' : 'none';
+      });
+    });
+    form.querySelectorAll('input[name="cor_resident"]').forEach(input => {
+      input.addEventListener('change', function() {
+        form.querySelector('.cor_resident_yes').style.display = (this.value === 'yes') ? 'block' : 'none';
+        form.querySelector('.cor_resident_no').style.display = (this.value === 'no') ? 'block' : 'none';
+      });
+    });
+    form.querySelectorAll('input[name="seal_conviction"]').forEach(input => {
+      input.addEventListener('change', function() {
+        form.querySelector('.seal_conviction_yes').style.display = (this.value === 'yes') ? 'block' : 'none';
+        form.querySelector('.seal_conviction_no').style.display = (this.value === 'no') ? 'block' : 'none';
+      });
+    });
+    form.querySelectorAll('input[name="seal_resolved"]').forEach(input => {
+      input.addEventListener('change', function() {
+        form.querySelector('.seal_resolved_yes').style.display = (this.value === 'yes') ? 'block' : 'none';
+        form.querySelector('.seal_resolved_no').style.display = (this.value === 'no') ? 'block' : 'none';
+      });
+    });
+    form.querySelectorAll('input[name="term_half"]').forEach(input => {
+      input.addEventListener('change', function() {
+        form.querySelector('.term_half_yes').style.display = (this.value === 'yes') ? 'block' : 'none';
+        form.querySelector('.term_half_no').style.display = (this.value === 'no') ? 'block' : 'none';
+      });
+    });
+    form.querySelectorAll('input[name="term_requirements"]').forEach(input => {
+      input.addEventListener('change', function() {
+        form.querySelector('.term_requirements_yes').style.display = (this.value === 'yes') ? 'block' : 'none';
+        form.querySelector('.term_requirements_no').style.display = (this.value === 'no') ? 'block' : 'none';
+      });
+    });
+    form.querySelectorAll('input[name="term_violations"]').forEach(input => {
+      input.addEventListener('change', function() {
+        form.querySelector('.term_violations_yes').style.display = (this.value === 'yes') ? 'block' : 'none';
+        form.querySelector('.term_violations_no').style.display = (this.value === 'no') ? 'block' : 'none';
+      });
+    });
+    // Hide error message on input changes
+    form.querySelectorAll('input[type="radio"]').forEach(input => {
+      input.addEventListener('change', function() {
+        const errMsg = this.closest('.step').querySelector('.error-msg');
+        if(errMsg) errMsg.style.display = 'none';
+      });
+    });
+    form.querySelectorAll('input[type="checkbox"]').forEach(input => {
+      input.addEventListener('change', function() {
+        serviceError.style.display = 'none';
+      });
+    });
+    // Next button click
+    nextBtn.addEventListener('click', function() {
+      const currentId = stepSequence[currentStepIndex];
+      const currentStepEl = stepElements[currentId];
+      let stepValid = true;
+      const inputs = Array.from(currentStepEl.querySelectorAll('input'));
+      if(currentId === 'step-service') {
+        const anyChecked = inputs.some(inp => inp.checked);
+        if(!anyChecked) {
+          serviceError.style.display = 'block';
+          stepValid = false;
+        }
+      } else {
+        for(const input of inputs) {
+          if(input.type === 'radio') {
+            const group = currentStepEl.querySelectorAll('input[name="' + input.name + '"]');
+            if(Array.from(group).every(r => !r.checked)) {
+              stepValid = false;
+            }
+          } else if(input.type === 'checkbox') {
+            continue;
+          } else {
+            if(!input.checkValidity()) {
+              input.reportValidity();
+              stepValid = false;
+              break;
+            }
+          }
+        }
+        if(!stepValid && currentStepEl.querySelector('.error-msg')) {
+          currentStepEl.querySelector('.error-msg').style.display = 'block';
+        }
+      }
+      if(!stepValid) return;
+      // If leaving name step, update email step greeting with first name
+      if(currentId === 'step-name') {
+        const nameVal = nameInput.value.trim();
+        const firstName = nameVal.split(' ')[0] || nameVal;
+        if(firstName) {
+          emailQuestionSpan.textContent = firstName;
+        }
+      }
+      // If leaving service selection, update sequence
+      if(currentId === 'step-service') {
+        updateStepSequence();
+      }
+      // Advance to next step
+      const nextIndex = currentStepIndex + 1;
+      if(nextIndex < stepSequence.length) {
+        showStep(nextIndex);
+      }
+    });
+    // Back button click
+    prevBtn.addEventListener('click', function() {
+      if(currentStepIndex === 0) return;
+      if(stepSequence[currentStepIndex] === 'step-summary') {
+        nextBtn.style.display = 'inline-block';
+        nextBtn.textContent = 'Next';
+      }
+      const prevIndex = currentStepIndex - 1;
+      showStep(prevIndex);
+    });
+  })();
 </script>
 </body>
 </html>
