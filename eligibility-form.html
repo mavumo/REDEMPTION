@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redemption Law Group - Service Eligibility Form</title>
+  <title>Service Eligibility Form | Redemption Law Group</title>
   <style>
-    /* Basic styling */
+    /* Reset and base styles */
     html, body {
       margin: 0;
       padding: 0;
@@ -15,27 +15,39 @@
       background-color: #f8f9fa;
       color: #212529;
     }
-    /* Make the container fill the entire viewport */
+    /* Full-page container */
     #form-container {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      width: 100%;
       height: 100%;
-      background: #ffffff;
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
-      box-sizing: border-box;
-      padding: 20px;
+      width: 100%;
     }
-    /* Centered content wrapper */
+    /* Centered content area (logo, title, subtitle, form) */
     #content-wrapper {
       flex: 1;
-      max-width: 600px;
-      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
       width: 100%;
     }
+    /* Title and subtitle */
+    #form-title {
+      font-size: 2em;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    #form-subtitle {
+      font-size: 1em;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #555;
+      line-height: 1.4;
+      max-width: 500px;
+    }
+    /* Logo */
     #logo {
       text-align: center;
       margin-bottom: 20px;
@@ -43,6 +55,17 @@
     #logo img {
       max-width: 150px;
       height: auto;
+    }
+    /* Form wrapper */
+    #eligibility-form {
+      width: 100%;
+      max-width: 600px;
+      background: #ffffff;
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-sizing: border-box;
     }
     /* Step containers */
     .step { display: none; }
@@ -171,11 +194,11 @@
     /* Footer styling */
     footer {
       text-align: center;
-      padding-top: 20px;
+      padding: 15px 10px;
       font-size: 0.85em;
       color: #555;
       border-top: 1px solid #ced4da;
-      margin-top: 20px;
+      background: #ffffff;
     }
     footer p {
       margin: 0;
@@ -189,9 +212,17 @@
 <body>
   <div id="form-container">
     <div id="content-wrapper">
+      <!-- Title and Subtitle -->
+      <h1 id="form-title">Service Eligibility Form</h1>
+      <p id="form-subtitle">
+        Find out which service you’re eligible for and take the first step towards clearing your record
+        and reclaiming your future in less than 5 minutes.
+      </p>
+      <!-- Logo -->
       <div id="logo">
         <img src="https://redemption.legal/rdmptn.svg" alt="Redemption Law Group Logo" />
       </div>
+      <!-- Form -->
       <form id="eligibility-form" novalidate>
         <!-- Step 1: Name -->
         <div id="step-name" class="step active">
@@ -357,11 +388,9 @@
         </div>
       </form>
     </div>
-
-    
     <!-- Footer -->
     <footer>
-      <p>© 2025, Redemption Law Group<br><br>
+      <p>©  2025, Redemption Law Group<br><br>
       <b>DISCLAIMER: Completion and/or submission of this form does not constitute an attorney-client relationship.</b></p>
     </footer>
   </div>
@@ -577,7 +606,7 @@
           payLink.style.marginTop = '10px';
           payLink.onclick = function(e) {
             e.preventDefault();
-            alert('Redirecting to secure Stripe payment...');
+            alert('Redirecting to secure Stripe payment... (placeholder)');
           };
           block.appendChild(payLink);
 
@@ -657,6 +686,7 @@
           form.querySelector('.term_violations_no').style.display = (this.value === 'no') ? 'block' : 'none';
         });
       });
+
       // Hide error message on input changes
       form.querySelectorAll('input[type="radio"]').forEach(input => {
         input.addEventListener('change', function() {
@@ -735,6 +765,9 @@
         const prevIndex = currentStepIndex - 1;
         showStep(prevIndex);
       });
+
+      // Initialize first step
+      showStep(0);
     })();
   </script>
 </body>
