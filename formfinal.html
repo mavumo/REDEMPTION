@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service Eligibility Form | Redemption Law Group</title>
+  <style>
+    html, body { margin:0; padding:0; height:100%; width:100%; font-family:Arial,sans-serif; background:#f8f9fa; color:#212529; }
+    #form-container { display:flex; flex-direction:column; height:100%; width:100%; }
+    #content-wrapper { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px; box-sizing:border-box; }
+    #form-title { font-size:2em; margin-bottom:10px; text-align:center; }
+    #form-subtitle { font-size:1em; margin-bottom:20px; text-align:center; color:#555; line-height:1.4; max-width:500px; }
+    #logo { text-align:center; margin-bottom:20px; }
+    #logo img { max-width:150px; height:auto; }
+    #eligibility-form { width:100%; max-width:600px; background:#fff; border:1px solid #ced4da; border-radius:8px; padding:20px; box-shadow:0 2px 5px rgba(0,0,0,0.1); box-sizing:border-box; }
+    .step { display:none; }
+    .step.active { display:block; }
+    label { font-weight:500; margin-bottom:5px; display:block; }
+    input, select { width:100%; padding:10px; margin-bottom:15px; font-size:16px; border:1px solid #ced4da; border-radius:4px; box-sizing:border-box; }
+    input:focus, select:focus { border-color:#0d6efd; outline:none; box-shadow:0 0 0 4px rgba(13,110,253,0.1); }
+    .radio-group label, .checkbox-group label { margin-right:20px; cursor:pointer; }
+    .note { font-size:0.9em; color:#6c757d; margin:5px 0 0; }
+    .error-msg { color:#d9534f; font-weight:500; margin-top:5px; display:none; }
+    #navigation { text-align:right; margin-top:15px; }
+    .btn { display:inline-block; padding:10px 20px; font-size:16px; border:none; border-radius:4px; cursor:pointer; text-decoration:none; text-align:center; box-sizing:border-box; }
+    .btn-primary { background:#0d6efd; color:#fff; }
+    .btn-secondary { background:#6c757d; color:#fff; }
+    .btn:disabled { opacity:0.6; cursor:not-allowed; }
+    footer { text-align:center; padding:15px 10px; font-size:0.85em; color:#555; border-top:1px solid #ced4da; background:#fff; }
+    footer b { color:#000; }
+  </style>
+</head>
+<body>
+  <div id="form-container">
+    <div id="content-wrapper">
+      <h1 id="form-title">Service Eligibility Form</h1>
+      <p id="form-subtitle">Find out which service you’re eligible for and take the first step towards clearing your record and reclaiming your future in less than 5 minutes.</p>
+      <div id="logo"><img src="https://redemption.legal/rdmptn.svg" alt="Redemption Law Group Logo"/></div>
+      <form id="eligibility-form" novalidate>
+
+        <!-- Step 1: First & Last Name -->
+        <div id="step-name" class="step active">
+          <label>First Name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="First Name" required autocomplete="given-name" />
+          <label>Last Name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Last Name" required autocomplete="family-name" />
+          <p class="error-msg">Please enter both first and last name.</p>
+        </div>
+
+        <!-- Step 2: Phone -->
+        <div id="step-phone" class="step" style="display:none;">
+          <label>Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="e.g. 555-123-4567" required autocomplete="tel" />
+          <p class="error-msg">Please enter your phone number.</p>
+        </div>
+
+        <!-- Step 3: Mailing Address -->
+        <div id="step-address" class="step" style="display:none;">
+          <label>Mailing Address</label>
+          <input type="text" id="address" name="address" placeholder="Street address, city, state, ZIP" required autocomplete="street-address" />
+          <p class="error-msg">Please enter your mailing address.</p>
+        </div>
+
+        <!-- Step 4: Email -->
+        <div id="step-email" class="step" style="display:none;">
+          <label>Email Address</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+          <p class="error-msg">Please enter a valid email address.</p>
+        </div>
+
+        <!-- Step 5: Service Selection -->
+        <div id="step-service" class="step" style="display:none;">
+          <label>What service are you interested in?</label>
+          <div class="checkbox-group">
+            <label><input type="radio" name="service" value="expungement" required /> Criminal Expungement</label>
+            <label><input type="radio" name="service" value="cor" /> Certificate of Rehabilitation</label>
+            <label><input type="radio" name="service" value="termination" /> Early Probation Termination</label>
+            <label><input type="radio" name="service" value="sealing" /> Arrest Record Sealing</label>
+          </div>
+          <p class="error-msg">Please select a service.</p>
+        </div>
+
+        <!-- Expungement Details -->
+        <div id="step-expungement-1" class="step" style="display:none;">
+          <label>Where were you convicted?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="exp_court" value="state" required /> State Court</label>
+            <label><input type="radio" name="exp_court" value="federal" required /> Federal Court</label>
+          </div>
+          <p class="note">Unfortunately, we only work with California State cases.</p>
+          <p class="error-msg">Please select court type.</p>
+        </div>
+        <div id="step-expungement-2" class="step" style="display:none;">
+          <label>Which California county did your conviction take place in?</label>
+          <select id="exp_county" name="exp_county" required>
+            <option value="" disabled selected>Select County</option>
+            <!-- Insert counties here -->
+            <option value="Alameda">Alameda</option>
+            <!-- ... -->
+          </select>
+          <p class="error-msg">Please select a county.</p>
+        </div>
+        <div id="step-expungement-3" class="step" style="display:none;">
+          <label>You were convicted of a:</label>
+          <div class="radio-group">
+            <label><input type="radio" name="exp_type" value="felony" required /> Felony</label>
+            <label><input type="radio" name="exp_type" value="misdemeanor" required /> Misdemeanor</label>
+          </div>
+          <p class="error-msg">Please select conviction type.</p>
+        </div>
+        <div id="step-expungement-4" class="step" style="display:none;">
+          <label>Did you serve time in state prison?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="exp_prison_time" value="yes" required /> Yes</label>
+            <label><input type="radio" name="exp_prison_time" value="no" required /> No</label>
+          </div>
+          <p class="note">Unfortunately, you do not qualify for an expungement, but <a href="#certificate">click HERE</a> to see if you qualify for a Certificate of Rehabilitation.</p>
+          <p class="error-msg">Please answer this question.</p>
+        </div>
+        <div id="step-expungement-5" class="step" style="display:none;">
+          <label>Have you completed probation?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="exp_probation_done" value="yes" required /> Yes</label>
+            <label><input type="radio" name="exp_probation_done" value="no" required /> No</label>
+          </div>
+          <p class="note">Please <a href="#termination">click HERE</a> to see if you qualify for early termination of probation.</p>
+          <p class="error-msg">Please answer this question.</p>
+        </div>
+        <div id="step-expungement-6" class="step" style="display:none;">
+          <label>Were you required to pay restitution?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="exp_restitution" value="yes" required /> Yes</label>
+            <label><input type="radio" name="exp_restitution" value="no" required /> No</label>
+          </div>
+          <p class="error-msg">Please answer this question.</p>
+        </div>
+        <div id="step-expungement-7" class="step" style="display:none;">
+          <label>Have you paid your restitution in full?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="exp_restitution_paid" value="yes" required /> Yes</label>
+            <label><input type="radio" name="exp_restitution_paid" value="no" required /> No</label>
+          </div>
+          <p class="note">Unfortunately, you need to pay your restitution in full first before seeking an expungement. Please try again after restitution has been paid in full.</p>
+          <p class="error-msg">Please answer this question.</p>
+        </div>
+        <div id="step-expungement-8" class="step" style="display:none;">
+          <label>Are you currently facing new charges?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="exp_new_charges" value="yes" required /> Yes</label>
+            <label><input type="radio" name="exp_new_charges" value="no" required /> No</label>
+          </div>
+          <p class="note">Unfortunately, you are not eligible for expungement while you have other criminal charges pending against you.</p>
+          <p class="error-msg">Please answer this question.</p>
+        </div>
+        <div id="step-expungement-9" class="step" style="display:none;">
+          <label>Were you convicted of any of the following offenses?</label>
+          <select name="exp_disqualify_offense" required>
+            <option value="" disabled selected>Select</option>
+            <option value="286c">PC §286(c) - Aggravated sodomy with a minor</option>
+            <option value="288">PC §288 - Lewd acts with a minor</option>
+            <option value="288.5">PC §288.5 - Continuous sexual abuse of a child</option>
+            <option value="289j">PC §289(j) - Forcible sexual penetration of a minor</option>
+            <option value="none">None of the above</option>
+          </select>
+          <p class="note">Unfortunately, anyone convicted under §§286(c), 288, 288.5, and/or 289(j) are not eligible for expungement or certificate of rehabilitation.</p>
+          <p class="error-msg">Please select an option.</p>
+        </div>
+
+        <!-- Certificate of Rehabilitation (linked step id certificate) -->
+        <div id="certificate" class="step" style="display:none;">
+          <!-- Similar detailed steps for COR per spec -->
+        </div>
+
+        <!-- Early Termination (linked step id termination) -->
+        <div id="termination" class="step" style="display:none;">
+          <!-- Similar detailed steps for early termination per spec -->
+        </div>
+
+        <!-- Arrest Record Sealing -->
+        <div id="sealing" class="step" style="display:none;">
+          <!-- Similar detailed steps for sealing per spec -->
+        </div>
+
+        <!-- Summary / Recommendations -->
+        <div id="step-summary" class="step" style="display:none;">
+          <div id="summary-content"></div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div id="navigation">
+          <button type="button" id="prevBtn" class="btn btn-secondary" style="display:none;">Back</button>
+          <button type="button" id="nextBtn" class="btn btn-primary">Next</button>
+        </div>
+      </form>
+    </div>
+    <!-- Footer -->
+    <footer>
+      <p>© 2025, Redemption Law Group<br><br>
+      <b>DISCLAIMER: Completion and/or submission of this form does not constitute an attorney-client relationship.</b></p>
+    </footer>
+  </div>
+  <script>
+  // Similar JS as before, updated to handle new steps and navigation sequence including expungement steps 1-9, certificate, termination, sealing, summary
+  (function(){
+    const form = document.getElementById('eligibility-form');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nameFirst = document.getElementById('firstName');
+    const nameLast = document.getElementById('lastName');
+    const emailSpan = document.getElementById('userNameSpan');
+    const serviceError = document.getElementById('serviceError');
+    const summaryContent = document.getElementById('summary-content');
+
+    const stepEls = {
+      'step-name': document.getElementById('step-name'),
+      'step-phone': document.getElementById('step-phone'),
+      'step-address': document.getElementById('step-address'),
+      'step-email': document.getElementById('step-email'),
+      'step-service': document.getElementById('step-service'),
+      'step-expungement-1': document.getElementById('step-expungement-1'),
+      'step-expungement-2': document.getElementById('step-expungement-2'),
+      'step-expungement-3': document.getElementById('step-expungement-3'),
+      'step-expungement-4': document.getElementById('step-expungement-4'),
+      'step-expungement-5': document.getElementById('step-expungement-5'),
+      'step-expungement-6': document.getElementById('step-expungement-6'),
+      'step-expungement-7': document.getElementById('step-expungement-7'),
+      'step-expungement-8': document.getElementById('step-expungement-8'),
+      'step-expungement-9': document.getElementById('step-expungement-9'),
+      'certificate': document.getElementById('certificate'),
+      'termination': document.getElementById('termination'),
+      'sealing': document.getElementById('sealing'),
+      'step-summary': document.getElementById('step-summary')
+    };
+    let sequence = ['step-name','step-phone','step-address','step-email','step-service'];
+    let idx=0;
+    function show(i){
+      Object.values(stepEls).forEach(el=>el.style.display='none');
+      const id=sequence[i];
+      const el= stepEls[id];
+      el.style.display='block';
+      prevBtn.style.display=i>0?'inline-block':'none';
+      if(id==='step-summary') nextBtn.style.display='none'; else nextBtn.style.display='inline-block';
+      idx=i;
+    }
+    function buildSequence(){
+      sequence=['step-name','step-phone','step-address','step-email','step-service'];
+      const svc= form.service.value;
+      if(svc==='expungement'){
+        sequence.push('step-expungement-1','step-expungement-2','step-expungement-3','step-expungement-4','step-expungement-5','step-expungement-6','step-expungement-7','step-expungement-8','step-expungement-9');
+      } else if(svc==='cor') sequence.push('certificate');
+      else if(svc==='termination') sequence.push('termination');
+      else if(svc==='sealing') sequence.push('sealing');
+      sequence.push('step-summary');
+    }
+    nextBtn.onclick=()=>{
+      const id=sequence[idx]; const el=stepEls[id]; let valid=true;
+      const inputs=el.querySelectorAll('input,select');
+      if(id==='step-service'){ if(!Array.from(inputs).some(i=>i.checked)){serviceError.style.display='block';valid=false;} }
+      else inputs.forEach(i=>{if(i.required&&!i.value){valid=false;i.reportValidity();}});
+      if(!valid) return;
+      if(id==='step-service'){ buildSequence(); }
+      if(id==='step-name'){ const f=nameFirst.value.trim().split(' ')[0]; emailSpan.textContent=f; }
+      if(idx+1<sequence.length) show(idx+1);
+      if(sequence[idx]==='step-summary') buildSummary();
+    };
+    prevBtn.onclick=()=>show(idx-1);
+    show(0);
+    function buildSummary(){
+      summaryContent.innerHTML='<h2>Summary & Next Steps</h2><p>We will contact you soon.</p>';
+    }
+  })();
+  </script>
+</body>
+</html>
