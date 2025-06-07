@@ -123,7 +123,16 @@
             <label><input type="radio" name="exp_prison" value="yes" required> Yes</label>
             <label><input type="radio" name="exp_prison" value="no" required> No</label>
           </div>
-          <p class="note">Unfortunately, you do not qualify for an expungement, but <a href="#step-cor-1">click HERE</a> to see Certificate of Rehabilitation.</p>
+
+          
+          <p class="ineligible-msg">
+  Unfortunately, you do not qualify for an expungement. Please choose an alternative:
+  <a href="#" onclick="goToService('cor');return false;">Certificate of Rehabilitation</a> |
+  <a href="#" onclick="goToService('sealing');return false;">Arrest Record Sealing</a> |
+  <a href="#" onclick="goToService('termination');return false;">Early Probation Termination</a>
+</p>
+
+          
           <p class="error-msg">Please answer this question.</p>
         </div>
         <div id="step-exp-5" class="step">
@@ -158,7 +167,16 @@
             <label><input type="radio" name="exp_new" value="yes" required> Yes</label>
             <label><input type="radio" name="exp_new" value="no" required> No</label>
           </div>
-          <p class="note">Unfortunately, you are not eligible for expungement with pending charges.</p>
+
+          
+          <p class="ineligible-msg">
+  Unfortunately, you do not qualify for an expungement. Please choose an alternative:
+  <a href="#" onclick="goToService('cor');return false;">Certificate of Rehabilitation</a> |
+  <a href="#" onclick="goToService('sealing');return false;">Arrest Record Sealing</a> |
+  <a href="#" onclick="goToService('termination');return false;">Early Probation Termination</a>
+</p>
+
+          
           <p class="error-msg">Please answer this question.</p>
         </div>
         <div id="step-exp-9" class="step">
@@ -202,5 +220,34 @@
       show(0);
     })();
   </script>
+
+  <script>
+    // Step 3: Routing helper to jump into another service flow
+    function goToService(serviceKey) {
+      // 1. Hide all steps
+      document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
+
+      // 2. Check the corresponding service radio
+      const radio = document.getElementById('service-' + serviceKey);
+      if (radio) radio.checked = true;
+
+      // 3. Rebuild the step order
+      updateStepSequence();
+
+      // 4. Show the very first step of that service
+      const firstStepMap = {
+        expungement: 'step-exp-q1',
+        cor:          'step-cor-q1',
+        sealing:      'step-sealing-q1',
+        termination:  'step-termination-q1'
+      };
+      const firstStepId = firstStepMap[serviceKey];
+      const idx = stepSequence.indexOf(firstStepId);
+      if (idx >= 0) {
+        showStep(idx);
+      }
+    }
+  </script>
+  
 </body>
 </html>
