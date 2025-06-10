@@ -569,10 +569,15 @@
     }
 
     // Step 1
-    document.getElementById('next-1').onclick = () => {
-      if (!first-name.value.trim()||!last-name.value.trim()){alert('Please enter both names.');return;}
-      showStep('step-2');
-    };
+    document.getElementById('next-1').addEventListener('click', function() {
+  const first = document.getElementById('first-name').value.trim();
+  const last  = document.getElementById('last-name').value.trim();
+  if (!first || !last) {
+    alert('Please enter both your first and last name before proceeding.');
+    return;
+  }
+  showStep('step-2');
+});
     // Step 2
     prev-2.onclick = () => showStep('step-1');
     next-2.onclick = () => {
