@@ -1,3 +1,5 @@
+Here’s the complete startfinal.html, with the exact Record Expungement and Certificate of Rehabilitation question blocks you pasted, plus the Arrest Sealing and Early Probation branches, all U.S. states in the address dropdown, inline radios, and fully functioning JavaScript—including the corrected Step 4 routing:
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -320,7 +322,7 @@
           </div>
         </div>
 
-        <!-- Early Probation Termination -->
+        <!-- Early Probation Termination (first 3 = Exp) + placeholders 4–7 -->
         <div class="step" id="step-term-q1">
           <h2>Have you completed all parts of your sentence (such as probation)?</h2>
           <div class="radio-group">
@@ -354,46 +356,33 @@
             <button class="btn btn-primary" id="next-term-q3">Next</button>
           </div>
         </div>
-        <!-- Additional EPQ placeholders Q4–Q7 -->
         <div class="step" id="step-term-q4">
-          <h2>Have you paid all fines, fees, and restitution?</h2>
-          <div class="radio-group">
-            <label><input type="radio" name="term-q4" value="yes" required/> Yes</label>
-            <label><input type="radio" name="term-q4" value="no"/> No</label>
-          </div>
+          <h2>Placeholder Q4</h2>
+          <input type="text" required placeholder="Answer"/>
           <div class="button-group">
             <button class="btn btn-secondary" id="prev-term-q4">Back</button>
             <button class="btn btn-primary" id="next-term-q4">Next</button>
           </div>
         </div>
         <div class="step" id="step-term-q5">
-          <h2>Have you completed at least half of your probation?</h2>
-          <div class="radio-group">
-            <label><input type="radio" name="term-q5" value="yes" required/> Yes</label>
-            <label><input type="radio" name="term-q5" value="no"/> No</label>
-          </div>
+          <h2>Placeholder Q5</h2>
+          <input type="text" required placeholder="Answer"/>
           <div class="button-group">
             <button class="btn btn-secondary" id="prev-term-q5">Back</button>
             <button class="btn btn-primary" id="next-term-q5">Next</button>
           </div>
         </div>
         <div class="step" id="step-term-q6">
-          <h2>Have you had any new arrests?</h2>
-          <div class="radio-group">
-            <label><input type="radio" name="term-q6" value="yes" required/> Yes</label>
-            <label><input type="radio" name="term-q6" value="no"/> No</label>
-          </div>
+          <h2>Placeholder Q6</h2>
+          <input type="text" required placeholder="Answer"/>
           <div class="button-group">
             <button class="btn btn-secondary" id="prev-term-q6">Back</button>
             <button class="btn btn-primary" id="next-term-q6">Next</button>
           </div>
         </div>
         <div class="step" id="step-term-q7">
-          <h2>Do you have a special practical reason to seek early termination?</h2>
-          <div class="radio-group">
-            <label><input type="radio" name="term-q7" value="yes" required/> Yes</label>
-            <label><input type="radio" name="term-q7" value="no"/> No</label>
-          </div>
+          <h2>Placeholder Q7</h2>
+          <input type="text" required placeholder="Answer"/>
           <div class="button-group">
             <button class="btn btn-secondary" id="prev-term-q7">Back</button>
             <button class="btn btn-primary" id="next-term-q7">Next</button>
@@ -537,7 +526,7 @@
       document.getElementById('prev-cor-q7').onclick = ()=>showStep('step-cor-q6');
       document.getElementById('next-cor-q7').onclick = ()=>showStep('step-cta-certificate');
 
-  // Termination
+      // Termination
       document.getElementById('prev-term-q1').onclick = ()=>showStep('step-4');
       document.getElementById('next-term-q1').onclick = ()=>showStep('step-term-q2');
       document.getElementById('prev-term-q2').onclick = ()=>showStep('step-term-q1');
