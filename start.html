@@ -407,170 +407,143 @@
     </footer>
   </div>
 
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Utility to show a given step
-    function showStep(id) {
-      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      window.scrollTo(0, 0);
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Utility: show only the step with this ID
+  function showStep(id) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    var target = document.getElementById(id);
+    if (target) target.classList.add('active');
+    window.scrollTo(0,0);
+  }
+
+  // Redirect for CTA
+  window.redirectToStripe = function(service) {
+    var urls = {
+      expungement: 'https://stripe.com/checkout?service=expungement',
+      certificate: 'https://stripe.com/checkout?service=certificate',
+      sealing:     'https://stripe.com/checkout?service=sealing',
+      termination: 'https://stripe.com/checkout?service=termination'
+    };
+    window.location.href = urls[service];
+  };
+
+  // Step 1 → Step 2
+  document.getElementById('next-1').addEventListener('click', function() {
+    var first = document.getElementById('first-name').value.trim();
+    var last = document.getElementById('last-name').value.trim();
+    if (!first || !last) {
+      alert('Please enter both first and last name.');
+      return;
     }
-
-    // Redirect to Stripe checkout
-    function redirectToStripe(service) {
-      const urls = {
-        expungement: 'https://stripe.com/checkout?service=expungement',
-        certificate: 'https://stripe.com/checkout?service=certificate',
-        sealing:     'https://stripe.com/checkout?service=sealing',
-        termination: 'https://stripe.com/checkout?service=termination'
-      };
-      window.location.href = urls[service];
-    }
-
-    // Step 1 -> Step 2
-    document.getElementById('next-1').addEventListener('click', () => {
-      const first = document.getElementById('first-name').value.trim();
-      const last  = document.getElementById('last-name').value.trim();
-      if (!first || !last) {
-        alert('Please enter both first and last name.');
-        return;
-      }
-      showStep('step-2');
-    });
-
-    // Step 2
-    document.getElementById('prev-2').addEventListener('click', () => showStep('step-1'));
-    document.getElementById('next-2').addEventListener('click', () => {
-      const email = document.getElementById('email');
-      const phone = document.getElementById('phone');
-      if (!email.checkValidity()) {
-        alert('Please enter a valid email.');
-        return;
-      }
-      if (!phone.checkValidity()) {
-        alert('Please enter a valid 10-digit phone number.');
-        return;
-      }
-      showStep('step-3');
-    });
-
-    // Step 3
-    document.getElementById('prev-3').addEventListener('click', () => showStep('step-2'));
-    document.getElementById('next-3').addEventListener('click', () => {
-      const street = document.getElementById('street').value.trim();
-      const city   = document.getElementById('city').value.trim();
-      const state  = document.getElementById('state').value;
-      const zip    = document.getElementById('zip');
-      if (!street || !city || !state || !zip.checkValidity()) {
-        alert('Please complete your full mailing address.');
-        return;
-      }
-      showStep('step-4');
-    });
-
-    // Step 4 routing
-    document.getElementById('prev-4').addEventListener('click', () => showStep('step-3'));
-    document.getElementById('next-4').addEventListener('click', () => {
-      const svc = document.querySelector('input[name="service"]:checked');
-      if (!svc) {
-        alert('Please select a service.');
-        return;
-      }
-      const map = {
-        expungement: 'step-exp-q1',
-        certificate: 'step-cor-q1',
-        sealing:     'step-seal-q1',
-        termination: 'step-term-q1'
-      };
-      showStep(map[svc.value]);
-    });
-
-    // Record Expungement flow
-    document.getElementById('prev-exp-q1').addEventListener('click', () => showStep('step-4'));
-    document.getElementById('next-exp-q1').addEventListener('click', () => showStep('step-exp-q2'));
-    document.getElementById('prev-exp-q2').addEventListener('click', () => showStep('step-exp-q1'));
-    document.getElementById('next-exp-q2').addEventListener('click', () => showStep('step-exp-q3'));
-    document.getElementById('prev-exp-q3').addEventListener('click', () => showStep('step-exp-q2'));
-    document.getElementById('next-exp-q3').addEventListener('click', () => showStep('step-exp-q4'));
-    document.getElementById('prev-exp-q4').addEventListener('click', () => showStep('step-exp-q3'));
-    document.getElementById('next-exp-q4').addEventListener('click', () => showStep('step-exp-q5'));
-    document.getElementById('prev-exp-q5').addEventListener('click', () => showStep('step-exp-q4'));
-    document.getElementById('next-exp-q5').addEventListener('click', () => showStep('step-exp-q6'));
-    document.getElementById('prev-exp-q6').addEventListener('click', () => showStep('step-exp-q5'));
-    document.getElementById('next-exp-q6').addEventListener('click', () => showStep('step-cta-expungement'));
-
-    // Certificate flow
-    document.getElementById('prev-cor-q1').addEventListener('click', () => showStep('step-4'));
-    document.getElementById('next-cor-q1').addEventListener('click', () => showStep('step-cor-q2'));
-    document.getElementById('prev-cor-q2').addEventListener('click', () => showStep('step-cor-q1'));
-    document.getElementById('next-cor-q2').addEventListener('click', () => showStep('step-cor-q3'));
-    document.getElementById('prev-cor-q3').addEventListener('click', () => showStep('step-cor-q2'));
-    document.getElementById('next-cor-q3').addEventListener('click', () => showStep('step-cor-q4'));
-    document.getElementById('prev-cor-q4').addEventListener('click', () => showStep('step-cor-q3'));
-    document.getElementById('next-cor-q4').addEventListener('click', () => showStep('step-cor-q5'));
-    document.getElementById('prev-cor-q5').addEventListener('click', () => showStep('step-cor-q4'));
-    document.getElementById('next-cor-q5').addEventListener('click', () => showStep('step-cor-q6'));
-    document.getElementById('prev-cor-q6').addEventListener('click', () => showStep('step-cor-q5'));
-    document.getElementById('next-cor-q6').addEventListener('click', () => showStep('step-cor-q7'));
-    document.getElementById('prev-cor-q7').addEventListener('click', () => showStep('step-cor-q6'));
-    document.getElementById('next-cor-q7').addEventListener('click', () => showStep('step-cta-certificate'));
-
-    // Arrest Sealing flow
-    document.getElementById('prev-seal-q1').addEventListener('click', () => showStep('step-4'));
-    document.getElementById('next-seal-q1').addEventListener('click', () => showStep('step-seal-q2'));
-    document.getElementById('prev-seal-q2').addEventListener('click', () => showStep('step-seal-q1'));
-    document.getElementById('next-seal-q2').addEventListener('click', () => showStep('step-seal-q3'));
-    document.getElementById('prev-seal-q3').addEventListener('click', () => showStep('step-seal-q2'));
-    document.getElementById('next-seal-q3').addEventListener('click', () => showStep('step-cta-sealing'));
-
-    // Early Probation Termination
-    document.getElementById('prev-term-q1').addEventListener('click', () => showStep('step-4'));
-    document.getElementById('next-term-q1').addEventListener('click', () => showStep('step-term-q2'));
-    document.getElementById('prev-term-q2').addEventListener('click', () => showStep('step-term-q1'));
-    document.getElementById('next-term-q2').addEventListener('click', () => showStep('step-term-q3'));
-    document.getElementById('prev-term-q3').addEventListener('click', () => showStep('step-term-q2'));
-
-    document.getElementById('next-term-q3').addEventListener('click', () => {
-      // mirror expungement Q3 logic if any
-      showStep('step-term-q4');
-    });
-    document.getElementById('prev-term-q4').addEventListener('click', () => showStep('step-term-q3'));
-    document.getElementById('next-term-q4').addEventListener('click', () => {
-      const v = document.querySelector('input[name="term-q4"]:checked').value;
-      if (v === 'no') {
-        alert('This may negatively impact your application.');
-        prompt('Please explain further:');
-      }
-      showStep('step-term-q5');
-    });
-    document.getElementById('prev-term-q5').addEventListener('click', () => showStep('step-term-q4'));
-    document.getElementById('next-term-q5').addEventListener('click', () => {
-      const v = document.querySelector('input[name="term-q5"]:checked').value;
-      if (v === 'no') {
-        alert('This may negatively impact your application.');
-        prompt('Please explain further:');
-      }
-      showStep('step-term-q6');
-    });
-    document.getElementById('prev-term-q6').addEventListener('click', () => showStep('step-term-q5'));
-    document.getElementById('next-term-q6').addEventListener('click', () => {
-      const v = document.querySelector('input[name="term-q6"]:checked').value;
-      if (v === 'yes') {
-        alert('This may negatively impact your application.');
-        prompt('Please explain further:');
-      }
-      showStep('step-term-q7');
-    });
-    document.getElementById('prev-term-q7').addEventListener('click', () => showStep('step-term-q6'));
-    document.getElementById('next-term-q7').addEventListener('click', () => {
-      const v = document.querySelector('input[name="term-q7"]:checked').value;
-      if (v === 'no') {
-        alert('This may negatively impact your application.');
-        prompt('Please explain further:');
-      }
-      showStep('step-cta-termination');
-    });
+    showStep('step-2');
   });
+
+  // Step 2 ←→ Step 3
+  document.getElementById('prev-2').addEventListener('click', function() {
+    showStep('step-1');
+  });
+  document.getElementById('next-2').addEventListener('click', function() {
+    var email = document.getElementById('email');
+    var phone = document.getElementById('phone');
+    if (!email.checkValidity()) { alert('Please enter a valid email.'); return; }
+    if (!phone.checkValidity()) { alert('Please enter a valid 10-digit phone number.'); return; }
+    showStep('step-3');
+  });
+
+  // Step 3 ←→ Step 4
+  document.getElementById('prev-3').addEventListener('click', function() {
+    showStep('step-2');
+  });
+  document.getElementById('next-3').addEventListener('click', function() {
+    var street = document.getElementById('street').value.trim();
+    var city = document.getElementById('city').value.trim();
+    var state = document.getElementById('state').value;
+    var zip = document.getElementById('zip');
+    if (!street || !city || !state || !zip.checkValidity()) {
+      alert('Please complete your full mailing address.');
+      return;
+    }
+    showStep('step-4');
+  });
+
+  // STEP 4 BRANCHING -- THIS IS THE KEY PART!
+  document.getElementById('prev-4').addEventListener('click', function() {
+    showStep('step-3');
+  });
+  document.getElementById('next-4').addEventListener('click', function() {
+    var svc = document.querySelector('input[name="service"]:checked');
+    if (!svc) {
+      alert('Please select a service.');
+      return;
+    }
+    var routes = {
+      expungement: 'step-exp-q1',
+      certificate: 'step-cor-q1',
+      sealing:     'step-seal-q1',
+      termination: 'step-term-q1'
+    };
+    showStep(routes[svc.value]);
+  });
+
+  // ========== FROM HERE: The rest of your button navigation ==========
+
+  // Record Expungement flow
+  document.getElementById('prev-exp-q1').onclick = function() { showStep('step-4'); };
+  document.getElementById('next-exp-q1').onclick = function() { showStep('step-exp-q2'); };
+  document.getElementById('prev-exp-q2').onclick = function() { showStep('step-exp-q1'); };
+  document.getElementById('next-exp-q2').onclick = function() { showStep('step-exp-q3'); };
+  document.getElementById('prev-exp-q3').onclick = function() { showStep('step-exp-q2'); };
+  document.getElementById('next-exp-q3').onclick = function() { showStep('step-exp-q4'); };
+  document.getElementById('prev-exp-q4').onclick = function() { showStep('step-exp-q3'); };
+  document.getElementById('next-exp-q4').onclick = function() { showStep('step-exp-q5'); };
+  document.getElementById('prev-exp-q5').onclick = function() { showStep('step-exp-q4'); };
+  document.getElementById('next-exp-q5').onclick = function() { showStep('step-exp-q6'); };
+  document.getElementById('prev-exp-q6').onclick = function() { showStep('step-exp-q5'); };
+  document.getElementById('next-exp-q6').onclick = function() { showStep('step-cta-expungement'); };
+
+  // Certificate of Rehabilitation flow
+  document.getElementById('prev-cor-q1').onclick = function() { showStep('step-4'); };
+  document.getElementById('next-cor-q1').onclick = function() { showStep('step-cor-q2'); };
+  document.getElementById('prev-cor-q2').onclick = function() { showStep('step-cor-q1'); };
+  document.getElementById('next-cor-q2').onclick = function() { showStep('step-cor-q3'); };
+  document.getElementById('prev-cor-q3').onclick = function() { showStep('step-cor-q2'); };
+  document.getElementById('next-cor-q3').onclick = function() { showStep('step-cor-q4'); };
+  document.getElementById('prev-cor-q4').onclick = function() { showStep('step-cor-q3'); };
+  document.getElementById('next-cor-q4').onclick = function() { showStep('step-cor-q5'); };
+  document.getElementById('prev-cor-q5').onclick = function() { showStep('step-cor-q4'); };
+  document.getElementById('next-cor-q5').onclick = function() { showStep('step-cor-q6'); };
+  document.getElementById('prev-cor-q6').onclick = function() { showStep('step-cor-q5'); };
+  document.getElementById('next-cor-q6').onclick = function() { showStep('step-cor-q7'); };
+  document.getElementById('prev-cor-q7').onclick = function() { showStep('step-cor-q6'); };
+  document.getElementById('next-cor-q7').onclick = function() { showStep('step-cta-certificate'); };
+
+  // Arrest Record Sealing flow
+  document.getElementById('prev-seal-q1').onclick = function() { showStep('step-4'); };
+  document.getElementById('next-seal-q1').onclick = function() { showStep('step-seal-q2'); };
+  document.getElementById('prev-seal-q2').onclick = function() { showStep('step-seal-q1'); };
+  document.getElementById('next-seal-q2').onclick = function() { showStep('step-seal-q3'); };
+  document.getElementById('prev-seal-q3').onclick = function() { showStep('step-seal-q2'); };
+  document.getElementById('next-seal-q3').onclick = function() { showStep('step-cta-sealing'); };
+
+  // Early Probation Termination flow
+  document.getElementById('prev-term-q1').onclick = function() { showStep('step-4'); };
+  document.getElementById('next-term-q1').onclick = function() { showStep('step-term-q2'); };
+  document.getElementById('prev-term-q2').onclick = function() { showStep('step-term-q1'); };
+  document.getElementById('next-term-q2').onclick = function() { showStep('step-term-q3'); };
+  document.getElementById('prev-term-q3').onclick = function() { showStep('step-term-q2'); };
+  document.getElementById('next-term-q3').onclick = function() { showStep('step-term-q4'); };
+  document.getElementById('prev-term-q4').onclick = function() { showStep('step-term-q3'); };
+  document.getElementById('next-term-q4').onclick = function() { showStep('step-term-q5'); };
+  document.getElementById('prev-term-q5').onclick = function() { showStep('step-term-q4'); };
+  document.getElementById('next-term-q5').onclick = function() { showStep('step-term-q6'); };
+  document.getElementById('prev-term-q6').onclick = function() { showStep('step-term-q5'); };
+  document.getElementById('next-term-q6').onclick = function() { showStep('step-term-q7'); };
+  document.getElementById('prev-term-q7').onclick = function() { showStep('step-term-q6'); };
+  document.getElementById('next-term-q7').onclick = function() { showStep('step-cta-termination'); };
+
+});
 </script>
   
 </body>
