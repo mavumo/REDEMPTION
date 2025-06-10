@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Service Eligibility Form | Redemption Law Group</title>
+  <style>
+    /* Reset and base styles */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #212529;
+    }
+    /* Full-page container */
+    #form-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+    }
+    /* Centered content area (logo, title, subtitle, form) */
+    #content-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    /* Title and subtitle */
+    #form-title {
+      font-size: 2em;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    #form-subtitle {
+      font-size: 1em;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #555;
+      line-height: 1.4;
+      max-width: 500px;
+    }
+    /* Logo */
+    #logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #logo img {
+      max-width: 150px;
+      height: auto;
+    }
+    /* Form wrapper */
+    #eligibility-form {
+      width: 100%;
+      max-width: 600px;
+      background: #ffffff;
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-sizing: border-box;
+    }
+    /* Step containers */
+    .step { display: none; }
+    .step.active { display: block; }
+    /* Form elements styling */
+    label {
+      font-weight: 500;
+      margin-bottom: 5px;
+      display: block;
+    }
+    input[type=text], input[type=email], input[type=tel], select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    input[type=text]:focus, input[type=email]:focus, input[type=tel]:focus, select:focus {
+      border-color: #0d6efd;
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(13,110,253,0.1);
+    }
+    /* Checkbox and radio styles */
+    input[type=checkbox], input[type=radio] {
+      accent-color: #0d6efd;
+    }
+    .radio-group label {
+      margin-right: 20px;
+      cursor: pointer;
+    }
+    .radio-group label:last-child { margin-right: 0; }
+    /* Notes and error messages */
+    .eligibility-note {
+      font-weight: 500;
+      margin: 15px 0;
+    }
+    .eligibility-note.warning { color: #d9534f; }
+    /* Navigation buttons */
+    .button-group {
+      text-align: right;
+      margin-top: 15px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .btn-primary {
+      background-color: #0d6efd;
+      color: #fff;
+    }
+    .btn-primary:hover { background-color: #0b5ed7; }
+    .btn-secondary {
+      background-color: #6c757d;
+      color: #fff;
+    }
+    .btn-secondary:hover { background-color: #5c636a; }
+    /* Final recommendation styling */
+    .recommendation {
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 15px;
+      background: #f8f9fa;
+      text-align: center;
+    }
+    .recommendation h3 { margin-top: 0; }
+    .fee-bubble {
+      display: inline-block;
+      padding: 8px 12px;
+      border: 2px solid #555;
+      border-radius: 20px;
+      margin: 10px 0;
+    }
+    .placeholder-stripe, .placeholder-image {
+      margin: 20px 0;
+      padding: 40px;
+      border: 2px dashed #ccc;
+      color: #777;
+    }
+    .placeholder-image { margin-top: 10px; }
+    footer {
+      text-align: center;
+      padding: 15px 10px;
+      font-size: 0.85em;
+      color: #555;
+      border-top: 1px solid #ced4da;
+      background: #ffffff;
+    }
+    footer p {
+      margin: 0;
+      line-height: 1.5;
+    }
+    footer b {
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div id="form-container">
+    <div id="content-wrapper">
+      <h1 id="form-title">Service Eligibility Form</h1>
+      <p id="form-subtitle">
+        Find out which service you’re eligible for and take the first step towards
+        clearing your record and reclaiming your future in less than 5 minutes.
+      </p>
+      <div id="logo">
+        <img src="https://redemption.legal/rdmptn.svg" alt="Redemption Law Group Logo">
+      </div>
+
+      <form id="eligibility-form" novalidate name="eligibility-form">
+        <!-- Step 1 -->
+        <div class="step active" id="step-1">
+          <h2>Step 1: Your Name</h2>
+          <label>First Name *</label>
+          <input type="text" id="first-name" required>
+          <label>Last Name *</label>
+          <input type="text" id="last-name" required>
+          <div class="button-group">
+            <button type="button" class="btn btn-primary" id="next-1">Next</button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step" id="step-2">
+          <h2>Step 2: Contact Information</h2>
+          <label>Email *</label>
+          <input type="email" id="email" required>
+          <label>Phone *</label>
+          <input type="tel" id="phone" required pattern="\d{10}" placeholder="10-digit number">
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-2">Back</button>
+            <button type="button" class="btn btn-primary" id="next-2">Next</button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step" id="step-3">
+          <h2>Step 3: Mailing Address</h2>
+          <label>Street Address *</label>
+          <input type="text" id="street" required>
+          <label>City/Town *</label>
+          <input type="text" id="city" required>
+          <label>State *</label>
+          <select id="state" required>
+            <option value="">Select State</option>
+            <!-- all US states omitted here for brevity -->
+            <option>California</option>
+            <!-- ... -->
+          </select>
+          <label>ZIP Code *</label>
+          <input type="text" id="zip" required pattern="\d{5}" placeholder="5-digit ZIP">
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-3">Back</button>
+            <button type="button" class="btn btn-primary" id="next-3">Next</button>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step" id="step-4">
+          <h2>Step 4: Which service are you interested in? (Select one)</h2>
+          <div class="radio-group">
+            <label><input type="radio" name="service" value="expungement" required> Record Expungement</label>
+            <label><input type="radio" name="service" value="certificate"> Certificate of Rehabilitation</label>
+            <label><input type="radio" name="service" value="sealing"> Arrest Record Sealing</label>
+            <label><input type="radio" name="service" value="termination"> Early Probation Termination</label>
+          </div>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-4">Back</button>
+            <button type="button" class="btn btn-primary" id="next-4">Next</button>
+          </div>
+        </div>
+
+        <!-- Expungement Q1: Court System -->
+        <div class="step" id="step-exp-q1">
+          <h2>Which court system were you convicted in?</h2>
+          <div class="radio-group">
+            <label><input type="radio" name="exp-q1" value="state" required> State Court</label>
+            <label><input type="radio" name="exp-q1" value="federal"> Federal Court</label>
+          </div>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-exp-q1">Back</button>
+            <button type="button" class="btn btn-primary"   id="next-exp-q1">Next</button>
+          </div>
+        </div>
+
+        <!-- Expungement Q2: County -->
+        <div class="step" id="step-exp-q2">
+          <h2>Which county did your conviction take place in?</h2>
+          <select id="exp-county" required>
+            <option value="">Select County</option>
+            <option>Alameda</option><option>Alpine</option><option>Amador</option>
+            <option>Butte</option><option>Calaveras</option><option>Colusa</option>
+            <option>Contra Costa</option><option>Del Norte</option><option>El Dorado</option>
+            <option>Fresno</option><option>Glenn</option><option>Humboldt</option>
+            <option>Imperial</option><option>Inyo</option><option>Kern</option>
+            <option>Kings</option><option>Lake</option><option>Lassen</option>
+            <option>Los Angeles</option><option>Madera</option><option>Marin</option>
+            <option>Mariposa</option><option>Mendocino</option><option>Merced</option>
+            <option>Modoc</option><option>Mono</option><option>Monterey</option>
+            <option>Napa</option><option>Nevada</option><option>Orange</option>
+            <option>Placer</option><option>Plumas</option><option>Riverside</option>
+            <option>Sacramento</option><option>San Benito</option><option>San Bernardino</option>
+            <option>San Diego</option><option>San Francisco</option><option>San Joaquin</option>
+            <option>San Luis Obispo</option><option>San Mateo</option><option>Santa Barbara</option>
+            <option>Santa Clara</option><option>Santa Cruz</option><option>Shasta</option>
+            <option>Sierra</option><option>Siskiyou</option><option>Solano</option>
+            <option>Sonoma</option><option>Stanislaus</option><option>Sutter</option>
+            <option>Tehama</option><option>Trinity</option><option>Tulare</option>
+            <option>Tuolumne</option><option>Ventura</option><option>Yolo</option>
+            <option>Yuba</option>
+          </select>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-exp-q2">Back</button>
+            <button type="button" class="btn btn-primary"   id="next-exp-q2">Next</button>
+          </div>
+        </div>
+
+        <!-- Expungement Q3: Felony/Misdemeanor -->
+        <div class="step" id="step-exp-q3">
+          <h2>You were convicted of a:</h2>
+          <div class="radio-group">
+            <label><input type="radio" name="exp-q3" value="felony" required> Felony</label>
+            <label><input type="radio" name="exp-q3" value="misdemeanor"> Misdemeanor</label>
+          </div>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-exp-q3">Back</button>
+            <button type="button" class="btn btn-primary"   id="next-exp-q3">Next</button>
+          </div>
+        </div>
+
+        <!-- Expungement Q4: Restitution -->
+        <div class="step" id="step-exp-q4">
+          <h2>Were you required to pay restitution? If yes, have you paid it in full?</h2>
+          <div class="radio-group">
+            <label><input type="radio" name="exp-q4" value="paid-full" required> Yes, I have been required to pay restitution and have paid it in full.</label>
+            <label><input type="radio" name="exp-q4" value="paid-part"> Yes, I have been required to pay restitution but I have not paid it in full.</label>
+            <label><input type="radio" name="exp-q4" value="not-required"> No, I have not been required to pay restitution.</label>
+          </div>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-exp-q4">Back</button>
+            <button type="button" class="btn btn-primary"   id="next-exp-q4">Next</button>
+          </div>
+        </div>
+
+        <!-- Expungement Q5: New Charges -->
+        <div class="step" id="step-exp-q5">
+          <h2>Are you currently facing new charges?</h2>
+          <div class="radio-group">
+            <label><input type="radio" name="exp-q5" value="yes" required> Yes</label>
+            <label><input type="radio" name="exp-q5" value="no"> No</label>
+          </div>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-exp-q5">Back</button>
+            <button type="button" class="btn btn-primary"   id="next-exp-q5">Next</button>
+          </div>
+        </div>
+
+        <!-- Expungement Q6: Disqualifying Convictions -->
+        <div class="step" id="step-exp-q6">
+          <h2>Were you convicted of any of the following? (select all that apply)</h2>
+          <label><input type="checkbox" name="exp-q6" value="offense-1"> Sodomy with a child under 14 years old and more than 10 years younger than the defendant</label>
+          <label><input type="checkbox" name="exp-q6" value="offense-2"> Lewd or lascivious acts with a child under 14 years old</label>
+          <label><input type="checkbox" name="exp-q6" value="offense-3"> Continuous sexual abuse of a child</label>
+          <label><input type="checkbox" name="exp-q6" value="offense-4"> Forcible sexual penetration of a minor under 14 years old</label>
+          <label><input type="checkbox" name="exp-q6" value="none"> None of the above</label>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-exp-q6">Back</button>
+            <button type="button" class="btn btn-primary"   id="next-exp-q6">Next</button>
+          </div>
+        </div>
+
+        <!-- Arrest Record Sealing Questions -->
+        <div class="step" id="step-seal-q1">
+          <h2>Were you ever convicted of a crime from this arrest?</h2>
+          <div class="radio-group">
+            <label><input type="radio" name="seal-q1" value="no" required> No</label>
+            <label><input type="radio" name="seal-q1" value="yes"> Yes</label>
+          </div>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-seal-q1">Back</button>
+            <button type="button" class="btn btn-primary"   id="next-seal-q1">Next</button>
+          </div>
+        </div>
+
+        <div class="step" id="step-seal-q2">
+          <h2>Is the arrest case completely resolved with no conviction?</h2>
+          <div class="radio-group">
+            <label><input type="radio" name="seal-q2" value="yes" required> Yes</label>
+            <label><input type="radio" name="seal-q2" value="no"> No</label>
+          </div>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-seal-q2">Back</button>
+            <button type="button" class="btn btn-primary"   id="next-seal-q2">Next</button>
+          </div>
+        </div>
+
+        <!-- Certificate of Rehabilitation Questions -->
+        <div class="step" id="step-cor-q1">
+          <h2>Which court system were you convicted in?</h2>
+          <div class="radio-group">
+            <label><input type="radio" name="cor-q1" value="state" required> State Court</label>
+            <label><input type="radio" name="cor-q1" value="federal"> Federal Court</label>
+          </div>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-cor-q1">Back</button>
+            <button type="button" class="btn btn-primary"   id="next-cor-q1">Next</button>
+          </div>
+        </div>
+
+        <div class="step" id="step-cor-q2">
+          <h2>Which county did your conviction take place in?</h2>
+          <select id="cor-county" required>
+            <option value="">Select County</option>
+            <option>Alameda</option><option>Alpine</option><option>Amador</option>
+            <option>Butte</option><option>Calaveras</option><option>Colusa</option>
+            <option>Contra Costa</option><option>Del Norte</option><option>El Dorado</option>
+            <option>Fresno</option><option>Glenn</option><option>Humboldt</option>
+            <option>Imperial</option><option>Inyo</option><option>Kern</option>
+            <option>Kings</option><option>Lake</option><option>Lassen</option>
+            <option>Los Angeles</option><option>Madera</option><option>Marin</option>
+            <option>Mariposa</option><option>Mendocino</option><option>Merced</option>
+            <option>Modoc</option><option>Mono</option><option>Monterey</option>
+            <option>Napa</option><option>Nevada</option><option>Orange</option>
+            <option>Placer</option><option>Plumas</option><option>Riverside</option>
+            <option>Sacramento</option><option>San Benito</option><option>San Bernardino</option>
+            <option>San Diego</option><option>San Francisco</option><option>San Joaquin</option>
+            <option>San Luis Obispo</option><option>San Mateo</option><option>Santa Barbara</option>
+            <option>Santa Clara</option><option>Santa Cruz</option><option>Shasta</option>
+            <option>Sierra</option><option>Siskiyou</option><option>Solano</option>
+            <option>Sonoma</option><option>Stanislaus</option><option>Sutter</option>
+            <option>Tehama</option><option>Trinity</option><option>Tulare</option>
+            <option>Tuolumne</option><option>Ventura</option><option>Yolo</option>
+            <option>Yuba</option>
+          </select>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-cor-q2">Back</button>
+            <button type="button" class="btn btn-primary"   id="next-cor-q2">Next</button>
+          </div>
+        </div>
+
+        <div class="step" id="step-cor-q3">
+          <h2>You were convicted of a:</h2>
+          <div class="radio-group">
+            <label><input type="radio" name="cor-q3" value="felony" required> Felony</label>
+            <label><input type="radio" name="cor-q3" value="misdemeanor"> Misdemeanor</label>
+          </div>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-cor-q3">Back</button>
+            <button type="button" class="btn btn-primary"   id="next-cor-q3">Next</button>
+          </div>
+        </div>
+
+        <div class="step" id="step-cor-q4">
+          <h2>Did you serve time in state prison?</h2>
+          <div class="radio-group">
+            <label><input type="radio" name="cor-q4" value="yes" required> Yes</label>
+            <label><input type="radio" name="cor-q4" value="no"> No</label>
+          </div>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-cor-q4">Back</button>
+            <button type="button" class="btn btn-primary"   id="next-cor-q4">Next</button>
+          </div>
+        </div>
+
+        <div class="step" id="step-cor-q5">
+          <h2>Have you lived in California for at least 5 years immediately before today?</h2>
+          <div class="radio-group">
+            <label><input type="radio" name="cor-q5" value="yes" required> Yes</label>
+            <label><input type="radio" name="cor-q5" value="no"> No</label>
+          </div>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-cor-q5">Back</button>
+            <button type="button" class="btn btn-primary"   id="next-cor-q5">Next</button>
+          </div>
+        </div>
+
+        <div class="step" id="step-cor-q6">
+          <h2>Have you been convicted of any other crime in the last five years?</h2>
+          <div class="radio-group">
+            <label><input type="radio" name="cor-q6" value="yes" required> Yes</label>
+            <label><input type="radio" name="cor-q6" value="no"> No</label>
+          </div>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-cor-q6">Back</button>
+            <button type="button" class="btn btn-primary"   id="next-cor-q6">Next</button>
+          </div>
+        </div>
+
+        <div class="step" id="step-cor-q7">
+          <h2>Have you completed all parts of your sentence (such as probation or parole)?</h2>
+          <div class="radio-group">
+            <label><input type="radio" name="cor-q7" value="yes" required> Yes</label>
+            <label><input type="radio" name="cor-q7" value="no"> No</label>
+          </div>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" id="prev-cor-q7">Back</button>
+            <button type="button" class="btn btn-primary"   id="next-cor-q7">Next</button>
+          </div>
+        </div>
+
+        <!-- Final CTA Pages -->
+        <div class="step" id="step-cta-expungement">
+          <div class="recommendation">
+            <h3>One last thing…</h3>
+            <strong>RECORD EXPUNGEMENT</strong>
+            <div class="note">
+              You will be redirected to our secure Stripe payment gateway to complete your application and pay the service fee.
+            </div>
+            <div class="placeholder-stripe">[ STRIPE PAYMENT METHODS HERE ]</div>
+            <div class="placeholder-image">[ Money-Back Guarantee Badge or Doodle ]</div>
+            <div class="button-group">
+              <button type="button" class="btn btn-primary" onclick="redirectToStripe('expungement')">
+                Pay Now &amp; Submit For Review
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" id="step-cta-certificate">
+          <div class="recommendation">
+            <h3>One last thing…</h3>
+            <strong>CERTIFICATE OF REHABILITATION</strong>
+            <div class="note">
+              You will be redirected to our secure Stripe payment gateway to complete your application and pay the service fee.
+            </div>
+            <div class="placeholder-stripe">[ STRIPE PAYMENT METHODS HERE ]</div>
+            <div class="placeholder-image">[ Money-Back Guarantee Badge or Doodle ]</div>
+            <div class="button-group">
+              <button type="button" class="btn btn-primary" onclick="redirectToStripe('certificate')">
+                Pay Now &amp; Submit For Review
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" id="step-cta-sealing">
+          <div class="recommendation">
+            <h3>One last thing…</h3>
+            <strong>ARREST RECORD SEALING</strong>
+            <div class="note">
+              You will be redirected to our secure Stripe payment gateway to complete your application and pay the service fee.
+            </div>
+            <div class="placeholder-stripe">[ STRIPE PAYMENT METHODS HERE ]</div>
+            <div class="placeholder-image">[ Money-Back Guarantee Badge or Doodle ]</div>
+            <div class="button-group">
+              <button type="button" class="btn btn-primary" onclick="redirectToStripe('sealing')">
+                Pay Now &amp; Submit For Review
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" id="step-cta-termination">
+          <div class="recommendation">
+            <h3>One last thing…</h3>
+            <strong>EARLY PROBATION TERMINATION</strong>
+            <div class="note">
+              You will be redirected to our secure Stripe payment gateway to complete your application and pay the service fee.
+            </div>
+            <div class="placeholder-stripe">[ STRIPE PAYMENT METHODS HERE ]</div>
+            <div class="placeholder-image">[ Money-Back Guarantee Badge or Doodle ]</div>
+            <div class="button-group">
+              <button type="button" class="btn btn-primary" onclick="redirectToStripe('termination')">
+                Pay Now &amp; Submit For Review
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <footer>
+      <p>© 2025, Redemption Law Group<br><br>
+      <b>DISCLAIMER: Completion and/or submission of this form does not constitute an attorney-client relationship.</b></p>
+    </footer>
+  </div>
+
+  <script>
+    function showStep(id) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo(0,0);
+    }
+    function redirectToStripe(service) {
+      const urls = {
+        expungement: 'https://stripe.com/checkout?service=expungement',
+        certificate: 'https://stripe.com/checkout?service=certificate',
+        sealing:     'https://stripe.com/checkout?service=sealing',
+        termination: 'https://stripe.com/checkout?service=termination'
+      };
+      window.location.href = urls[service];
+    }
+
+    // Step 1
+    document.getElementById('next-1').onclick = () => {
+      if (!first-name.value.trim()||!last-name.value.trim()){alert('Please enter both names.');return;}
+      showStep('step-2');
+    };
+    // Step 2
+    prev-2.onclick = () => showStep('step-1');
+    next-2.onclick = () => {
+      if(!email.checkValidity()){alert('Valid email required');return;}
+      if(!phone.checkValidity()){alert('Valid phone');return;}
+      showStep('step-3');
+    };
+    // Step 3
+    prev-3.onclick = () => showStep('step-2');
+    next-3.onclick = () => {
+      if(!street.value||!city.value||!state.value||!zip.checkValidity()){alert('Complete address');return;}
+      showStep('step-4');
+    };
+    // Step 4
+    prev-4.onclick = () => showStep('step-3');
+    next-4.onclick = () => {
+      const svc = document.querySelector('input[name="service"]:checked');
+      if(!svc){alert('Select service');return;}
+      showStep({
+        expungement:'step-exp-q1',
+        certificate:'step-cor-q1',
+        sealing:    'step-seal-q1',
+        termination:'step-term-q1'
+      }[svc.value]);
+    };
+
+    // Exp Q1
+    prev-exp-q1.onclick = ()=>showStep('step-4');
+    next-exp-q1.onclick = ()=>{
+      const ans = document.querySelector('input[name="exp-q1"]:checked').value;
+      if(ans==='federal'){
+        document.getElementById('step-exp-q1').innerHTML=`
+          <p class="eligibility-note warning">
+            Unfortunately, we only work with individuals that have California State cases, not Federal Cases. Please feel free to reach out to us if you have any further questions.
+          </p>
+          <div class="button-group">
+            <button class="btn btn-primary" onclick="window.location.href='https://www.redemption.legal/'">Back To Homepage</button>
+            <button class="btn btn-secondary" onclick="window.open('https://help.redemption.legal','_blank')">Contact Support</button>
+          </div>`;
+        return;
+      }
+      showStep('step-exp-q2');
+    };
+
+    // Exp Q2 (county)
+    prev-exp-q2.onclick = ()=>showStep('step-exp-q1');
+    next-exp-q2.onclick = ()=>{
+      if(!document.getElementById('exp-county').value){alert('Select county');return;}
+      showStep('step-exp-q3');
+    };
+
+    // Exp Q3 (felony)
+    prev-exp-q3.onclick = ()=>showStep('step-exp-q2');
+    next-exp-q3.onclick = ()=>showStep('step-exp-q4');
+
+    // Exp Q4 (restitution)
+    prev-exp-q4.onclick = ()=>showStep('step-exp-q3');
+    next-exp-q4.onclick = ()=>{
+      const ans = document.querySelector('input[name="exp-q4"]:checked').value;
+      if(ans==='paid-part'){
+        document.getElementById('step-exp-q4').innerHTML=`
+          <p class="eligibility-note warning">
+            Unfortunately, you need to pay your restitution in full first before seeking an expungement. Please try again after restitution has been paid in full. Please feel free to contact us if you have any further queries, comments or concerns.
+          </p>
+          <div class="button-group">
+            <button class="btn btn-primary" onclick="window.location.href='https://www.redemption.legal/'">Back To Homepage</button>
+            <button class="btn btn-secondary" onclick="window.open('https://help.redemption.legal','_blank')">Contact Support</button>
+          </div>`;
+        return;
+      }
+      showStep('step-exp-q5');
+    };
+
+    // Exp Q5
+    prev-exp-q5.onclick = ()=>showStep('step-exp-q4');
+    next-exp-q5.onclick = ()=>{
+      const ans=document.querySelector('input[name="exp-q5"]:checked').value;
+      if(ans==='yes'){
+        document.getElementById('step-exp-q5').innerHTML=`
+          <p class="eligibility-note warning">
+            Unfortunately, you are not eligible for expungement while you have other criminal charges pending against you. Please feel free to reach out if any further questions.
+          </p>
+          <div class="button-group">
+            <button class="btn btn-primary" onclick="window.location.href='https://www.redemption.legal/'">Back To Homepage</button>
+            <button class="btn btn-secondary" onclick="window.open('https://help.redemption.legal','_blank')">Contact Support</button>
+          </div>`;
+        return;
+      }
+      showStep('step-exp-q6');
+    };
+
+    // Exp Q6
+    prev-exp-q6.onclick = ()=>showStep('step-exp-q5');
+    next-exp-q6.onclick = ()=>{
+      const sel=Array.from(document.querySelectorAll('input[name="exp-q6"]:checked')).map(i=>i.value);
+      if(sel.includes('none')){
+        showStep('step-cta-expungement');
+      } else if(sel.length){
+        document.getElementById('step-exp-q6').innerHTML=`
+          <p class="eligibility-note warning">
+            Unfortunately anyone convicted of these offences are not eligible for Record Expungement or a Certificate of Rehabilitation.
+          </p>
+          <div class="button-group">
+            <button class="btn btn-primary" onclick="window.location.href='https://www.redemption.legal/'">Back To Homepage</button>
+          </div>`;
+      } else alert('Please select at least one option.');
+    };
+
+    // Sealing
+    prev-seal-q1.onclick = ()=>showStep('step-4');
+    next-seal-q1.onclick = ()=>{
+      if(document.querySelector('input[name="seal-q1"]:checked').value==='yes'){
+        document.getElementById('step-seal-q1').innerHTML=`
+          <p class="eligibility-note warning">
+            We only handle non-conviction arrest sealing. Please explore Expungement eligibility.
+          </p>
+          <div class="button-group">
+            <button class="btn btn-primary" onclick="showStep('step-exp-q1')">Go to Expungement</button>
+            <button class="btn btn-secondary" onclick="window.location.href='https://www.redemption.legal/'">Start Over</button>
+          </div>`;
+        return;
+      }
+      showStep('step-seal-q2');
+    };
+    prev-seal-q2.onclick = ()=>showStep('step-seal-q1');
+    next-seal-q2.onclick = ()=>{
+      if(document.querySelector('input[name="seal-q2"]:checked').value==='no'){
+        document.getElementById('step-seal-q2').innerHTML=`
+          <p class="eligibility-note warning">
+            You cannot seal until the case is fully resolved with no conviction.
+          </p>
+          <div class="button-group">
+            <button class="btn btn-primary" onclick="window.location.href='https://www.redemption.legal/'">Back To Homepage</button>
+          </div>`;
+        return;
+      }
+      showStep('step-cta-sealing');
+    };
+
+    // Certificate
+    prev-cor-q1.onclick = ()=>showStep('step-4');
+    next-cor-q1.onclick = ()=>{
+      if(document.querySelector('input[name="cor-q1"]:checked').value==='federal'){
+        document.getElementById('step-cor-q1').innerHTML=`
+          <p class="eligibility-note warning">
+            Unfortunately, we only work with California State cases, not Federal. Feel free to reach out with any questions.
+          </p>
+          <div class="button-group">
+            <button class="btn btn-primary" onclick="window.location.href='https://www.redemption.legal/'">Back To Homepage</button>
+            <button class="btn btn-secondary" onclick="window.open('https://help.redemption.legal','_blank')">Contact Support</button>
+          </div>`;
+        return;
+      }
+      showStep('step-cor-q2');
+    };
+    prev-cor-q2.onclick = ()=>showStep('step-cor-q1');
+    next-cor-q2.onclick = ()=>{
+      if(!cor-county.value){alert('Select county');return;}
+      showStep('step-cor-q3');
+    };
+    prev-cor-q3.onclick = ()=>showStep('step-cor-q2');
+    next-cor-q3.onclick = ()=>showStep('step-cor-q4');
+    prev-cor-q4.onclick = ()=>showStep('step-cor-q3');
+    next-cor-q4.onclick = ()=>showStep('step-cor-q5');
+
+    // Cor Q5: residency
+    prev-cor-q5.onclick = ()=>showStep('step-cor-q4');
+    next-cor-q5.onclick = ()=>{
+      if(document.querySelector('input[name="cor-q5"]:checked').value==='no'){
+        document.getElementById('step-cor-q5').innerHTML=`
+          <p class="eligibility-note warning">
+            You must have lived in CA for 5 years immediately before filing. Please contact us for questions.
+          </p>
+          <div class="button-group">
+            <button class="btn btn-primary" onclick="window.location.href='https://www.redemption.legal/'">Back To Homepage</button>
+            <button class="btn btn-secondary" onclick="window.open('https://help.redemption.legal','_blank')">Contact Support</button>
+          </div>`;
+        return;
+      }
+      showStep('step-cor-q6');
+    };
+
+    // Cor Q6: other crime
+    prev-cor-q6.onclick = ()=>showStep('step-cor-q5');
+    next-cor-q6.onclick = ()=>{
+      if(document.querySelector('input[name="cor-q6"]:checked').value==='yes'){
+        document.getElementById('step-cor-q6').innerHTML=`
+          <p class="eligibility-note warning">
+            You must show a 5-year conviction-free history. Please contact us for any questions.
+          </p>
+          <div class="button-group">
+            <button class="btn btn-primary" onclick="window.location.href='https://www.redemption.legal/'">Back To Homepage</button>
+            <button class="btn btn-secondary" onclick="window.open('https://help.redemption.legal','_blank')">Contact Support</button>
+          </div>`;
+        return;
+      }
+      showStep('step-cor-q7');
+    };
+
+    // Cor Q7: sentence completion
+    prev-cor-q7.onclick = ()=>showStep('step-cor-q6');
+    next-cor-q7.onclick = ()=>{
+      if(document.querySelector('input[name="cor-q7"]:checked').value==='no'){
+        document.getElementById('step-cor-q7').innerHTML=`
+          <p class="eligibility-note warning">
+            Unfortunately, you cannot seek a certificate while on probation or parole.
+          </p>
+          <div class="button-group">
+            <button class="btn btn-primary" onclick="window.location.href='https://www.redemption.legal/'">Back To Homepage</button>
+            <button class="btn btn-secondary" onclick="window.open('https://help.redemption.legal','_blank')">Contact Support</button>
+          </div>`;
+        return;
+      }
+      showStep('step-cta-certificate');
+    };
+
+    // Probation Termination path
+    prev-term-q1.onclick = ()=>showStep('step-4');
+    next-term-q1.onclick = ()=>showStep('step-term-q2');
+    prev-term-q2.onclick = ()=>showStep('step-term-q1');
+    next-term-q2.onclick = ()=>showStep('step-term-q3');
+    prev-term-q3.onclick = ()=>showStep('step-term-q2');
+    next-term-q3.onclick = ()=>showStep('step-cta-termination');
+  </script>
+</body>
+</html>
