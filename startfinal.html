@@ -384,21 +384,20 @@
     });
 
     // Step 4 routing
-    document.getElementById('prev-4').addEventListener('click', () => showStep('step-3'));
-    document.getElementById('next-4').addEventListener('click', () => {
-      const svc = document.querySelector('input[name="service"]:checked');
-      if (!svc) {
-        alert('Please select a service.');
-        return;
-      }
-      const map = {
-        expungement: 'step-exp-q1',
-        certificate: 'step-cor-q1',
-        sealing:     'step-seal-q1',
-        termination: 'step-term-q1'
-      };
-      showStep(map[svc.value]);
-    });
+    document.getElementById('next-4').onclick = () => {
+  const svc = document.querySelector('input[name="service"]:checked');
+  if (!svc) {
+    alert('Please select a service.');
+    return;
+  }
+  const map = {
+    expungement: 'step-exp-q1',
+    certificate: 'step-cor-q1',
+    sealing:     'step-seal-q1',
+    termination: 'step-term-q1'
+  };
+  showStep(map[svc.value]);
+};
 
     // ...then repeat exactly the same logic for each of your flows (expungement, certificate, sealing, termination)
     // attaching handlers to prev-/next- buttons just like above.
