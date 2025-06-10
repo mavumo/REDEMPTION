@@ -347,11 +347,17 @@
       window.location.href = urls[svc];
     }
     window.addEventListener('DOMContentLoaded',()=>{
-      // Steps 1–4
-      document.getElementById('next-1').onclick = ()=> {
-        if(!first-name.value.trim()||!last-name.value.trim()){alert('Enter both names');return;}
-        showStep('step-2');
-      };
+    
+      // Step 1 → Step 2
+document.getElementById('next-1').onclick = function() {
+  const f = document.getElementById('first-name').value.trim();
+  const l = document.getElementById('last-name').value.trim();
+  if (!f || !l) {
+    alert('Please enter both first and last name.');
+    return;
+  }
+  showStep('step-2');
+};
       prev-2.onclick = ()=>showStep('step-1');
       next-2.onclick = ()=> {
         if(!email.checkValidity()||!phone.checkValidity()){alert('Valid email & phone');return;}
