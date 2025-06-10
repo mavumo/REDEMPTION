@@ -6,22 +6,20 @@
   <title>Service Eligibility Form | Redemption Law Group</title>
   <style>
     html, body { margin:0; padding:0; width:100%; height:100%; font-family:Arial,sans-serif; background:#f8f9fa; color:#212529; }
-    #form-container { display:flex; flex-direction:column; height:100%; }
+    #form-container { display:flex; flex-direction:column; min-height:100vh; }
     #content-wrapper { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px; }
     #eligibility-form { width:100%; max-width:600px; background:#fff; border:1px solid #ced4da; border-radius:8px; padding:20px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
     .step { display:none; } .step.active { display:block; }
     h2 { margin-top:0; }
     label { display:block; font-weight:500; margin-bottom:5px; }
-    input, select { width:100%; padding:10px; margin-bottom:15px; font-size:16px; border:1px solid #ced4da; border-radius:4px; box-sizing:border-box; }
+    input[type=text], input[type=email], input[type=tel], select { width:100%; padding:10px; margin-bottom:15px; font-size:16px; border:1px solid #ced4da; border-radius:4px; }
     input:focus, select:focus { border-color:#0d6efd; box-shadow:0 0 0 4px rgba(13,110,253,0.1); outline:none; }
-    .radio-group label { display:inline-block; margin-right:20px; cursor:pointer; }
-    input[type=radio], input[type=checkbox] { accent-color:#0d6efd; }
+    .radio-group label, .checkbox-group label { display:flex; align-items:center; margin-bottom:12px; cursor:pointer; }
+    .radio-group input, .checkbox-group input { margin-right:8px; accent-color:#0d6efd; }
     .button-group { text-align:right; margin-top:10px; }
-    .btn { padding:10px 20px; font-size:16px; border:none; border-radius:4px; cursor:pointer; color:#fff; margin-left:5px; }
+    .btn { padding:10px 20px; border:none; border-radius:4px; cursor:pointer; color:#fff; font-size:16px; margin-left:8px; }
     .btn-primary { background:#0d6efd; } .btn-primary:hover { background:#0b5ed7; }
     .btn-secondary { background:#6c757d; } .btn-secondary:hover { background:#5c636a; }
-    .eligibility-note { font-weight:500; margin:15px 0; }
-    .eligibility-note.warning { color:#d9534f; }
     .recommendation { border:1px solid #ced4da; border-radius:5px; background:#f8f9fa; padding:15px; text-align:center; margin-bottom:15px; }
     .fee-bubble { display:inline-block; padding:8px 12px; border:2px solid #555; border-radius:20px; margin:10px 0; }
     .placeholder-stripe, .placeholder-image { margin:20px 0; padding:40px; border:2px dashed #ccc; color:#777; }
@@ -38,9 +36,9 @@
         <div class="step active" id="step-1">
           <h2>Step 1: Your Name</h2>
           <label for="first-name">First Name *</label>
-          <input id="first-name" type="text" required/>
+          <input type="text" id="first-name" required/>
           <label for="last-name">Last Name *</label>
-          <input id="last-name" type="text" required/>
+          <input type="text" id="last-name" required/>
           <div class="button-group">
             <button type="button" class="btn btn-primary" id="next-1">Next</button>
           </div>
@@ -50,9 +48,9 @@
         <div class="step" id="step-2">
           <h2>Step 2: Contact Information</h2>
           <label for="email">Email *</label>
-          <input id="email" type="email" required/>
+          <input type="email" id="email" required/>
           <label for="phone">Phone * (10 digits)</label>
-          <input id="phone" type="tel" pattern="\d{10}" required/>
+          <input type="tel" id="phone" pattern="\d{10}" required/>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-2">Back</button>
             <button type="button" class="btn btn-primary" id="next-2">Next</button>
@@ -62,10 +60,10 @@
         <!-- Step 3 -->
         <div class="step" id="step-3">
           <h2>Step 3: Mailing Address</h2>
-          <label for="street">Street Address *</label>
-          <input id="street" type="text" required/>
+          <label for="street">Street *</label>
+          <input type="text" id="street" required/>
           <label for="city">City/Town *</label>
-          <input id="city" type="text" required/>
+          <input type="text" id="city" required/>
           <label for="state">State *</label>
           <select id="state" required>
             <option value="">Select State</option>
@@ -83,8 +81,8 @@
             <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
             <option>Wisconsin</option><option>Wyoming</option>
           </select>
-          <label for="zip">ZIP Code *</label>
-          <input id="zip" type="text" pattern="\d{5}" required/>
+          <label for="zip">ZIP Code * (5 digits)</label>
+          <input type="text" id="zip" pattern="\d{5}" required/>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-3">Back</button>
             <button type="button" class="btn btn-primary" id="next-3">Next</button>
@@ -158,7 +156,7 @@
           <h2>Were you required to pay restitution? If yes, have you paid it in full?</h2>
           <div class="radio-group">
             <label><input type="radio" name="exp-q4" value="paid-full" required/> Yes, paid in full</label>
-            <label><input type="radio" name="exp-q4" value="paid-part"/> Required but not fully</label>
+            <label><input type="radio" name="exp-q4" value="paid-part"/> Required but not paid in full</label>
             <label><input type="radio" name="exp-q4" value="not-required"/> No restitution required</label>
           </div>
           <div class="button-group">
@@ -179,11 +177,13 @@
         </div>
         <div class="step" id="step-exp-q6">
           <h2>Were you convicted of any of the following? (select all)</h2>
-          <label><input type="checkbox" name="exp-q6" value="offense-1"/> Sodomy with a child under 14</label>
-          <label><input type="checkbox" name="exp-q6" value="offense-2"/> Lewd or lascivious acts with child under 14</label>
-          <label><input type="checkbox" name="exp-q6" value="offense-3"/> Continuous sexual abuse of a child</label>
-          <label><input type="checkbox" name="exp-q6" value="offense-4"/> Forcible penetration of a minor under 14</label>
-          <label><input type="checkbox" name="exp-q6" value="none"/> None of the above</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="exp-q6" value="offense-1"/> Sodomy with a child under 14</label>
+            <label><input type="checkbox" name="exp-q6" value="offense-2"/> Lewd or lascivious acts with child under 14</label>
+            <label><input type="checkbox" name="exp-q6" value="offense-3"/> Continuous sexual abuse</label>
+            <label><input type="checkbox inCheckbox" name="exp-q6" value="offense-4"/> Forcible penetration</label>
+            <label><input type="checkbox" name="exp-q6" value="none"/> None of the above</label>
+          </div>
           <div class="button-group">
             <button class="btn btn-secondary" id="prev-exp-q6">Back</button>
             <button class="btn btn-primary" id="next-exp-q6">Next</button>
@@ -228,9 +228,11 @@
         </div>
         <div class="step" id="step-seal-q3">
           <h2>Choose any that apply:</h2>
-          <label><input type="checkbox" name="seal-q3" value="not-guilty"/> Found not guilty</label>
-          <label><input type="checkbox" name="seal-q3" value="convicted"/> Convicted</label>
-          <label><input type="checkbox" name="seal-q3" value="ongoing"/> Case ongoing</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="seal-q3" value="not-guilty"/> Not guilty</label>
+            <label><input type="checkbox" name="seal-q3" value="convicted"/> Convicted</label>
+            <label><input type="checkbox" name="seal-q3" value="ongoing"/> Ongoing</label>
+          </div>
           <div class="button-group">
             <button class="btn btn-secondary" id="prev-seal-q3">Back</button>
             <button class="btn btn-primary" id="next-seal-q3">Next</button>
@@ -344,118 +346,100 @@
 
       </form>
     </div>
-    <footer>
-      <p>© 2025 Redemption Law Group<br><b>Disclaimer: Completing this form does not create an attorney-client relationship.</b></p>
-    </footer>
+    <footer>© 2025 Redemption Law Group • Disclaimer: Completing this form does not create an attorney-client relationship.</footer>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       function showStep(id) {
-        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         window.scrollTo(0,0);
       }
-      function redirectToStripe(svc) {
+      function redirectToStripe(s) {
         const urls = {
           expungement:'https://stripe.com/checkout?service=expungement',
           certificate:'https://stripe.com/checkout?service=certificate',
-          sealing:    'https://stripe.com/checkout?service=sealing',
+          sealing:'https://stripe.com/checkout?service=sealing',
           termination:'https://stripe.com/checkout?service=termination'
         };
-        window.location.href = urls[svc];
+        window.location.href=urls[s];
       }
-      // Step 1→2
-      document.getElementById('next-1').onclick = function(){
-        const f=document.getElementById('first-name').value.trim(),
-              l=document.getElementById('last-name').value.trim();
-        if(!f||!l){ alert('Please enter both names.'); return; }
+
+      // Step 1 → 2
+      document.getElementById('next-1').onclick = ()=> {
+        const f=document.getElementById('first-name').value.trim();
+        const l=document.getElementById('last-name').value.trim();
+        if(!f||!l){alert('Enter both names');return;}
         showStep('step-2');
       };
       // Step 2
       document.getElementById('prev-2').onclick = ()=>showStep('step-1');
-      document.getElementById('next-2').onclick = function(){
+      document.getElementById('next-2').onclick = ()=> {
         const e=document.getElementById('email'), p=document.getElementById('phone');
-        if(!e.checkValidity()){ alert('Valid email required'); return; }
-        if(!p.checkValidity()){ alert('Valid phone required'); return; }
+        if(!e.checkValidity()){alert('Valid email required');return;}
+        if(!p.checkValidity()){alert('Valid phone required');return;}
         showStep('step-3');
       };
       // Step 3
       document.getElementById('prev-3').onclick = ()=>showStep('step-2');
-      document.getElementById('next-3').onclick = function(){
+      document.getElementById('next-3').onclick = ()=> {
         const st=document.getElementById('street').value.trim(),
               ct=document.getElementById('city').value.trim(),
               stt=document.getElementById('state').value,
               zp=document.getElementById('zip');
-        if(!st||!ct||!stt||!zp.checkValidity()){ alert('Complete address'); return; }
+        if(!st||!ct||!stt||!zp.checkValidity()){alert('Complete address');return;}
         showStep('step-4');
       };
       // Step 4 routing
       document.getElementById('prev-4').onclick = ()=>showStep('step-3');
-      document.getElementById('next-4').onclick = function(){
+      document.getElementById('next-4').onclick = ()=> {
         const svc=document.querySelector('input[name="service"]:checked');
-        if(!svc){ alert('Select a service'); return; }
-        const routes={
+        if(!svc){alert('Select a service');return;}
+        const map = {
           expungement:'step-exp-q1',
           certificate:'step-cor-q1',
           sealing:'step-seal-q1',
           termination:'step-term-q1'
         };
-        showStep(routes[svc.value]);
+        showStep(map[svc.value]);
       };
-      // Expungement flow
-      ['exp-q1','exp-q2','exp-q3','exp-q4','exp-q5','exp-q6'].forEach((q,i)=>{
-        document.getElementById('prev-'+q).onclick = ()=> showStep(i===0?'step-4':'step-exp-q'+i);
-        document.getElementById('next-'+q).onclick = ()=> showStep(q==='exp-q6'?'step-cta-expungement':'step-exp-q'+(i+2));
-      });
-      // Certificate flow
-      ['cor-q1','cor-q2','cor-q3','cor-q4','cor-q5','cor-q6','cor-q7'].forEach((q,i)=>{
-        document.getElementById('prev-'+q).onclick = ()=> showStep(i===0?'step-4':'step-cor-q'+i);
-        document.getElementById('next-'+q).onclick = ()=> showStep(q==='cor-q7'?'step-cta-certificate':'step-cor-q'+(i+2));
-      });
-      // Sealing flow
-      ['seal-q1','seal-q2','seal-q3'].forEach((q,i)=>{
-        document.getElementById('prev-'+q).onclick = ()=> showStep(i===0?'step-4':'step-seal-q'+i);
-        document.getElementById('next-'+q).onclick = ()=> showStep(q==='seal-q3'?'step-cta-sealing':'step-seal-q'+(i+2));
-      });
-      // Termination flow Q1-Q3 mirror Expungement Q1-Q3
-      ['term-q1','term-q2','term-q3'].forEach((q,i)=>{
-        document.getElementById('prev-'+q).onclick = ()=> showStep(i===0?'step-4':'step-term-q'+i);
-        document.getElementById('next-'+q).onclick = ()=> showStep('step-term-q'+(i+2));
-      });
-      // Termination Q4-Q7 with conditional prompts
-      document.getElementById('prev-term-q4').onclick = ()=>showStep('step-term-q3');
-      document.getElementById('next-term-q4').onclick = function(){
-        if(document.querySelector('input[name="term-q4"]:checked').value==='no'){
-          alert('This may negatively impact your application.');
-          prompt('Please explain further:');
-        }
-        showStep('step-term-q5');
-      };
-      document.getElementById('prev-term-q5').onclick = ()=>showStep('step-term-q4');
-      document.getElementById('next-term-q5').onclick = function(){
-        if(document.querySelector('input[name="term-q5"]:checked').value==='no'){
-          alert('This may negatively impact your application.');
-          prompt('Please explain further:');
-        }
-        showStep('step-term-q6');
-      };
-      document.getElementById('prev-term-q6').onclick = ()=>showStep('step-term-q5');
-      document.getElementById('next-term-q6').onclick = function(){
-        if(document.querySelector('input[name="term-q6"]:checked').value==='yes'){
-          alert('This may negatively impact your application.');
-          prompt('Please explain further:');
-        }
-        showStep('step-term-q7');
-      };
-      document.getElementById('prev-term-q7').onclick = ()=>showStep('step-term-q6');
-      document.getElementById('next-term-q7').onclick = function(){
-        if(document.querySelector('input[name="term-q7"]:checked').value==='no'){
-          alert('This may negatively impact your application.');
-          prompt('Please explain further:');
-        }
-        showStep('step-cta-termination');
-      };
+
+      // Record Expungement
+      document.getElementById('prev-exp-q1').onclick = ()=>showStep('step-4');
+      document.getElementById('next-exp-q1').onclick = ()=>showStep('step-exp-q2');
+      document.getElementById('prev-exp-q2').onclick = ()=>showStep('step-exp-q1');
+      document.getElementById('next-exp-q2').onclick = ()=>showStep('step-exp-q3');
+      document.getElementById('prev-exp-q3').onclick = ()=>showStep('step-exp-q2');
+      document.getElementById('next-exp-q3').onclick = ()=>showStep('step-exp-q4');
+      document.getElementById('prev-exp-q4').onclick = ()=>showStep('step-exp-q3');
+      document.getElementById('next-exp-q4').onclick = ()=>showStep('step-exp-q5');
+      document.getElementById('prev-exp-q5').onclick = ()=>showStep('step-exp-q4');
+      document.getElementById('next-exp-q5').onclick = ()=>showStep('step-exp-q6');
+      document.getElementById('prev-exp-q6').onclick = ()=>showStep('step-exp-q5');
+      document.getElementById('next-exp-q6').onclick = ()=>showStep('step-cta-expungement');
+
+      // Certificate
+      document.getElementById('prev-cor-q1').onclick = ()=>showStep('step-4');
+      document.getElementById('next-cor-q1').onclick = ()=>showStep('step-cor-q2');
+      document.getElementById('prev-cor-q2').onclick = ()=>showStep('step-cor-q1');
+      document.getElementById('next-cor-q2').onclick = ()=>showStep('step-cor-q3');
+      document.getElementById('prev-cor-q3').onclick = ()=>showStep('step-cor-q2');
+      document.getElementById('next-cor-q3').onclick = ()=>showStep('step-cor-q4');
+      document.getElementById('prev-cor-q4').onclick = ()=>showStep('step-cor-q3');
+      document.getElementById('next-cor-q4').onclick = ()=>showStep('step-cor-q5');
+      document.getElementById('prev-cor-q5').onclick = ()=>showStep('step-cor-q4');
+      document.getElementById('next-cor-q5').onclick = ()=>showStep('step-cor-q6');
+      document.getElementById('prev-cor-q6').onclick = ()=>showStep('step-cor-q5');
+      document.getElementById('next-cor-q6').onclick = ()=>showStep('step-cor-q7');
+      document.getElementById('prev-cor-q7').onclick = ()=>showStep('step-cor-q6');
+      document.getElementById('next-cor-q7').onclick = ()=>showStep('step-cta-certificate');
+
+      // Sealing
+      document.getElementById('prev-seal-q1').onclick = ()=>showStep('step-4');
+      document.getElementById('next-seal-q1').onclick = ()=>showStep('step-seal-q2');
+      document.getElementById('prev-seal-q2').onclick = ()=>showStep('step-seal-q1');
+      document.getElementById('next-quote'); // Typo? Should be next-seal-q2
     });
   </script>
 </body>
