@@ -89,6 +89,7 @@
           <h2>Select Service</h2>
           <div class="radio-group">
             <label><input type="radio" name="service" value="expungement" required/> Record Expungement</label>
+
             <label><input type="radio" name="service" value="certificate"/> Certificate of Rehabilitation</label>
             <label><input type="radio" name="service" value="sealing"/> Arrest Record Sealing</label>
             <label><input type="radio" name="service" value="termination"/> Early Probation Termination</label>
@@ -333,26 +334,29 @@
 
   <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // Utility to show a given step
     function showStep(id) {
       document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
       document.getElementById(id).classList.add('active');
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
     }
-    function redirectToStripe(svc) {
+
+    // Redirect to Stripe checkout
+    function redirectToStripe(service) {
       const urls = {
         expungement: 'https://stripe.com/checkout?service=expungement',
         certificate: 'https://stripe.com/checkout?service=certificate',
         sealing:     'https://stripe.com/checkout?service=sealing',
         termination: 'https://stripe.com/checkout?service=termination'
       };
-      window.location.href = urls[svc];
+      window.location.href = urls[service];
     }
 
-    // Step 1 → 2
+    // Step 1 -> Step 2
     document.getElementById('next-1').addEventListener('click', () => {
-      const f = document.getElementById('first-name').value.trim();
-      const l = document.getElementById('last-name').value.trim();
-      if (!f || !l) {
+      const first = document.getElementById('first-name').value.trim();
+      const last  = document.getElementById('last-name').value.trim();
+      if (!first || !last) {
         alert('Please enter both first and last name.');
         return;
       }
@@ -362,21 +366,27 @@
     // Step 2
     document.getElementById('prev-2').addEventListener('click', () => showStep('step-1'));
     document.getElementById('next-2').addEventListener('click', () => {
-      const e = document.getElementById('email');
-      const p = document.getElementById('phone');
-      if (!e.checkValidity()) { alert('Please enter a valid email.'); return; }
-      if (!p.checkValidity()) { alert('Please enter a valid 10-digit phone.'); return; }
+      const email = document.getElementById('email');
+      const phone = document.getElementById('phone');
+      if (!email.checkValidity()) {
+        alert('Please enter a valid email.');
+        return;
+      }
+      if (!phone.checkValidity()) {
+        alert('Please enter a valid 10-digit phone number.');
+        return;
+      }
       showStep('step-3');
     });
 
     // Step 3
     document.getElementById('prev-3').addEventListener('click', () => showStep('step-2'));
     document.getElementById('next-3').addEventListener('click', () => {
-      const st = document.getElementById('street').value.trim();
-      const ct = document.getElementById('city').value.trim();
-      const stt = document.getElementById('state').value;
-      const zp = document.getElementById('zip');
-      if (!st || !ct || !stt || !zp.checkValidity()) {
+      const street = document.getElementById('street').value.trim();
+      const city   = document.getElementById('city').value.trim();
+      const state  = document.getElementById('state').value;
+      const zip    = document.getElementById('zip');
+      if (!street || !city || !state || !zip.checkValidity()) {
         alert('Please complete your full mailing address.');
         return;
       }
@@ -384,31 +394,106 @@
     });
 
     // Step 4 routing
-    document.getElementById('next-4').onclick = () => {
-  const svc = document.querySelector('input[name="service"]:checked');
-  if (!svc) {
-    alert('Please select a service.');
-    return;
-  }
-  const map = {
-    expungement: 'step-exp-q1',
-    certificate: 'step-cor-q1',
-    sealing:     'step-seal-q1',
-    termination: 'step-term-q1'
-  };
-  showStep(map[svc.value]);
-};
+    document.getElementById('prev-4').addEventListener('click', () => showStep('step-3'));
+    document.getElementById('next-4').addEventListener('click', () => {
+      const svc = document.querySelector('input[name="service"]:checked');
+      if (!svc) {
+        alert('Please select a service.');
+        return;
+      }
+      const map = {
+        expungement: 'step-exp-q1',
+        certificate: 'step-cor-q1',
+        sealing:     'step-seal-q1',
+        termination: 'step-term-q1'
+      };
+      showStep(map[svc.value]);
+    });
 
-    // ...then repeat exactly the same logic for each of your flows (expungement, certificate, sealing, termination)
-    // attaching handlers to prev-/next- buttons just like above.
+    // Record Expungement flow
+    document.getElementById('prev-exp-q1').addEventListener('click', () => showStep('step-4'));
+    document.getElementById('next-exp-q1').addEventListener('click', () => showStep('step-exp-q2'));
+    document.getElementById('prev-exp-q2').addEventListener('click', () => showStep('step-exp-q1'));
+    document.getElementById('next-exp-q2').addEventListener('click', () => showStep('step-exp-q3'));
+    document.getElementById('prev-exp-q3').addEventListener('click', () => showStep('step-exp-q2'));
+    document.getElementById('next-exp-q3').addEventListener('click', () => showStep('step-exp-q4'));
+    document.getElementById('prev-exp-q4').addEventListener('click', () => showStep('step-exp-q3'));
+    document.getElementById('next-exp-q4').addEventListener('click', () => showStep('step-exp-q5'));
+    document.getElementById('prev-exp-q5').addEventListener('click', () => showStep('step-exp-q4'));
+    document.getElementById('next-exp-q5').addEventListener('click', () => showStep('step-exp-q6'));
+    document.getElementById('prev-exp-q6').addEventListener('click', () => showStep('step-exp-q5'));
+    document.getElementById('next-exp-q6').addEventListener('click', () => showStep('step-cta-expungement'));
 
-    // Finally wire your redirectToStripe calls on the CTA buttons:
-    document.querySelectorAll('[onclick^="redirectToStripe"]').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.preventDefault();
-        const svc = btn.getAttribute('onclick').match(/'(.+)'/)[1];
-        redirectToStripe(svc);
-      });
+    // Certificate flow
+    document.getElementById('prev-cor-q1').addEventListener('click', () => showStep('step-4'));
+    document.getElementById('next-cor-q1').addEventListener('click', () => showStep('step-cor-q2'));
+    document.getElementById('prev-cor-q2').addEventListener('click', () => showStep('step-cor-q1'));
+    document.getElementById('next-cor-q2').addEventListener('click', () => showStep('step-cor-q3'));
+    document.getElementById('prev-cor-q3').addEventListener('click', () => showStep('step-cor-q2'));
+    document.getElementById('next-cor-q3').addEventListener('click', () => showStep('step-cor-q4'));
+    document.getElementById('prev-cor-q4').addEventListener('click', () => showStep('step-cor-q3'));
+    document.getElementById('next-cor-q4').addEventListener('click', () => showStep('step-cor-q5'));
+    document.getElementById('prev-cor-q5').addEventListener('click', () => showStep('step-cor-q4'));
+    document.getElementById('next-cor-q5').addEventListener('click', () => showStep('step-cor-q6'));
+    document.getElementById('prev-cor-q6').addEventListener('click', () => showStep('step-cor-q5'));
+    document.getElementById('next-cor-q6').addEventListener('click', () => showStep('step-cor-q7'));
+    document.getElementById('prev-cor-q7').addEventListener('click', () => showStep('step-cor-q6'));
+    document.getElementById('next-cor-q7').addEventListener('click', () => showStep('step-cta-certificate'));
+
+    // Arrest Sealing flow
+    document.getElementById('prev-seal-q1').addEventListener('click', () => showStep('step-4'));
+    document.getElementById('next-seal-q1').addEventListener('click', () => showStep('step-seal-q2'));
+    document.getElementById('prev-seal-q2').addEventListener('click', () => showStep('step-seal-q1'));
+    document.getElementById('next-seal-q2').addEventListener('click', () => showStep('step-seal-q3'));
+    document.getElementById('prev-seal-q3').addEventListener('click', () => showStep('step-seal-q2'));
+    document.getElementById('next-seal-q3').addEventListener('click', () => showStep('step-cta-sealing'));
+
+    // Early Probation Termination
+    document.getElementById('prev-term-q1').addEventListener('click', () => showStep('step-4'));
+    document.getElementById('next-term-q1').addEventListener('click', () => showStep('step-term-q2'));
+    document.getElementById('prev-term-q2').addEventListener('click', () => showStep('step-term-q1'));
+    document.getElementById('next-term-q2').addEventListener('click', () => showStep('step-term-q3'));
+    document.getElementById('prev-term-q3').addEventListener('click', () => showStep('step-term-q2'));
+
+    document.getElementById('next-term-q3').addEventListener('click', () => {
+      // mirror expungement Q3 logic if any
+      showStep('step-term-q4');
+    });
+    document.getElementById('prev-term-q4').addEventListener('click', () => showStep('step-term-q3'));
+    document.getElementById('next-term-q4').addEventListener('click', () => {
+      const v = document.querySelector('input[name="term-q4"]:checked').value;
+      if (v === 'no') {
+        alert('This may negatively impact your application.');
+        prompt('Please explain further:');
+      }
+      showStep('step-term-q5');
+    });
+    document.getElementById('prev-term-q5').addEventListener('click', () => showStep('step-term-q4'));
+    document.getElementById('next-term-q5').addEventListener('click', () => {
+      const v = document.querySelector('input[name="term-q5"]:checked').value;
+      if (v === 'no') {
+        alert('This may negatively impact your application.');
+        prompt('Please explain further:');
+      }
+      showStep('step-term-q6');
+    });
+    document.getElementById('prev-term-q6').addEventListener('click', () => showStep('step-term-q5'));
+    document.getElementById('next-term-q6').addEventListener('click', () => {
+      const v = document.querySelector('input[name="term-q6"]:checked').value;
+      if (v === 'yes') {
+        alert('This may negatively impact your application.');
+        prompt('Please explain further:');
+      }
+      showStep('step-term-q7');
+    });
+    document.getElementById('prev-term-q7').addEventListener('click', () => showStep('step-term-q6'));
+    document.getElementById('next-term-q7').addEventListener('click', () => {
+      const v = document.querySelector('input[name="term-q7"]:checked').value;
+      if (v === 'no') {
+        alert('This may negatively impact your application.');
+        prompt('Please explain further:');
+      }
+      showStep('step-cta-termination');
     });
   });
 </script>
