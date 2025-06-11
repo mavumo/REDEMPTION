@@ -760,10 +760,10 @@
       // Stripe redirect
       window.redirectToStripe = function(service){
         var urls = {
-          expungement: 'https://stripe.com/checkout?service=expungement',
-          certificate: 'https://stripe.com/checkout?service=certificate',
-          sealing: 'https://stripe.com/checkout?service=sealing',
-          termination: 'https://stripe.com/checkout?service=termination'
+          expungement: 'https://pay.redemption.legal/b/test_8x2cMY4ROftxc9K3fC8Ra05',
+          certificate: 'https://pay.redemption.legal/b/test_eVqbIU6ZWgxBc9KdUg8Ra06',
+          sealing: 'https://pay.redemption.legal/b/test_4gMeV63NKgxBb5GcQc8Ra03',
+          termination: 'https://pay.redemption.legal/b/test_aFacMY9844OTa1C2by8Ra02'
         };
         window.location.href = urls[service] || '/';
       };
