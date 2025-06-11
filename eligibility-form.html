@@ -766,10 +766,10 @@
       // Stripe redirect
       window.redirectToStripe = function(service){
         var urls = {
-          expungement: 'https://pay.redemption.legal/b/test_8x2cMY4ROftxc9K3fC8Ra05',
-          certificate: 'https://pay.redemption.legal/b/test_eVqbIU6ZWgxBc9KdUg8Ra06',
-          sealing: 'https://pay.redemption.legal/b/test_4gMeV63NKgxBb5GcQc8Ra03',
-          termination: 'https://pay.redemption.legal/b/test_aFacMY9844OTa1C2by8Ra02'
+          expungement: 'https://buy.stripe.com/6oU5kDbnS5np0VYgIA97G01',
+          certificate: 'https://buy.stripe.com/eVq8wPfE87vx3463VO97G04',
+          sealing: 'https://buy.stripe.com/6oU5kDbnS5np0VYgIA97G01',
+          termination: 'https://buy.stripe.com/5kQ28reA41799sugIA97G02'
         };
         window.location.href = urls[service] || '/';
       };
