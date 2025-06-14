@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Petition for Dismissal - Redemption Law Group</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    h2 {
+      text-align: center;
+    }
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+    .section {
+      margin-top: 20px;
+      border-top: 2px solid #000;
+      padding-top: 10px;
+    }
+    input[type="checkbox"] {
+      transform: scale(1.2);
+      margin-right: 10px;
+    }
+    textarea {
+      width: 100%;
+      height: 80px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>PETITION FOR DISMISSAL<br>
+(Cal. Penal Code §§ 17(b), 17(d)(2), 1203.4, 1203.4a, 1203.41, 1203.42, 1203.43, 1203.49)</h2>
+
+<form>
+  <label>Defendant's Full Name: <input type="text" name="defendantName"></label><br><br>
+  <label>Date of Birth: <input type="date" name="dob"></label><br><br>
+  <label>Case Number: <input type="text" name="caseNumber"></label>
+
+  <div class="section">
+    <p><strong>1. Offenses:</strong> Provide offense details below.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Section</th>
+          <th>Type of Offense (felony, misdemeanor, or infraction)</th>
+          <th>Eligible for Reduction to Misdemeanor (Penal Code §17(b))</th>
+          <th>Eligible for Reduction to Infraction (Penal Code §17(d)(2))</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><input type="text" name="code1"></td><td><input type="text" name="section1"></td><td><input type="text" name="type1"></td><td><input type="checkbox" name="reduceM1"></td><td><input type="checkbox" name="reduceI1"></td></tr>
+        <tr><td><input type="text" name="code2"></td><td><input type="text" name="section2"></td><td><input type="text" name="type2"></td><td><input type="checkbox" name="reduceM2"></td><td><input type="checkbox" name="reduceI2"></td></tr>
+        <!-- More rows can be added if needed -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <p><strong>2. Probation Status:</strong></p>
+    <label><input type="checkbox" name="probation_a"> Fulfilled all conditions of probation</label><br>
+    <label><input type="checkbox" name="probation_b"> Discharged from probation before term ended</label><br>
+    <label><input type="checkbox" name="probation_c"> Should be granted relief in the interests of justice</label><br>
+    <p>Explanation: <textarea name="probation_explanation"></textarea></p>
+  </div>
+
+  <div class="section">
+    <p><strong>3. Misdemeanor conviction under Penal Code §1203.49:</strong></p>
+    <label><input type="checkbox" name="human_trafficking"> Conviction due to being a victim of human trafficking</label><br>
+    <p>Supporting Evidence: <textarea name="trafficking_explanation"></textarea></p>
+  </div>
+
+  <div class="section">
+    <p><strong>4. Felony County Jail Sentence (Penal Code §1203.41):</strong></p>
+    <label><input type="checkbox" name="felony_a"> More than one year passed with mandatory supervision</label><br>
+    <label><input type="checkbox" name="felony_b"> More than two years passed without mandatory supervision</label><br>
+    <p>Explanation: <textarea name="felony_explanation"></textarea></p>
+  </div>
+
+  <div class="section">
+    <p><strong>5. Deferred Entry of Judgment (Penal Code §1203.43):</strong></p>
+    <label>Date of dismissal: <input type="date" name="dismissal_date"></label><br>
+    <label><input type="checkbox" name="deferred_a"> Court records are available</label><br>
+    <label><input type="checkbox" name="deferred_b"> Petitioner declares dismissal under penalty of perjury</label><br>
+    <label><input type="checkbox" name="deferred_b1"> Has attached state summary</label>
+    <label><input type="checkbox" name="deferred_b2"> Has not attached state summary</label>
+  </div>
+
+  <div class="section">
+    <p><strong>6. Reduction Request:</strong></p>
+    <label><input type="checkbox" name="reduction_request"> Request reduction to misdemeanor or infraction as applicable</label>
+  </div>
+
+  <div class="section">
+    <p><strong>7. Plea Withdrawal Request:</strong></p>
+    <label><input type="checkbox" name="plea_withdrawal"> Request withdrawal of guilty plea and dismissal</label>
+  </div>
+
+  <div class="section">
+    <p><strong>Declaration:</strong></p>
+    <p>I declare under penalty of perjury under the laws of the State of California that the foregoing is true and correct.</p>
+    <label>Date: <input type="date" name="declaration_date"></label><br><br>
+    <label>Signature of Petitioner or Attorney: <input type="text" name="signature"></label><br><br>
+    <label>Address: <input type="text" name="address"></label><br>
+    <label>City: <input type="text" name="city"></label>
+    <label>State: <input type="text" name="state"></label>
+    <label>ZIP Code: <input type="text" name="zip"></label>
+  </div>
+
+  <br><br>
+  <button type="submit">Submit Petition</button>
+</form>
+
+</body>
+</html>
