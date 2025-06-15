@@ -49,22 +49,22 @@
       <form id="eligibility-form" autocomplete="off" novalidate onsubmit="return false;">
         <!-- Step 1: Name -->
         <div class="step active" id="step-1">
-          <h2>Step 1: Your Name</h2>
+          <h2>What Is Your Full Name? </h2>
           <label>First Name *</label>
-          <input type="text" id="first-name" name="first-name" required>
+          <input type="text" id="first-name" name="first-name" required placeholder="John">
           <label>Last Name *</label>
-          <input type="text" id="last-name" name="last-name" required>
+          <input type="text" id="last-name" name="last-name" required placeholder="Doe">
           <div class="button-group">
             <button type="button" class="btn btn-primary" id="next-1">Next</button>
           </div>
         </div>
         <!-- Step 2: Contact -->
         <div class="step" id="step-2">
-          <h2>Step 2: Contact Information</h2>
-          <label>Email *</label>
-          <input type="email" id="email" name="email" required>
-          <label>Phone *</label>
-          <input type="tel" id="phone" name="phone" required pattern="\d{10}" placeholder="10-digit number">
+          <h2>How Do We Contact You?</h2>
+          <label>Email Address *</label>
+          <input type="email" id="email" name="email" required placeholder="email@example.com">
+          <label>Phone Number *</label>
+          <input type="tel" id="phone" name="phone" required pattern="\d{10}" placeholder="(123)-123-1234">
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-2">Back</button>
             <button type="button" class="btn btn-primary" id="next-2">Next</button>
@@ -72,7 +72,7 @@
         </div>
         <!-- Step 3: Mailing Address -->
         <div class="step" id="step-3">
-          <h2>Step 3: Mailing Address</h2>
+          <h2>What is your current mailing address?</h2>
           <label>Street Address *</label>
           <input type="text" id="street" name="street-name" required>
           <label>City/Town *</label>
@@ -94,8 +94,8 @@
             <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
             <option>Wisconsin</option><option>Wyoming</option>
           </select>
-          <label>ZIP Code *</label>
-          <input type="text" id="zip" name="zipcode" required pattern="\d{5}" placeholder="5-digit ZIP">
+          <label>ZIP Code (5-Digits) *</label>
+          <input type="text" id="zip" name="zipcode" required pattern="\d{5}" placeholder="Ex: 12345">
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-3">Back</button>
             <button type="button" class="btn btn-primary" id="next-3">Next</button>
@@ -190,11 +190,11 @@
         <div class="step" id="step-exp-q6">
           <h2>Were you convicted of any of the following offenses?</h2>
           <div class="checkbox-group">
-            <label><input type="checkbox" name="serious-offence" value="sodomy"> Sodomy with a child</label>
-            <label><input type="checkbox" name="serious-offence" value="lewdness"> Lewd or lascivious acts</label>
-            <label><input type="checkbox" name="serious-offence" value="abuse"> Continuous sexual abuse</label>
-            <label><input type="checkbox" name="serious-offence" value="force"> Forcible penetration</label>
-            <label><input type="checkbox" name="serious-offence" value="none"> None of the above</label>
+            <label><input type="checkbox" name="disqualifying-offence" value="sodomy"> Sodomy with a child</label>
+            <label><input type="checkbox" name="disqualifying-offence" value="lewdness"> Lewd or lascivious acts</label>
+            <label><input type="checkbox" name="disqualifying-offence" value="abuse"> Continuous sexual abuse</label>
+            <label><input type="checkbox" name="disqualifying-offence" value="force"> Forcible penetration</label>
+            <label><input type="checkbox" name="disqualifying-offence" value="none"> None of the above</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-exp-q6">Back</button>
@@ -313,7 +313,7 @@
            <br> <strong>CERTIFICATE OF REHABILITATION</strong><br>
             <div class="fee-bubble">$1,295 service fee</div>
             <div class="note">Redirecting to Stripe to pay securely and submit your application..</div>
-            <div class="placeholder-stripe"><img src="https://redemption.legal/stripe.PNG" width="250" height="auto" align-items="center" justify-content="center" alt="Stripe Banner"></div>
+            <div class="placeholder-stripe"><img src="https://redemption.legal/stripe.PNG" width="300" height="auto" align-items="center" justify-content="center" alt="Stripe Banner"></div>
             <div class="placeholder-image"><img src="https://redemption.legal/guarantee.PNG" width="250" height="auto" align-items="center" justify-content="center" alt="Money Back Guarantee"></div>
             <div class="button-group">
               <button class="btn btn-primary" type="button" onclick="redirectToStripe('certificate')">Pay &amp; Submit</button>
@@ -362,7 +362,7 @@
            <br> <strong>ARREST RECORD SEALING</strong>
            <br> <div class="fee-bubble">$1,695 service fee</div>
             <div class="note">You will be redirected to Stripe to pay securely and submit your application.</div>
-             <div class="placeholder-stripe"><img src="https://redemption.legal/stripe.PNG" width="250" height="auto" align-items="center" justify-content="center" alt="Stripe Banner"></div>
+             <div class="placeholder-stripe"><img src="https://redemption.legal/stripe.PNG" width="300" height="auto" align-items="center" justify-content="center" alt="Stripe Banner"></div>
             <div class="placeholder-image"><img src="https://redemption.legal/guarantee.PNG" width="250" height="auto" align-items="center" justify-content="center" alt="Money Back Guarantee"></div>
             <div class="button-group">
               <button class="btn btn-primary" type="button" onclick="redirectToStripe('sealing')">Pay &amp; Submit</button>
@@ -464,11 +464,11 @@
         </div>
         <div class="step" id="step-cta-termination">
           <div class="recommendation">
-            <h3>Great! You are eligible for</h3>
-            <strong>EARLY PROBATION TERMINATION</strong>
-            <div class="fee-bubble">$1,695 once-off</div>
+            <h3>Good news! You are eligible for</h3>
+           <br> <strong>EARLY PROBATION TERMINATION</strong>
+           <br> <div class="fee-bubble">$1,695 service fee</div>
             <div class="note">Redirecting to Stripe to pay securely and submit your application.</div>
-             <div class="placeholder-stripe"><img src="https://redemption.legal/stripe.PNG" width="250" height="auto" align-items="center" justify-content="center" alt="Stripe Banner"></div>
+             <div class="placeholder-stripe"><img src="https://redemption.legal/stripe.PNG" width="300" height="auto" align-items="center" justify-content="center" alt="Stripe Banner"></div>
             <div class="placeholder-image"><img src="https://redemption.legal/guarantee.PNG" width="250" height="auto" align-items="center" justify-content="center" alt="Money Back Guarantee"></div>
             <div class="button-group">
               <button class="btn btn-primary" type="button" onclick="redirectToStripe('termination')">Pay &amp; Submit</button>
@@ -552,7 +552,7 @@
       };
       document.getElementById('prev-exp-q4').onclick = function(){ showStep('step-exp-q3'); };
       document.getElementById('next-exp-q4').onclick = function(){
-        var v = document.querySelector('input[name="exp-q4"]:checked');
+        var v = document.querySelector('input[name="restitution-status"]:checked');
         if (!v) { alert('Select answer'); return; }
         if (v.value === 'paid-part') {
           document.getElementById('step-exp-q4').innerHTML =
@@ -564,7 +564,7 @@
       };
       document.getElementById('prev-exp-q5').onclick = function(){ showStep('step-exp-q4'); };
       document.getElementById('next-exp-q5').onclick = function(){
-        var v = document.querySelector('input[name="exp-q5"]:checked');
+        var v = document.querySelector('input[name="new-charges"]:checked');
         if (!v) { alert('Select answer'); return; }
         if (v.value === 'yes') {
           document.getElementById('step-exp-q5').innerHTML =
@@ -577,7 +577,7 @@
       };
       document.getElementById('prev-exp-q6').onclick = function(){ showStep('step-exp-q5'); };
       document.getElementById('next-exp-q6').onclick = function(){
-        let checks = Array.from(document.querySelectorAll('input[name="exp-q6"]:checked')).map(c=>c.value);
+        let checks = Array.from(document.querySelectorAll('input[name="disqualifying-offence"]:checked')).map(c=>c.value);
         if (!checks.length) { alert('Select at least one'); return; }
         if (checks.includes('none')) { showStep('step-cta-expungement'); return; }
         document.getElementById('step-exp-q6').innerHTML =
