@@ -190,11 +190,11 @@
         <div class="step" id="step-exp-q6">
           <h2>Were you convicted of any of the following offenses?</h2>
           <div class="checkbox-group">
-            <label><input type="checkbox" name="offence" value="sodomy"> Sodomy with a child…</label>
-            <label><input type="checkbox" name="offence" value="lewdness"> Lewd or lascivious acts…</label>
-            <label><input type="checkbox" name="offence" value="abuse"> Continuous sexual abuse…</label>
-            <label><input type="checkbox" name="offence" value="force"> Forcible penetration…</label>
-            <label><input type="checkbox" name="offence" value="none"> None of the above</label>
+            <label><input type="checkbox" name="serious-offence" value="sodomy"> Sodomy with a child</label>
+            <label><input type="checkbox" name="serious-offence" value="lewdness"> Lewd or lascivious acts</label>
+            <label><input type="checkbox" name="serious-offence" value="abuse"> Continuous sexual abuse</label>
+            <label><input type="checkbox" name="serious-offence" value="force"> Forcible penetration</label>
+            <label><input type="checkbox" name="serious-offence" value="none"> None of the above</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-exp-q6">Back</button>
@@ -207,7 +207,7 @@
             <br><strong>RECORD EXPUNGEMENT</strong><br>
             <div class="fee-bubble">$990 service fee</div>
             <div class="note">You will be redirected to Stripe to pay securely and submit your application.</div>
-             <div class="placeholder-stripe"><img src="https://redemption.legal/stripe.PNG" width="250" height="auto" align-items="center" justify-content="center" alt="Stripe Banner"></div>
+             <div class="placeholder-stripe"><img src="https://redemption.legal/stripe.PNG" width="300" height="auto" align-items="center" justify-content="center" alt="Stripe Checkout"></div>
             <div class="placeholder-image"><img src="https://redemption.legal/guarantee.PNG" width="250" height="auto" align-items="center" justify-content="center" alt="Money Back Guarantee"></div>
             <div class="button-group">
               <button class="btn btn-primary" type="button" onclick="redirectToStripe('expungement')">Pay &amp; Submit</button>
@@ -219,8 +219,8 @@
         <div class="step" id="step-cor-q1">
           <h2>Which court system were you convicted in?</h2>
           <div class="radio-group">
-            <label><input type="radio" name="cor-q1" value="state" required> State Court</label>
-            <label><input type="radio" name="cor-q1" value="federal"> Federal Court</label>
+            <label><input type="radio" name="court-system" value="state" required> State Court</label>
+            <label><input type="radio" name="court-system" value="federal"> Federal Court</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-cor-q1">Back</button>
@@ -266,8 +266,8 @@
         <div class="step" id="step-cor-q4">
           <h2>Did you serve time in state prison?</h2>
           <div class="radio-group">
-            <label><input type="radio" name="cor-q4" value="yes" required> Yes</label>
-            <label><input type="radio" name="cor-q4" value="no"> No</label>
+            <label><input type="radio" name="state-time-served" value="yes" required> Yes</label>
+            <label><input type="radio" name="state-time-served" value="no"> No</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-cor-q4">Back</button>
@@ -277,8 +277,8 @@
         <div class="step" id="step-cor-q5">
           <h2>Have you lived in California for at least 5 years immediately before today?</h2>
           <div class="radio-group">
-            <label><input type="radio" name="cor-q5" value="yes" required> Yes</label>
-            <label><input type="radio" name="cor-q5" value="no"> No</label>
+            <label><input type="radio" name="5-years-in-ca" value="yes" required> Yes</label>
+            <label><input type="radio" name="5-years-in-ca" value="no"> No</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-cor-q5">Back</button>
@@ -288,8 +288,8 @@
         <div class="step" id="step-cor-q6">
           <h2>Have you been convicted of any other crime in the last five years?</h2>
           <div class="radio-group">
-            <label><input type="radio" name="cor-q6" value="yes" required> Yes</label>
-            <label><input type="radio" name="cor-q6" value="no"> No</label>
+            <label><input type="radio" name="crime-committed-5yrs" value="yes" required> Yes</label>
+            <label><input type="radio" name="crime-committed-5yrs" value="no"> No</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-cor-q6">Back</button>
@@ -299,8 +299,8 @@
         <div class="step" id="step-cor-q7">
           <h2>Have you completed all parts of your sentence (probation or parole)?</h2>
           <div class="radio-group">
-            <label><input type="radio" name="cor-q7" value="yes" required> Yes</label>
-            <label><input type="radio" name="cor-q7" value="no"> No</label>
+            <label><input type="radio" name="sentence-completed" value="yes" required> Yes</label>
+            <label><input type="radio" name="sentence-completed" value="no"> No</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-cor-q7">Back</button>
@@ -310,8 +310,8 @@
         <div class="step" id="step-cta-certificate">
           <div class="recommendation">
             <h3>Good news! You are eligible for a</h3>
-            <strong>CERTIFICATE OF REHABILITATION</strong>
-            <div class="fee-bubble">$1,295 once-off</div>
+           <br> <strong>CERTIFICATE OF REHABILITATION</strong><br>
+            <div class="fee-bubble">$1,295 service fee</div>
             <div class="note">Redirecting to Stripe to pay securely and submit your application..</div>
             <div class="placeholder-stripe"><img src="https://redemption.legal/stripe.PNG" width="250" height="auto" align-items="center" justify-content="center" alt="Stripe Banner"></div>
             <div class="placeholder-image"><img src="https://redemption.legal/guarantee.PNG" width="250" height="auto" align-items="center" justify-content="center" alt="Money Back Guarantee"></div>
@@ -588,7 +588,7 @@
       // Certificate of Rehabilitation
       document.getElementById('prev-cor-q1').onclick = function(){ showStep('step-4'); };
       document.getElementById('next-cor-q1').onclick = function(){
-        var v = document.querySelector('input[name="cor-q1"]:checked');
+        var v = document.querySelector('input[name="court-system"]:checked');
         if (!v) { alert('Select court system'); return; }
         if (v.value === 'federal') {
           document.getElementById('step-cor-q1').innerHTML =
@@ -605,7 +605,7 @@
       };
       document.getElementById('prev-cor-q3').onclick = function(){ showStep('step-cor-q2'); };
       document.getElementById('next-cor-q3').onclick = function(){
-        var v = document.querySelector('input[name="cor-q3"]:checked');
+        var v = document.querySelector('input[name="conviction-type"]:checked');
         if (!v) { alert('Select felony/misdemeanor'); return; }
         showStep('step-cor-q4');
       };
@@ -613,7 +613,7 @@
       document.getElementById('next-cor-q4').onclick = function(){ showStep('step-cor-q5'); };
       document.getElementById('prev-cor-q5').onclick = function(){ showStep('step-cor-q4'); };
       document.getElementById('next-cor-q5').onclick = function(){
-        var v = document.querySelector('input[name="cor-q5"]:checked');
+        var v = document.querySelector('input[name="5-years-in-ca"]:checked');
         if (!v) { alert('Select answer'); return; }
         if (v.value === 'no') {
           document.getElementById('step-cor-q5').innerHTML =
@@ -625,7 +625,7 @@
       };
       document.getElementById('prev-cor-q6').onclick = function(){ showStep('step-cor-q5'); };
       document.getElementById('next-cor-q6').onclick = function(){
-        var v = document.querySelector('input[name="cor-q6"]:checked');
+        var v = document.querySelector('input[name="crime-committed-5yrs"]:checked');
         if (!v) { alert('Select answer'); return; }
         if (v.value === 'yes') {
           document.getElementById('step-cor-q6').innerHTML =
@@ -637,7 +637,7 @@
       };
       document.getElementById('prev-cor-q7').onclick = function(){ showStep('step-cor-q6'); };
       document.getElementById('next-cor-q7').onclick = function(){
-        var v = document.querySelector('input[name="cor-q7"]:checked');
+        var v = document.querySelector('input[name="sentence-completed"]:checked');
         if (!v) { alert('Select answer'); return; }
         if (v.value === 'no') {
           document.getElementById('step-cor-q7').innerHTML =
@@ -689,7 +689,7 @@
       // Early Probation Termination (Q1-Q3 are same as expungement Q1-Q3)
       document.getElementById('prev-term-q1').onclick = function(){ showStep('step-4'); };
       document.getElementById('next-term-q1').onclick = function(){
-        var v = document.querySelector('input[name="court-system-2"]:checked');
+        var v = document.querySelector('input[name="court-system"]:checked');
         if (!v) { alert('Select court system'); return; }
         if (v.value === 'federal') {
           document.getElementById('step-term-q1').innerHTML =
@@ -707,7 +707,7 @@
       };
       document.getElementById('prev-term-q3').onclick = function(){ showStep('step-term-q2'); };
       document.getElementById('next-term-q3').onclick = function(){
-        var v = document.querySelector('input[name="conviction-type-2"]:checked');
+        var v = document.querySelector('input[name="conviction-type"]:checked');
         if (!v) { alert('Select felony/misdemeanor'); return; }
         showStep('step-term-q4');
       };
