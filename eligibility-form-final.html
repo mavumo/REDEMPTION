@@ -528,7 +528,7 @@
       // Expungement
       document.getElementById('prev-exp-q1').onclick = function(){ showStep('step-4'); };
       document.getElementById('next-exp-q1').onclick = function(){
-        var v = document.querySelector('input[name="exp-q1"]:checked');
+        var v = document.querySelector('input[name="court-system"]:checked');
         if (!v) { alert('Select court system'); return; }
         if (v.value === 'federal') {
           document.getElementById('step-exp-q1').innerHTML =
@@ -546,7 +546,7 @@
       };
       document.getElementById('prev-exp-q3').onclick = function(){ showStep('step-exp-q2'); };
       document.getElementById('next-exp-q3').onclick = function(){
-        var v = document.querySelector('input[name="exp-q3"]:checked');
+        var v = document.querySelector('input[name="conviction-type"]:checked');
         if (!v) { alert('Select felony/misdemeanor'); return; }
         showStep('step-exp-q4');
       };
@@ -792,7 +792,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     submitBtn.onclick = async function () {
       submitBtn.disabled = true;
-      submitBtn.innerText = 'Submitting...';
+      submitBtn.innerText = 'Redirecting...';
 
       const formData = new FormData(form);
       try {
