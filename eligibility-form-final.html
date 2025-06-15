@@ -325,8 +325,8 @@
         <div class="step" id="step-seal-q1">
           <h2>Were you arrested in California?</h2>
           <div class="radio-group">
-            <label><input type="radio" name="seal-q1" value="yes" required> Yes</label>
-            <label><input type="radio" name="seal-q1" value="no"> No</label>
+            <label><input type="radio" name="arrested-in-ca" value="yes" required> Yes</label>
+            <label><input type="radio" name="arrested-in-ca" value="no"> No</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-seal-q1">Back</button>
@@ -336,8 +336,8 @@
         <div class="step" id="step-seal-q2">
           <h2>Did the arrest result in criminal charges being filed against you?</h2>
           <div class="radio-group">
-            <label><input type="radio" name="seal-q2" value="yes" required> Yes</label>
-            <label><input type="radio" name="seal-q2" value="no"> No</label>
+            <label><input type="radio" name="charges-filed" value="yes" required> Yes</label>
+            <label><input type="radio" name="charges-filed" value="no"> No</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-seal-q2">Back</button>
@@ -347,9 +347,9 @@
         <div class="step" id="step-seal-q3">
           <h2>Choose any of the following that apply to you:</h2>
           <div class="checkbox-group">
-            <label><input type="checkbox" name="seal-q3" value="not-guilty"> I was found not guilty</label>
-            <label><input type="checkbox" name="seal-q3" value="convicted"> I was convicted</label>
-            <label><input type="checkbox" name="seal-q3" value="ongoing"> The case is still ongoing</label>
+            <label><input type="checkbox" name="conviction-status" value="not-guilty"> I was found not guilty</label>
+            <label><input type="checkbox" name="conviction-status" value="convicted"> I was convicted</label>
+            <label><input type="checkbox" name="conviction-status" value="ongoing"> The case is still ongoing</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-seal-q3">Back</button>
@@ -359,8 +359,8 @@
         <div class="step" id="step-cta-sealing">
           <div class="recommendation">
             <h3>Great! You are eligible for</h3>
-            <strong>ARREST RECORD SEALING</strong>
-            <div class="fee-bubble">$1,695 once-off</div>
+           <br> <strong>ARREST RECORD SEALING</strong>
+           <br> <div class="fee-bubble">$1,695 service fee</div>
             <div class="note">You will be redirected to Stripe to pay securely and submit your application.</div>
              <div class="placeholder-stripe"><img src="https://redemption.legal/stripe.PNG" width="250" height="auto" align-items="center" justify-content="center" alt="Stripe Banner"></div>
             <div class="placeholder-image"><img src="https://redemption.legal/guarantee.PNG" width="250" height="auto" align-items="center" justify-content="center" alt="Money Back Guarantee"></div>
@@ -374,8 +374,8 @@
         <div class="step" id="step-term-q1">
           <h2>Which court system were you convicted in?</h2>
           <div class="radio-group">
-            <label><input type="radio" name="term-q1" value="state" required> State Court</label>
-            <label><input type="radio" name="term-q1" value="federal"> Federal Court</label>
+            <label><input type="radio" name="court-system" value="state" required> State Court</label>
+            <label><input type="radio" name="court-system" value="federal"> Federal Court</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-term-q1">Back</button>
@@ -384,7 +384,7 @@
         </div>
         <div class="step" id="step-term-q2">
           <h2>Which county did your conviction take place in?</h2>
-          <select id="term-county" required>
+          <select id="term-county" name="county" required>
             <option value="">Select County</option>
             <option>Alameda</option><option>Alpine</option><option>Amador</option><option>Butte</option>
             <option>Calaveras</option><option>Colusa</option><option>Contra Costa</option><option>Del Norte</option>
@@ -410,8 +410,8 @@
         <div class="step" id="step-term-q3">
           <h2>You were convicted of a:</h2>
           <div class="radio-group">
-            <label><input type="radio" name="term-q3" value="felony" required> Felony</label>
-            <label><input type="radio" name="term-q3" value="misdemeanor"> Misdemeanor</label>
+            <label><input type="radio" name="conviction-type" value="felony" required> Felony</label>
+            <label><input type="radio" name="conviction-type" value="misdemeanor"> Misdemeanor</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-term-q3">Back</button>
@@ -421,8 +421,8 @@
         <div class="step" id="step-term-q4">
           <h2>Have you paid all fines, fees, and restitution?</h2>
           <div class="radio-group">
-            <label><input type="radio" name="term-q4" value="yes" required> Yes</label>
-            <label><input type="radio" name="term-q4" value="no"> No</label>
+            <label><input type="radio" name="restitution-fees-and-fines" value="paid" required> Yes</label>
+            <label><input type="radio" name="restitution-fees-and-fines" value="unpaid"> No</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-term-q4">Back</button>
@@ -651,7 +651,7 @@
       // Arrest Record Sealing
       document.getElementById('prev-seal-q1').onclick = function(){ showStep('step-4'); };
       document.getElementById('next-seal-q1').onclick = function(){
-        var v = document.querySelector('input[name="seal-q1"]:checked');
+        var v = document.querySelector('input[name="arrested-in-ca"]:checked');
         if (!v) { alert('Select answer'); return; }
         if (v.value === 'no') {
           document.getElementById('step-seal-q1').innerHTML =
@@ -663,7 +663,7 @@
       };
       document.getElementById('prev-seal-q2').onclick = function(){ showStep('step-seal-q1'); };
       document.getElementById('next-seal-q2').onclick = function(){
-        var v = document.querySelector('input[name="seal-q2"]:checked');
+        var v = document.querySelector('input[name="charges-filed"]:checked');
         if (!v) { alert('Select answer'); return; }
         if (v.value === 'yes') {
           document.getElementById('step-seal-q2').innerHTML =
@@ -675,7 +675,7 @@
       };
       document.getElementById('prev-seal-q3').onclick = function(){ showStep('step-seal-q2'); };
       document.getElementById('next-seal-q3').onclick = function(){
-        var checks = Array.from(document.querySelectorAll('input[name="seal-q3"]:checked')).map(c=>c.value);
+        var checks = Array.from(document.querySelectorAll('input[name="conviction-status"]:checked')).map(c=>c.value);
         if (!checks.length) { alert('Select at least one'); return; }
         if (checks.includes('convicted') || checks.includes('ongoing')) {
           document.getElementById('step-seal-q3').innerHTML =
@@ -689,7 +689,7 @@
       // Early Probation Termination (Q1-Q3 are same as expungement Q1-Q3)
       document.getElementById('prev-term-q1').onclick = function(){ showStep('step-4'); };
       document.getElementById('next-term-q1').onclick = function(){
-        var v = document.querySelector('input[name="term-q1"]:checked');
+        var v = document.querySelector('input[name="court-system-2"]:checked');
         if (!v) { alert('Select court system'); return; }
         if (v.value === 'federal') {
           document.getElementById('step-term-q1').innerHTML =
@@ -707,13 +707,13 @@
       };
       document.getElementById('prev-term-q3').onclick = function(){ showStep('step-term-q2'); };
       document.getElementById('next-term-q3').onclick = function(){
-        var v = document.querySelector('input[name="term-q3"]:checked');
+        var v = document.querySelector('input[name="conviction-type-2"]:checked');
         if (!v) { alert('Select felony/misdemeanor'); return; }
         showStep('step-term-q4');
       };
       document.getElementById('prev-term-q4').onclick = function(){ showStep('step-term-q3'); };
       document.getElementById('next-term-q4').onclick = function(){
-        var v = document.querySelector('input[name="term-q4"]:checked');
+        var v = document.querySelector('input[name="restitution-fees-and-fines"]:checked');
         if (!v) { alert('Select answer'); return; }
         if (v.value === 'no') {
           document.getElementById('step-term-q4').innerHTML =
@@ -726,7 +726,7 @@
       };
       document.getElementById('prev-term-q5').onclick = function(){ showStep('step-term-q4'); };
       document.getElementById('next-term-q5').onclick = function(){
-        var v = document.querySelector('input[name="term-q5"]:checked');
+        var v = document.querySelector('input[name="conviction-type"]:checked');
         if (!v) { alert('Select answer'); return; }
         if (v.value === 'no') {
           document.getElementById('step-term-q5').innerHTML =
