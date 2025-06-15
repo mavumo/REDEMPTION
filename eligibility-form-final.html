@@ -51,9 +51,9 @@
         <div class="step active" id="step-1">
           <h2>Step 1: Your Name</h2>
           <label>First Name *</label>
-          <input type="text" id="first-name" required>
+          <input type="text" id="first-name" name="first-name" required>
           <label>Last Name *</label>
-          <input type="text" id="last-name" required>
+          <input type="text" id="last-name" name="last-name" required>
           <div class="button-group">
             <button type="button" class="btn btn-primary" id="next-1">Next</button>
           </div>
@@ -62,9 +62,9 @@
         <div class="step" id="step-2">
           <h2>Step 2: Contact Information</h2>
           <label>Email *</label>
-          <input type="email" id="email" required>
+          <input type="email" id="email" name="email" required>
           <label>Phone *</label>
-          <input type="tel" id="phone" required pattern="\d{10}" placeholder="10-digit number">
+          <input type="tel" id="phone" name="phone" required pattern="\d{10}" placeholder="10-digit number">
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-2">Back</button>
             <button type="button" class="btn btn-primary" id="next-2">Next</button>
@@ -74,11 +74,11 @@
         <div class="step" id="step-3">
           <h2>Step 3: Mailing Address</h2>
           <label>Street Address *</label>
-          <input type="text" id="street" required>
+          <input type="text" id="street" name="street-name" required>
           <label>City/Town *</label>
-          <input type="text" id="city" required>
+          <input type="text" id="city" name="city" required>
           <label>State *</label>
-          <select id="state" required>
+          <select id="state" name="state" required>
             <option value="">Select State</option>
             <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
             <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
@@ -95,7 +95,7 @@
             <option>Wisconsin</option><option>Wyoming</option>
           </select>
           <label>ZIP Code *</label>
-          <input type="text" id="zip" required pattern="\d{5}" placeholder="5-digit ZIP">
+          <input type="text" id="zip" name="zipcode" required pattern="\d{5}" placeholder="5-digit ZIP">
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-3">Back</button>
             <button type="button" class="btn btn-primary" id="next-3">Next</button>
@@ -120,8 +120,8 @@
         <div class="step" id="step-exp-q1">
           <h2>Which court system were you convicted in?</h2>
           <div class="radio-group">
-            <label><input type="radio" name="exp-q1" value="state" required> State Court</label>
-            <label><input type="radio" name="exp-q1" value="federal"> Federal Court</label>
+            <label><input type="radio" name="court-system" value="state" required> State Court</label>
+            <label><input type="radio" name="court-system" value="federal"> Federal Court</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-exp-q1">Back</button>
@@ -130,7 +130,7 @@
         </div>
         <div class="step" id="step-exp-q2">
           <h2>Which county did your conviction take place in?</h2>
-          <select id="exp-county" required>
+          <select id="exp-county" name="county" required>
             <option value="">Select County</option>
             <option>Alameda</option><option>Alpine</option><option>Amador</option><option>Butte</option>
             <option>Calaveras</option><option>Colusa</option><option>Contra Costa</option><option>Del Norte</option>
@@ -156,8 +156,8 @@
         <div class="step" id="step-exp-q3">
           <h2>You were convicted of a:</h2>
           <div class="radio-group">
-            <label><input type="radio" name="exp-q3" value="felony" required> Felony</label>
-            <label><input type="radio" name="exp-q3" value="misdemeanor"> Misdemeanor</label>
+            <label><input type="radio" name="conviction-type" value="felony" required> Felony</label>
+            <label><input type="radio" name="conviction-type" value="misdemeanor"> Misdemeanor</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-exp-q3">Back</button>
@@ -167,9 +167,9 @@
         <div class="step" id="step-exp-q4">
           <h2>Were you required to pay restitution? If yes, have you paid it in full?</h2>
           <div class="radio-group">
-            <label><input type="radio" name="exp-q4" value="paid-full" required> Yes, paid in full</label>
-            <label><input type="radio" name="exp-q4" value="paid-part"> Required but not paid in full</label>
-            <label><input type="radio" name="exp-q4" value="not-required"> No restitution required</label>
+            <label><input type="radio" name="restitution-status" value="paid-full" required> Yes, paid in full</label>
+            <label><input type="radio" name="restitution-status" value="paid-part"> Required but not paid in full</label>
+            <label><input type="radio" name="restitution-status" value="not-required"> No restitution required</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-exp-q4">Back</button>
@@ -179,8 +179,8 @@
         <div class="step" id="step-exp-q5">
           <h2>Are you currently facing new charges?</h2>
           <div class="radio-group">
-            <label><input type="radio" name="exp-q5" value="yes" required> Yes</label>
-            <label><input type="radio" name="exp-q5" value="no"> No</label>
+            <label><input type="radio" name="new-charges" value="yes" required> Yes</label>
+            <label><input type="radio" name="new-charges" value="no"> No</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-exp-q5">Back</button>
@@ -190,11 +190,11 @@
         <div class="step" id="step-exp-q6">
           <h2>Were you convicted of any of the following offenses?</h2>
           <div class="checkbox-group">
-            <label><input type="checkbox" name="exp-q6" value="offense-1"> Sodomy with a child…</label>
-            <label><input type="checkbox" name="exp-q6" value="offense-2"> Lewd or lascivious acts…</label>
-            <label><input type="checkbox" name="exp-q6" value="offense-3"> Continuous sexual abuse…</label>
-            <label><input type="checkbox" name="exp-q6" value="offense-4"> Forcible penetration…</label>
-            <label><input type="checkbox" name="exp-q6" value="none"> None of the above</label>
+            <label><input type="checkbox" name="offence" value="sodomy"> Sodomy with a child…</label>
+            <label><input type="checkbox" name="offence" value="lewdness"> Lewd or lascivious acts…</label>
+            <label><input type="checkbox" name="offence" value="abuse"> Continuous sexual abuse…</label>
+            <label><input type="checkbox" name="offence" value="force"> Forcible penetration…</label>
+            <label><input type="checkbox" name="offence" value="none"> None of the above</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-exp-q6">Back</button>
@@ -204,8 +204,8 @@
         <div class="step" id="step-cta-expungement">
           <div class="recommendation">
             <h3>Good news! You are eligible for</h3>
-            <strong>RECORD EXPUNGEMENT</strong>
-            <div class="fee-bubble">$990 once-off</div>
+            <br><strong>RECORD EXPUNGEMENT</strong><br>
+            <div class="fee-bubble">$990 service fee</div>
             <div class="note">You will be redirected to Stripe to pay securely and submit your application.</div>
              <div class="placeholder-stripe"><img src="https://redemption.legal/stripe.PNG" width="250" height="auto" align-items="center" justify-content="center" alt="Stripe Banner"></div>
             <div class="placeholder-image"><img src="https://redemption.legal/guarantee.PNG" width="250" height="auto" align-items="center" justify-content="center" alt="Money Back Guarantee"></div>
@@ -229,7 +229,7 @@
         </div>
         <div class="step" id="step-cor-q2">
           <h2>Which county did your conviction take place in?</h2>
-          <select id="cor-county" required>
+          <select id="cor-county" name="county" required>
             <option value="">Select County</option>
             <option>Alameda</option><option>Alpine</option><option>Amador</option><option>Butte</option>
             <option>Calaveras</option><option>Colusa</option><option>Contra Costa</option><option>Del Norte</option>
@@ -255,8 +255,8 @@
         <div class="step" id="step-cor-q3">
           <h2>You were convicted of a:</h2>
           <div class="radio-group">
-            <label><input type="radio" name="cor-q3" value="felony" required> Felony</label>
-            <label><input type="radio" name="cor-q3" value="misdemeanor"> Misdemeanor</label>
+            <label><input type="radio" name="conviction-type" value="felony" required> Felony</label>
+            <label><input type="radio" name="conviction-type" value="misdemeanor"> Misdemeanor</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-cor-q3">Back</button>
