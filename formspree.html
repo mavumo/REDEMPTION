@@ -1,0 +1,47 @@
+
+<!-- This is a placeholder: the actual content includes the full multi-step form -->
+<!-- Only key enhancement shown here: final JS logic for dynamic submission and Stripe redirect -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById('eligibility-form');
+
+  document.querySelectorAll(".btn-primary").forEach(btn => {
+    if (btn.innerText.includes("Pay") || btn.innerText.includes("Submit")) {
+      btn.addEventListener("click", async function () {
+        btn.disabled = true;
+        btn.innerText = "Submitting...";
+
+        const formData = new FormData(form);
+        const selectedService = formData.get("service");
+
+        try {
+          const res = await fetch("https://formspree.io/f/xeokkzle", {
+            method: "POST",
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (res.ok) {
+            const stripeUrls = {
+              expungement: "https://buy.stripe.com/6oU5kDbnS5np0VYgIA97G01",
+              certificate: "https://buy.stripe.com/eVq8wPfE87vx3463VO97G04",
+              sealing: "https://buy.stripe.com/6oU5kDbnS5np0VYgIA97G01",
+              termination: "https://buy.stripe.com/5kQ28reA41799sugIA97G02"
+            };
+            window.location.href = stripeUrls[selectedService] || "/";
+          } else {
+            alert("There was a problem submitting the form.");
+            btn.disabled = false;
+            btn.innerText = "Submit & Pay";
+          }
+        } catch (error) {
+          console.error("Error submitting form:", error);
+          alert("Network error. Please try again.");
+          btn.disabled = false;
+          btn.innerText = "Submit & Pay";
+        }
+      });
+    }
+  });
+});
+</script>
