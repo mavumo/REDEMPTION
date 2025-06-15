@@ -432,8 +432,8 @@
         <div class="step" id="step-term-q5">
           <h2>Have you completed at least half of your probation?</h2>
           <div class="radio-group">
-            <label><input type="radio" name="term-q5" value="yes" required> Yes</label>
-            <label><input type="radio" name="term-q5" value="no"> No</label>
+            <label><input type="radio" name="half-of-probation-completion" value="yes" required> Yes</label>
+            <label><input type="radio" name="half-of-probation-completion" value="no"> No</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-term-q5">Back</button>
@@ -443,8 +443,8 @@
         <div class="step" id="step-term-q6">
           <h2>Have you had any new arrests?</h2>
           <div class="radio-group">
-            <label><input type="radio" name="term-q6" value="yes" required> Yes</label>
-            <label><input type="radio" name="term-q6" value="no"> No</label>
+            <label><input type="radio" name="new-arrests" value="yes" required> Yes</label>
+            <label><input type="radio" name="new-arrests" value="no"> No</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-term-q6">Back</button>
@@ -454,8 +454,8 @@
         <div class="step" id="step-term-q7">
           <h2>Do you have a special practical reason to seek early termination?</h2>
           <div class="radio-group">
-            <label><input type="radio" name="term-q7" value="yes" required> Yes</label>
-            <label><input type="radio" name="term-q7" value="no"> No</label>
+            <label><input type="radio" name="special-reason-for-termination-request" value="yes" required> Yes</label>
+            <label><input type="radio" name="special-reason-for-termination-request" value="no"> No</label>
           </div>
           <div class="button-group">
             <button type="button" class="btn btn-secondary" id="prev-term-q7">Back</button>
@@ -726,7 +726,7 @@
       };
       document.getElementById('prev-term-q5').onclick = function(){ showStep('step-term-q4'); };
       document.getElementById('next-term-q5').onclick = function(){
-        var v = document.querySelector('input[name="conviction-type"]:checked');
+        var v = document.querySelector('input[name="half-of-probation-completion"]:checked');
         if (!v) { alert('Select answer'); return; }
         if (v.value === 'no') {
           document.getElementById('step-term-q5').innerHTML =
@@ -739,7 +739,7 @@
       };
       document.getElementById('prev-term-q6').onclick = function(){ showStep('step-term-q5'); };
       document.getElementById('next-term-q6').onclick = function(){
-        var v = document.querySelector('input[name="term-q6"]:checked');
+        var v = document.querySelector('input[name="new-arrests"]:checked');
         if (!v) { alert('Select answer'); return; }
         if (v.value === 'yes') {
           document.getElementById('step-term-q6').innerHTML =
@@ -752,7 +752,7 @@
       };
       document.getElementById('prev-term-q7').onclick = function(){ showStep('step-term-q6'); };
       document.getElementById('next-term-q7').onclick = function(){
-        var v = document.querySelector('input[name="term-q7"]:checked');
+        var v = document.querySelector('input[name="special-reason-for-termination-request"]:checked');
         if (!v) { alert('Select answer'); return; }
         if (v.value === 'no') {
           document.getElementById('step-term-q7').innerHTML =
@@ -792,7 +792,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     submitBtn.onclick = async function () {
       submitBtn.disabled = true;
-      submitBtn.innerText = 'Redirecting...';
+      submitBtn.innerText = 'Submitting...';
 
       const formData = new FormData(form);
       try {
