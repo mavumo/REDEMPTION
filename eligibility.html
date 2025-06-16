@@ -489,311 +489,367 @@
       <b>Disclaimer: Completing this service eligibility form does not create an attorney-client relationship.</b></p>
     </footer>
   </div>
+
+
+  
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      function showStep(id) {
-        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-        var el = document.getElementById(id);
-        if (el) el.classList.add('active');
-        window.scrollTo(0,0);
-      }
-      window.showStep = showStep;
+document.addEventListener('DOMContentLoaded', function () {
+  let currentStepId = 'step-1';
+  let previousStepId = null;
 
-      // Step 1 navigation
-      document.getElementById('next-1').onclick = function() {
-        var fn = document.getElementById('first-name'), ln = document.getElementById('last-name');
-        if (!fn.value.trim() || !ln.value.trim()) { alert('Please enter both names.'); return; }
-        showStep('step-2');
-      };
-      document.getElementById('prev-2').onclick = function() { showStep('step-1'); };
-      document.getElementById('next-2').onclick = function() {
-        var email = document.getElementById('email');
-        var phone = document.getElementById('phone');
-        if (!email.value.trim() || !email.checkValidity()) { alert('Valid email required'); return; }
-        if (!phone.value.trim() || !phone.checkValidity()) { alert('Valid 10-digit phone required'); return; }
-        showStep('step-3');
-      };
-      document.getElementById('prev-3').onclick = function() { showStep('step-2'); };
-      document.getElementById('next-3').onclick = function() {
-        var street=document.getElementById('street'),city=document.getElementById('city'),state=document.getElementById('state'),zip=document.getElementById('zip');
-        if (!street.value.trim() || !city.value.trim() || !state.value || !zip.value.trim() || !zip.checkValidity()) {
-          alert('Complete your full mailing address'); return;
-        }
-        showStep('step-4');
-      };
-      document.getElementById('prev-4').onclick = function() { showStep('step-3'); };
-      document.getElementById('next-4').onclick = function() {
-        var svc = document.querySelector('input[name="service"]:checked');
-        if (!svc) { alert('Select a service'); return; }
-        if (svc.value === 'expungement') showStep('step-exp-q1');
-        else if (svc.value === 'certificate') showStep('step-cor-q1');
-        else if (svc.value === 'sealing') showStep('step-seal-q1');
-        else if (svc.value === 'termination') showStep('step-term-q1');
-      };
+  function showStep(id) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById(id);
+    if (el) el.classList.add('active');
+    previousStepId = currentStepId;
+    currentStepId = id;
+    window.scrollTo(0, 0);
+  }
 
-      // Expungement
-      document.getElementById('prev-exp-q1').onclick = function(){ showStep('step-4'); };
-      document.getElementById('next-exp-q1').onclick = function(){
-        var v = document.querySelector('input[name="court-system"]:checked');
-        if (!v) { alert('Select court system'); return; }
-        if (v.value === 'federal') {
-          document.getElementById('step-exp-q1').innerHTML =
-            '<p class="eligibility-note warning">Sorry, we only work with CA state cases, not federal. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-exp-q1\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
-          return;
-        }
-        showStep('step-exp-q2');
-      };
-      document.getElementById('prev-exp-q2').onclick = function(){ showStep('step-exp-q1'); };
-      document.getElementById('next-exp-q2').onclick = function(){
-        if (!document.getElementById('exp-county').value) { alert('Select county'); return; }
-        showStep('step-exp-q3');
-      };
-      document.getElementById('prev-exp-q3').onclick = function(){ showStep('step-exp-q2'); };
-      document.getElementById('next-exp-q3').onclick = function(){
-        var v = document.querySelector('input[name="conviction-type"]:checked');
-        if (!v) { alert('Select felony/misdemeanor'); return; }
-        showStep('step-exp-q4');
-      };
-      document.getElementById('prev-exp-q4').onclick = function(){ showStep('step-exp-q3'); };
-      document.getElementById('next-exp-q4').onclick = function(){
-        var v = document.querySelector('input[name="restitution-status"]:checked');
-        if (!v) { alert('Select answer'); return; }
-        if (v.value === 'paid-part') {
-          document.getElementById('step-exp-q4').innerHTML =
-            '<p class="eligibility-note warning">You must pay all restitution in full before expungement. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-           '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-exp-q4\')">Go Back</button></div>' +
-          '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
-          return;
-        }
-        showStep('step-exp-q5');
-      };
-      document.getElementById('prev-exp-q5').onclick = function(){ showStep('step-exp-q4'); };
-      document.getElementById('next-exp-q5').onclick = function(){
-        var v = document.querySelector('input[name="new-charges"]:checked');
-        if (!v) { alert('Select answer'); return; }
-        if (v.value === 'yes') {
-          document.getElementById('step-exp-q5').innerHTML =
-            '<p class="eligibility-note warning">Unfortunately, you cannot submit a petition for expungement while facing new charges. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-            '<div class="button-group"><button class="btn btn-secondary" type="button" onclick="showStep(\'step-exp-q5\')">Go Back</button></div>' +
-          '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
-          return;
-        }
-        showStep('step-exp-q6');
-      };
-      document.getElementById('prev-exp-q6').onclick = function(){ showStep('step-exp-q5'); };
-      document.getElementById('next-exp-q6').onclick = function(){
-        let checks = Array.from(document.querySelectorAll('input[name="disqualifying-offence"]:checked')).map(c=>c.value);
-        if (!checks.length) { alert('Select at least one'); return; }
-        if (checks.includes('none')) { showStep('step-cta-expungement'); return; }
-        document.getElementById('step-exp-q6').innerHTML =
-          '<p class="eligibility-note warning">These offenses are not eligible for Record Expungement or a Certificate of Rehabilitation. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-exp-q6\')">Go Back</button></div>' +
-          '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
-      };
+  function generateWarningBlock(message, supportLink = 'https://help.redemption.legal/') {
+    return `
+      <p class="eligibility-note warning">${message}</p>
+      <div class="button-group">
+        <button class="btn btn-primary" type="button" onclick="showStep(previousStepId)">Go Back</button>
+      </div>
+      <div class="button-group">
+        <button class="btn btn-primary" type="button" onclick="window.location.href='${supportLink}'">Contact Support</button>
+      </div>
+    `;
+  }
 
-      // Certificate of Rehabilitation
-      document.getElementById('prev-cor-q1').onclick = function(){ showStep('step-4'); };
-      document.getElementById('next-cor-q1').onclick = function(){
-        var v = document.querySelector('input[name="court-system"]:checked');
-        if (!v) { alert('Select court system'); return; }
-        if (v.value === 'federal') {
-          document.getElementById('step-cor-q1').innerHTML =
-            '<p class="eligibility-note warning">Sorry, we only work with CA state cases, not federal. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-           '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-4\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
-          return;
-        }
-        showStep('step-cor-q2');
-      };
-      document.getElementById('prev-cor-q2').onclick = function(){ showStep('step-cor-q1'); };
-      document.getElementById('next-cor-q2').onclick = function(){
-        if (!document.getElementById('cor-county').value) { alert('Select county'); return; }
-        showStep('step-cor-q3');
-      };
-      document.getElementById('prev-cor-q3').onclick = function(){ showStep('step-cor-q2'); };
-      document.getElementById('next-cor-q3').onclick = function(){
-        var v = document.querySelector('input[name="conviction-type"]:checked');
-        if (!v) { alert('Select felony/misdemeanor'); return; }
-        showStep('step-cor-q4');
-      };
-      document.getElementById('prev-cor-q4').onclick = function(){ showStep('step-cor-q3'); };
-      document.getElementById('next-cor-q4').onclick = function(){ showStep('step-cor-q5'); };
-      document.getElementById('prev-cor-q5').onclick = function(){ showStep('step-cor-q4'); };
-      document.getElementById('next-cor-q5').onclick = function(){
-        var v = document.querySelector('input[name="5-years-in-ca"]:checked');
-        if (!v) { alert('Select answer'); return; }
-        if (v.value === 'no') {
-          document.getElementById('step-cor-q5').innerHTML =
-            '<p class="eligibility-note warning">You must have lived in CA for 5 years before filing. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-           '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-cor-q5\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
-          return;
-        }
-        showStep('step-cor-q6');
-      };
-      document.getElementById('prev-cor-q6').onclick = function(){ showStep('step-cor-q5'); };
-      document.getElementById('next-cor-q6').onclick = function(){
-        var v = document.querySelector('input[name="crime-committed-5yrs"]:checked');
-        if (!v) { alert('Select answer'); return; }
-        if (v.value === 'yes') {
-          document.getElementById('step-cor-q6').innerHTML =
-            '<p class="eligibility-note warning">You must show a 5-year conviction-free history. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-cor-q5\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
-          return;
-        }
-        showStep('step-cor-q7');
-      };
-      document.getElementById('prev-cor-q7').onclick = function(){ showStep('step-cor-q6'); };
-      document.getElementById('next-cor-q7').onclick = function(){
-        var v = document.querySelector('input[name="sentence-completed"]:checked');
-        if (!v) { alert('Select answer'); return; }
-        if (v.value === 'no') {
-          document.getElementById('step-cor-q7').innerHTML =
-            '<p class="eligibility-note warning"Sorry, you cannot seek a Certificate of Rehabilitation while actively on probation/parole. Alternatively, you may be eligible for Early Probation Termination. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-             '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-cor-q7\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
-          return;
-        }
-        showStep('step-cta-certificate');
-      };
+  // Base Navigation Logic (Steps 1-4)
+  document.getElementById('next-1').onclick = function () {
+    const fn = document.getElementById('first-name');
+    const ln = document.getElementById('last-name');
+    if (!fn.value.trim() || !ln.value.trim()) { alert('Please enter both names.'); return; }
+    showStep('step-2');
+  };
 
-      // Arrest Record Sealing
-      document.getElementById('prev-seal-q1').onclick = function(){ showStep('step-4'); };
-      document.getElementById('next-seal-q1').onclick = function(){
-        var v = document.querySelector('input[name="arrested-in-ca"]:checked');
-        if (!v) { alert('Select answer'); return; }
-        if (v.value === 'no') {
-          document.getElementById('step-seal-q1').innerHTML =
-            '<p class="eligibility-note warning">Unfortunately, you do not qualify for our Arrest Record Sealing service if you were arrested outside of CA.</p>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-seal-q1\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://redemption.legal/\'">Back To Homepage</button></div>';
-          return;
-        }
-        showStep('step-seal-q2');
-      };
-      document.getElementById('prev-seal-q2').onclick = function(){ showStep('step-seal-q1'); };
-      document.getElementById('next-seal-q2').onclick = function(){
-        var v = document.querySelector('input[name="charges-filed"]:checked');
-        if (!v) { alert('Select answer'); return; }
-        if (v.value === 'yes') {
-          document.getElementById('step-seal-q2').innerHTML =
-            '<p class="eligibility-note warning">This may negatively impact your application.</p>' +
-           '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-seal-q2\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-seal-q3\')">Proceed</button></div>';
-          return;
-        }
-        showStep('step-cta-sealing');
-      };
-      document.getElementById('prev-seal-q3').onclick = function(){ showStep('step-seal-q2'); };
-      document.getElementById('next-seal-q3').onclick = function(){
-        var checks = Array.from(document.querySelectorAll('input[name="conviction-status"]:checked')).map(c=>c.value);
-        if (!checks.length) { alert('Select at least one'); return; }
-        if (checks.includes('convicted') || checks.includes('ongoing')) {
-          document.getElementById('step-seal-q3').innerHTML =
-            '<p class="eligibility-note warning">This may negatively impact your application.</p>' +
-              '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-seal-q3\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-cta-sealing\')">Proceed</button></div>';
-          return;
-        }
-        showStep('step-cta-sealing');
-      };
+  document.getElementById('prev-2').onclick = function () { showStep('step-1'); };
 
-      // Early Probation Termination (Q1-Q3 are same as expungement Q1-Q3)
-      document.getElementById('prev-term-q1').onclick = function(){ showStep('step-4'); };
-      document.getElementById('next-term-q1').onclick = function(){
-        var v = document.querySelector('input[name="court-system"]:checked');
-        if (!v) { alert('Select court system'); return; }
-        if (v.value === 'federal') {
-          document.getElementById('step-term-q1').innerHTML =
-            '<p class="eligibility-note warning">We only work with CA state cases, not federal. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-     '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-term-q1\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
-          return;
-        }
-        showStep('step-term-q2');
-      };
-      document.getElementById('prev-term-q2').onclick = function(){ showStep('step-term-q1'); };
-      document.getElementById('next-term-q2').onclick = function(){
-        if (!document.getElementById('term-county').value) { alert('Select county'); return; }
-        showStep('step-term-q3');
-      };
-      document.getElementById('prev-term-q3').onclick = function(){ showStep('step-term-q2'); };
-      document.getElementById('next-term-q3').onclick = function(){
-        var v = document.querySelector('input[name="conviction-type"]:checked');
-        if (!v) { alert('Select felony/misdemeanor'); return; }
-        showStep('step-term-q4');
-      };
-      document.getElementById('prev-term-q4').onclick = function(){ showStep('step-term-q3'); };
-      document.getElementById('next-term-q4').onclick = function(){
-        var v = document.querySelector('input[name="restitution-fees-and-fines"]:checked');
-        if (!v) { alert('Select answer'); return; }
-        if (v.value === 'no') {
-          document.getElementById('step-term-q4').innerHTML =
-            '<p class="eligibility-note warning">This may negatively impact your application.</p>' +
-            '<div class="button-group"><button class="btn btn-secondary" type="button" onclick="showStep(\'step-term-q4\')">Go Back</button></div>'
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-term-q5\')">Proceed</button></div>';
-          return;
-        }
-        showStep('step-term-q5');
-      };
-      document.getElementById('prev-term-q5').onclick = function(){ showStep('step-term-q4'); };
-      document.getElementById('next-term-q5').onclick = function(){
-        var v = document.querySelector('input[name="half-of-probation-completion"]:checked');
-        if (!v) { alert('Select answer'); return; }
-        if (v.value === 'no') {
-          document.getElementById('step-term-q5').innerHTML =
-            '<p class="eligibility-note warning">This may negatively impact your application.</p>' +
-            '<div class="button-group"><button class="btn btn-secondary" type="button" onclick="showStep(\'step-term-q5\')">Go Back</button></div>'
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-term-q6\')">Proceed</button></div>';
-          return;
-        }
-        showStep('step-term-q6');
-      };
-      document.getElementById('prev-term-q6').onclick = function(){ showStep('step-term-q5'); };
-      document.getElementById('next-term-q6').onclick = function(){
-        var v = document.querySelector('input[name="new-arrests"]:checked');
-        if (!v) { alert('Select answer'); return; }
-        if (v.value === 'yes') {
-          document.getElementById('step-term-q6').innerHTML =
-            '<p class="eligibility-note warning">This may negatively impact your application.</p>' +
-            '<div class="button-group"><button class="btn btn-secondary" type="button" onclick="showStep(\'step-term-q6\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-term-q7\')">Proceed</button></div>';
-          return;
-        }
-        showStep('step-term-q7');
-      };
-      document.getElementById('prev-term-q7').onclick = function(){ showStep('step-term-q6'); };
-      document.getElementById('next-term-q7').onclick = function(){
-        var v = document.querySelector('input[name="special-reason-for-termination-request"]:checked');
-        if (!v) { alert('Select answer'); return; }
-        if (v.value === 'no') {
-          document.getElementById('step-term-q7').innerHTML =
-            '<p class="eligibility-note warning">This may negatively impact your application.</p>' +
-             '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-term-q7\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-cta-termination\')">Proceed</button></div>';
-          return;
-        }
-        showStep('step-cta-termination');
-      };
+  document.getElementById('next-2').onclick = function () {
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
+    if (!email.value.trim() || !email.checkValidity()) { alert('Valid email required'); return; }
+    if (!phone.value.trim() || !phone.checkValidity()) { alert('Valid 10-digit phone required'); return; }
+    showStep('step-3');
+  };
 
-      // Stripe redirect
-      window.redirectToStripe = function(service){
-        var urls = {
-          expungement: 'https://buy.stripe.com/6oU5kDbnS5np0VYgIA97G01',
-          certificate: 'https://buy.stripe.com/eVq8wPfE87vx3463VO97G04',
-          sealing: 'https://buy.stripe.com/14A28r2Rm4jl7kmcsk97G03',
-          termination: 'https://buy.stripe.com/5kQ28reA41799sugIA97G02'
-        };
-        window.location.href = urls[service] || '/';
-      };
-    });
-  </script>
+  document.getElementById('prev-3').onclick = function () { showStep('step-2'); };
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById('next-3').onclick = function () {
+    const street = document.getElementById('street');
+    const city = document.getElementById('city');
+    const state = document.getElementById('state');
+    const zip = document.getElementById('zip');
+    if (!street.value.trim() || !city.value.trim() || !state.value || !zip.value.trim() || !zip.checkValidity()) {
+      alert('Complete your full mailing address'); return;
+    }
+    showStep('step-4');
+  };
+
+  document.getElementById('prev-4').onclick = function () { showStep('step-3'); };
+
+  document.getElementById('next-4').onclick = function () {
+    const svc = document.querySelector('input[name="service"]:checked');
+    if (!svc) { alert('Select a service'); return; }
+    if (svc.value === 'expungement') showStep('step-exp-q1');
+    else if (svc.value === 'certificate') showStep('step-cor-q1');
+    else if (svc.value === 'sealing') showStep('step-seal-q1');
+    else if (svc.value === 'termination') showStep('step-term-q1');
+  };
+
+  // Full service logic will be appended in next cell
+
+
+  // EXPUNGEMENT Eligibility Logic
+  document.getElementById('next-exp-q1').onclick = function(){
+    var v = document.querySelector('input[name="court-system"]:checked');
+    if (!v) { alert('Select court system'); return; }
+    if (v.value === 'federal') {
+      document.getElementById('step-exp-q1').innerHTML = generateWarningBlock(
+        'Sorry, we only work with CA state cases, not federal.'
+      );
+      return;
+    }
+    showStep('step-exp-q2');
+  };
+
+  document.getElementById('prev-exp-q2').onclick = function(){ showStep('step-exp-q1'); };
+  document.getElementById('next-exp-q2').onclick = function(){
+    if (!document.getElementById('exp-county').value) { alert('Select county'); return; }
+    showStep('step-exp-q3');
+  };
+
+  document.getElementById('prev-exp-q3').onclick = function(){ showStep('step-exp-q2'); };
+  document.getElementById('next-exp-q3').onclick = function(){
+    var v = document.querySelector('input[name="conviction-type"]:checked');
+    if (!v) { alert('Select felony/misdemeanor'); return; }
+    showStep('step-exp-q4');
+  };
+
+  document.getElementById('prev-exp-q4').onclick = function(){ showStep('step-exp-q3'); };
+  document.getElementById('next-exp-q4').onclick = function(){
+    var v = document.querySelector('input[name="restitution-status"]:checked');
+    if (!v) { alert('Select answer'); return; }
+    if (v.value === 'paid-part') {
+      document.getElementById('step-exp-q4').innerHTML = generateWarningBlock(
+        'You must pay all restitution in full before expungement.'
+      );
+      return;
+    }
+    showStep('step-exp-q5');
+  };
+
+  document.getElementById('prev-exp-q5').onclick = function(){ showStep('step-exp-q4'); };
+  document.getElementById('next-exp-q5').onclick = function(){
+    var v = document.querySelector('input[name="new-charges"]:checked');
+    if (!v) { alert('Select answer'); return; }
+    if (v.value === 'yes') {
+      document.getElementById('step-exp-q5').innerHTML = generateWarningBlock(
+        'You cannot petition for expungement while facing new charges.'
+      );
+      return;
+    }
+    showStep('step-exp-q6');
+  };
+
+  document.getElementById('prev-exp-q6').onclick = function(){ showStep('step-exp-q5'); };
+  document.getElementById('next-exp-q6').onclick = function(){
+    let checks = Array.from(document.querySelectorAll('input[name="disqualifying-offence"]:checked')).map(c=>c.value);
+    if (!checks.length) { alert('Select at least one'); return; }
+    if (!checks.includes('none')) {
+      document.getElementById('step-exp-q6').innerHTML = generateWarningBlock(
+        'These offenses are not eligible for Record Expungement.'
+      );
+      return;
+    }
+    showStep('step-cta-expungement');
+  };
+
+  // CERTIFICATE
+  document.getElementById('prev-cor-q1').onclick = function(){ showStep('step-4'); };
+  document.getElementById('next-cor-q1').onclick = function(){
+    var v = document.querySelector('input[name="court-system"]:checked');
+    if (!v) { alert('Select court system'); return; }
+    if (v.value === 'federal') {
+      document.getElementById('step-cor-q1').innerHTML = generateWarningBlock(
+        'Sorry, we only work with CA state cases, not federal.'
+      );
+      return;
+    }
+    showStep('step-cor-q2');
+  };
+
+  document.getElementById('prev-cor-q2').onclick = function(){ showStep('step-cor-q1'); };
+  document.getElementById('next-cor-q2').onclick = function(){
+    if (!document.getElementById('cor-county').value) { alert('Select county'); return; }
+    showStep('step-cor-q3');
+  };
+
+  document.getElementById('prev-cor-q3').onclick = function(){ showStep('step-cor-q2'); };
+  document.getElementById('next-cor-q3').onclick = function(){
+    var v = document.querySelector('input[name="conviction-type"]:checked');
+    if (!v) { alert('Select felony/misdemeanor'); return; }
+    showStep('step-cor-q4');
+  };
+
+  document.getElementById('prev-cor-q4').onclick = function(){ showStep('step-cor-q3'); };
+  document.getElementById('next-cor-q4').onclick = function(){ showStep('step-cor-q5'); };
+
+  document.getElementById('prev-cor-q5').onclick = function(){ showStep('step-cor-q4'); };
+  document.getElementById('next-cor-q5').onclick = function(){
+    var v = document.querySelector('input[name="5-years-in-ca"]:checked');
+    if (!v) { alert('Select answer'); return; }
+    if (v.value === 'no') {
+      document.getElementById('step-cor-q5').innerHTML = generateWarningBlock(
+        'You must have lived in California for 5 years before applying.'
+      );
+      return;
+    }
+    showStep('step-cor-q6');
+  };
+
+  document.getElementById('prev-cor-q6').onclick = function(){ showStep('step-cor-q5'); };
+  document.getElementById('next-cor-q6').onclick = function(){
+    var v = document.querySelector('input[name="crime-committed-5yrs"]:checked');
+    if (!v) { alert('Select answer'); return; }
+    if (v.value === 'yes') {
+      document.getElementById('step-cor-q6').innerHTML = generateWarningBlock(
+        'You must show a conviction-free record for 5 years.'
+      );
+      return;
+    }
+    showStep('step-cor-q7');
+  };
+
+  document.getElementById('prev-cor-q7').onclick = function(){ showStep('step-cor-q6'); };
+  document.getElementById('next-cor-q7').onclick = function(){
+    var v = document.querySelector('input[name="sentence-completed"]:checked');
+    if (!v) { alert('Select answer'); return; }
+    if (v.value === 'no') {
+      document.getElementById('step-cor-q7').innerHTML = generateWarningBlock(
+        'You must complete all parts of your sentence before applying.'
+      );
+      return;
+    }
+    showStep('step-cta-certificate');
+  };
+
+  // SEALING
+  document.getElementById('prev-seal-q1').onclick = function(){ showStep('step-4'); };
+  document.getElementById('next-seal-q1').onclick = function(){
+    var v = document.querySelector('input[name="arrested-in-ca"]:checked');
+    if (!v) { alert('Select answer'); return; }
+    if (v.value === 'no') {
+      document.getElementById('step-seal-q1').innerHTML = generateWarningBlock(
+        'You must have been arrested in CA to qualify for sealing.',
+        'https://redemption.legal/'
+      );
+      return;
+    }
+    showStep('step-seal-q2');
+  };
+
+  document.getElementById('prev-seal-q2').onclick = function(){ showStep('step-seal-q1'); };
+  document.getElementById('next-seal-q2').onclick = function(){
+    var v = document.querySelector('input[name="charges-filed"]:checked');
+    if (!v) { alert('Select answer'); return; }
+    if (v.value === 'yes') {
+      document.getElementById('step-seal-q2').innerHTML = `
+        <p class="eligibility-note warning">This may negatively impact your application.</p>
+        <div class="button-group">
+          <button class="btn btn-primary" type="button" onclick="showStep(previousStepId)">Go Back</button>
+          <button class="btn btn-primary" type="button" onclick="showStep('step-seal-q3')">Proceed</button>
+        </div>`;
+      return;
+    }
+    showStep('step-cta-sealing');
+  };
+
+  document.getElementById('prev-seal-q3').onclick = function(){ showStep('step-seal-q2'); };
+  document.getElementById('next-seal-q3').onclick = function(){
+    let checks = Array.from(document.querySelectorAll('input[name="conviction-status"]:checked')).map(c=>c.value);
+    if (!checks.length) { alert('Select at least one'); return; }
+    if (checks.includes('convicted') || checks.includes('ongoing')) {
+      document.getElementById('step-seal-q3').innerHTML = `
+        <p class="eligibility-note warning">This may negatively impact your application.</p>
+        <div class="button-group">
+          <button class="btn btn-primary" type="button" onclick="showStep(previousStepId)">Go Back</button>
+          <button class="btn btn-primary" type="button" onclick="showStep('step-cta-sealing')">Proceed</button>
+        </div>`;
+      return;
+    }
+    showStep('step-cta-sealing');
+  };
+
+  // TERMINATION
+  document.getElementById('prev-term-q1').onclick = function(){ showStep('step-4'); };
+  document.getElementById('next-term-q1').onclick = function(){
+    var v = document.querySelector('input[name="court-system"]:checked');
+    if (!v) { alert('Select court system'); return; }
+    if (v.value === 'federal') {
+      document.getElementById('step-term-q1').innerHTML = generateWarningBlock(
+        'We only work with CA state cases.'
+      );
+      return;
+    }
+    showStep('step-term-q2');
+  };
+
+  document.getElementById('prev-term-q2').onclick = function(){ showStep('step-term-q1'); };
+  document.getElementById('next-term-q2').onclick = function(){
+    if (!document.getElementById('term-county').value) { alert('Select county'); return; }
+    showStep('step-term-q3');
+  };
+
+  document.getElementById('prev-term-q3').onclick = function(){ showStep('step-term-q2'); };
+  document.getElementById('next-term-q3').onclick = function(){
+    var v = document.querySelector('input[name="conviction-type"]:checked');
+    if (!v) { alert('Select felony/misdemeanor'); return; }
+    showStep('step-term-q4');
+  };
+
+  document.getElementById('prev-term-q4').onclick = function(){ showStep('step-term-q3'); };
+  document.getElementById('next-term-q4').onclick = function(){
+    var v = document.querySelector('input[name="restitution-fees-and-fines"]:checked');
+    if (!v) { alert('Select answer'); return; }
+    if (v.value === 'no') {
+      document.getElementById('step-term-q4').innerHTML = `
+        <p class="eligibility-note warning">This may negatively impact your application.</p>
+        <div class="button-group">
+          <button class="btn btn-primary" type="button" onclick="showStep(previousStepId)">Go Back</button>
+          <button class="btn btn-primary" type="button" onclick="showStep('step-term-q5')">Proceed</button>
+        </div>`;
+      return;
+    }
+    showStep('step-term-q5');
+  };
+
+  document.getElementById('prev-term-q5').onclick = function(){ showStep('step-term-q4'); };
+  document.getElementById('next-term-q5').onclick = function(){
+    var v = document.querySelector('input[name="half-of-probation-completion"]:checked');
+    if (!v) { alert('Select answer'); return; }
+    if (v.value === 'no') {
+      document.getElementById('step-term-q5').innerHTML = `
+        <p class="eligibility-note warning">This may negatively impact your application.</p>
+        <div class="button-group">
+          <button class="btn btn-primary" type="button" onclick="showStep(previousStepId)">Go Back</button>
+          <button class="btn btn-primary" type="button" onclick="showStep('step-term-q6')">Proceed</button>
+        </div>`;
+      return;
+    }
+    showStep('step-term-q6');
+  };
+
+  document.getElementById('prev-term-q6').onclick = function(){ showStep('step-term-q5'); };
+  document.getElementById('next-term-q6').onclick = function(){
+    var v = document.querySelector('input[name="new-arrests"]:checked');
+    if (!v) { alert('Select answer'); return; }
+    if (v.value === 'yes') {
+      document.getElementById('step-term-q6').innerHTML = `
+        <p class="eligibility-note warning">This may negatively impact your application.</p>
+        <div class="button-group">
+          <button class="btn btn-primary" type="button" onclick="showStep(previousStepId)">Go Back</button>
+          <button class="btn btn-primary" type="button" onclick="showStep('step-term-q7')">Proceed</button>
+        </div>`;
+      return;
+    }
+    showStep('step-term-q7');
+  };
+
+  document.getElementById('prev-term-q7').onclick = function(){ showStep('step-term-q6'); };
+  document.getElementById('next-term-q7').onclick = function(){
+    var v = document.querySelector('input[name="special-reason-for-termination-request"]:checked');
+    if (!v) { alert('Select answer'); return; }
+    if (v.value === 'no') {
+      document.getElementById('step-term-q7').innerHTML = `
+        <p class="eligibility-note warning">This may negatively impact your application.</p>
+        <div class="button-group">
+          <button class="btn btn-primary" type="button" onclick="showStep(previousStepId)">Go Back</button>
+          <button class="btn btn-primary" type="button" onclick="showStep('step-cta-termination')">Proceed</button>
+        </div>`;
+      return;
+    }
+    showStep('step-cta-termination');
+  };
+
+  // Make showStep globally accessible
+  window.showStep = showStep;
+
+  // Stripe redirection
+  window.redirectToStripe = function (service) {
+    const urls = {
+      expungement: 'https://buy.stripe.com/6oU5kDbnS5np0VYgIA97G01',
+      certificate: 'https://buy.stripe.com/eVq8wPfE87vx3463VO97G04',
+      sealing: 'https://buy.stripe.com/14A28r2Rm4jl7kmcsk97G03',
+      termination: 'https://buy.stripe.com/5kQ28reA41799sugIA97G02'
+    };
+    window.location.href = urls[service] || '/';
+  };
+
+  // Formspree submission
   const form = document.getElementById('eligibility-form');
   const stripeUrls = {
     expungement: "https://buy.stripe.com/6oU5kDbnS5np0VYgIA97G01",
@@ -815,9 +871,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const response = await fetch("https://formspree.io/f/xeokkzle", {
           method: "POST",
           body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
+          headers: { 'Accept': 'application/json' }
         });
 
         if (response.ok) {
@@ -835,9 +889,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
-  ['expungement', 'certificate', 'sealing', 'termination'].forEach(service => {
-    handleDynamicSubmit(service);
-  });
+  ['expungement', 'certificate', 'sealing', 'termination'].forEach(handleDynamicSubmit);
 });
 </script>
 </body>
