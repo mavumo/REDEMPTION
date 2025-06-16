@@ -563,7 +563,7 @@
         if (v.value === 'paid-part') {
           document.getElementById('step-exp-q4').innerHTML =
             '<p class="eligibility-note warning">You must pay all restitution in full before expungement. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-           '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-exp-q6\')">Go Back</button></div>' +
+           '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-exp-q4\')">Go Back</button></div>' +
           '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
           return;
         }
@@ -681,7 +681,8 @@
         if (v.value === 'yes') {
           document.getElementById('step-seal-q2').innerHTML =
             '<p class="eligibility-note warning">This may negatively impact your application.</p>' +
-          ;
+           '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-seal-q2\')">Go Back</button></div>' +
+            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-seal-q3\')">Proceed</button></div>';
           return;
         }
         showStep('step-cta-sealing');
