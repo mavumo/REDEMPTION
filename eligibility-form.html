@@ -539,8 +539,8 @@
         if (v.value === 'federal') {
           document.getElementById('step-exp-q1').innerHTML =
             '<p class="eligibility-note warning">Sorry, we only work with CA state cases, not federal. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-exp-q1\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
+           
+            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://redemption.legal/eligibility-form\'">Start Again</button></div>';
           return;
         }
         showStep('step-exp-q2');
@@ -563,8 +563,8 @@
         if (v.value === 'paid-part') {
           document.getElementById('step-exp-q4').innerHTML =
             '<p class="eligibility-note warning">You must pay all restitution in full before expungement. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-           '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-exp-q4\')">Go Back</button></div>' +
-          '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
+          
+          '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://redemption.legal/eligibility-form\'">Start Again</button></div>';
           return;
         }
         showStep('step-exp-q5');
@@ -576,8 +576,8 @@
         if (v.value === 'yes') {
           document.getElementById('step-exp-q5').innerHTML =
             '<p class="eligibility-note warning">Unfortunately, you cannot submit a petition for expungement while facing new charges. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-            '<div class="button-group"><button class="btn btn-secondary" type="button" onclick="showStep(\'step-exp-q5\')">Go Back</button></div>' +
-          '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
+            
+          '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://redemption.legal/eligibility-form\'">Start Again</button></div>';
           return;
         }
         showStep('step-exp-q6');
@@ -589,8 +589,8 @@
         if (checks.includes('none')) { showStep('step-cta-expungement'); return; }
         document.getElementById('step-exp-q6').innerHTML =
           '<p class="eligibility-note warning">These offenses are not eligible for Record Expungement or a Certificate of Rehabilitation. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-exp-q6\')">Go Back</button></div>' +
-          '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
+            
+          '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://redemption.legal/eligibility-form\'">Start Again</button></div>';
       };
 
       // Certificate of Rehabilitation
@@ -601,8 +601,8 @@
         if (v.value === 'federal') {
           document.getElementById('step-cor-q1').innerHTML =
             '<p class="eligibility-note warning">Sorry, we only work with CA state cases, not federal. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-           '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-4\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
+           
+            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://redemption.legal/eligibility-form\'">Start Again</button></div>';
           return;
         }
         showStep('step-cor-q2');
@@ -627,8 +627,8 @@
         if (v.value === 'no') {
           document.getElementById('step-cor-q5').innerHTML =
             '<p class="eligibility-note warning">You must have lived in CA for 5 years before filing. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-           '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-cor-q5\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
+           
+            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://redemption.legal/eligibility-form\'">Start Again</button></div>';
           return;
         }
         showStep('step-cor-q6');
@@ -640,8 +640,8 @@
         if (v.value === 'yes') {
           document.getElementById('step-cor-q6').innerHTML =
             '<p class="eligibility-note warning">You must show a 5-year conviction-free history. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-cor-q5\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
+            
+            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://redemption.legal/eligibility-form\'">Start Again</button></div>';
           return;
         }
         showStep('step-cor-q7');
@@ -653,8 +653,8 @@
         if (v.value === 'no') {
           document.getElementById('step-cor-q7').innerHTML =
             '<p class="eligibility-note warning"Sorry, you cannot seek a Certificate of Rehabilitation while actively on probation/parole. Alternatively, you may be eligible for Early Probation Termination. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-             '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-cor-q7\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
+            
+            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://redemption.legal/eligibility-form\'">Start Again</button></div>';
           return;
         }
         showStep('step-cta-certificate');
@@ -668,8 +668,8 @@
         if (v.value === 'no') {
           document.getElementById('step-seal-q1').innerHTML =
             '<p class="eligibility-note warning">Unfortunately, you do not qualify for our Arrest Record Sealing service if you were arrested outside of CA.</p>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-seal-q1\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://redemption.legal/\'">Back To Homepage</button></div>';
+            
+            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://redemption.legal/eligibility-form\'">Start Again</button></div>';
           return;
         }
         showStep('step-seal-q2');
@@ -681,7 +681,7 @@
         if (v.value === 'yes') {
           document.getElementById('step-seal-q2').innerHTML =
             '<p class="eligibility-note warning">This may negatively impact your application.</p>' +
-           '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-seal-q2\')">Go Back</button></div>' +
+          
             '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-seal-q3\')">Proceed</button></div>';
           return;
         }
@@ -694,7 +694,7 @@
         if (checks.includes('convicted') || checks.includes('ongoing')) {
           document.getElementById('step-seal-q3').innerHTML =
             '<p class="eligibility-note warning">This may negatively impact your application.</p>' +
-              '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-seal-q3\')">Go Back</button></div>' +
+            
             '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-cta-sealing\')">Proceed</button></div>';
           return;
         }
@@ -709,8 +709,8 @@
         if (v.value === 'federal') {
           document.getElementById('step-term-q1').innerHTML =
             '<p class="eligibility-note warning">We only work with CA state cases, not federal. Please feel free to give us a call on <a href="tel:(800) 870-0595">(800) 870-0595</a> or send an email to <a href="mailto:support@redemption.legal">support@redemption.legal</a> for further assistance.</p>' +
-     '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-term-q1\')">Go Back</button></div>' +
-            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://help.redemption.legal/\'">Contact Support</button></div>';
+     
+            '<div class="button-group"><button class="btn btn-primary" type="button" onclick="window.location.href=\'https://redemption.legal/eligibility-form\'">Start Again</button></div>';
           return;
         }
         showStep('step-term-q2');
@@ -733,7 +733,7 @@
         if (v.value === 'no') {
           document.getElementById('step-term-q4').innerHTML =
             '<p class="eligibility-note warning">This may negatively impact your application.</p>' +
-            '<div class="button-group"><button class="btn btn-secondary" type="button" onclick="showStep(\'step-term-q4\')">Go Back</button></div>'
+           
             '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-term-q5\')">Proceed</button></div>';
           return;
         }
@@ -746,7 +746,7 @@
         if (v.value === 'no') {
           document.getElementById('step-term-q5').innerHTML =
             '<p class="eligibility-note warning">This may negatively impact your application.</p>' +
-            '<div class="button-group"><button class="btn btn-secondary" type="button" onclick="showStep(\'step-term-q5\')">Go Back</button></div>'
+           
             '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-term-q6\')">Proceed</button></div>';
           return;
         }
@@ -759,7 +759,7 @@
         if (v.value === 'yes') {
           document.getElementById('step-term-q6').innerHTML =
             '<p class="eligibility-note warning">This may negatively impact your application.</p>' +
-            '<div class="button-group"><button class="btn btn-secondary" type="button" onclick="showStep(\'step-term-q6\')">Go Back</button></div>' +
+           
             '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-term-q7\')">Proceed</button></div>';
           return;
         }
@@ -772,7 +772,7 @@
         if (v.value === 'no') {
           document.getElementById('step-term-q7').innerHTML =
             '<p class="eligibility-note warning">This may negatively impact your application.</p>' +
-             '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-term-q7\')">Go Back</button></div>' +
+           
             '<div class="button-group"><button class="btn btn-primary" type="button" onclick="showStep(\'step-cta-termination\')">Proceed</button></div>';
           return;
         }
